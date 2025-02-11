@@ -2,6 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/well', function () {
+Route::get('/pull', function () {
     return view('welcome');
 });
