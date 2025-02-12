@@ -11,21 +11,21 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('book_clubs', function (Blueprint $table) {
-            $table->uuid('club_id')-> primary();
-            $table->string('club_name');
-            $table->foreignId('creator_user_id')->constrained('users', 'id');
-            $table->text('description');
-            $table->timestamp('created_date')->useCurrent();
+        Schema::create('book_club_members', function (Blueprint $table) {
+            $table->id('membership_id');
+            $table->foreignId('club_id')->constrained('book_clubs', 'club_id');
+            $table->foreignId('user_id')->constrained('users', 'id');
+            $table->timestamp('join_date')->useCurrent();
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('book_clubs');
+        Schema::dropIfExists('book_club_members');
     }
 };
