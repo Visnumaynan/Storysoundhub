@@ -14,11 +14,13 @@ return new class extends Migration
         Schema::create('books', function (Blueprint $table) {
             $table->uuid('book_id')-> primary();
             $table->string('title');
+            $table->string('isbn')->nullable();
             $table->string('author');
-            $table->string('genre');
-            $table->enum('format', ['physical', 'eBook', 'audiobook']);
+                      
+            $table->text('short_description')->nullable();
             $table->foreignuuid('owner_id')->constrained('users', 'id');
-            $table->enum('availability_status', ['available', 'borrowed', 'swapped']);
+            $table->string('condition');
+            $table->integer('quantity');
             $table->timestamp('upload_date')->useCurrent();
             $table->timestamps();
         });
