@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('genres', function (Blueprint $table) {
-            $table->uuid('genre_id')->primary();
-            $table->string('name');
+            $table->uuid('genre_id')->primary(); 
+            $table->string('name')->unique();
             $table->timestamps();
         });
     }
