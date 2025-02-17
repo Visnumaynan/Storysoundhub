@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('isbn')->nullable();
             $table->string('author');
-                      
+                     
             $table->text('short_description')->nullable();
             $table->foreignuuid('owner_id')->constrained('users', 'id');
             $table->string('condition');
