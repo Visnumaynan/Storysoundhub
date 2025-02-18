@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('password_hash');
             $table->string('profile_picture')->nullable();
             $table->integer('phone');
-            $table->enum('role', ['system_admin', 'user']);
             $table->string('location')->nullable();
             $table->timestamp('date_joined')->useCurrent();
             $table->timestamps();

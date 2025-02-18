@@ -16,7 +16,9 @@ return new class extends Migration
             $table->string('title');
             $table->string('isbn')->nullable();
             $table->string('author');
-            
+            $table->string('type');
+            $table->string('picture');
+            $table->foreignuuid('genre_id')->constrained('genres', 'genre_id');
             $table->decimal('price', 8, 2);
             $table->text('short_description')->nullable();
             $table->foreignuuid('owner_id')->constrained('users', 'id');

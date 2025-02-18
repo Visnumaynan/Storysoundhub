@@ -16,6 +16,7 @@ return new class extends Migration
             $table->id('wishlist_id');
             $table->foreignuuid('user_id')->constrained('users', 'id');
             $table->foreignuuid('book_id')->constrained('books', 'book_id');
+            $table->string('picture');
             $table->timestamp('wishlist_date')->useCurrent();
             $table->timestamps();
         });
