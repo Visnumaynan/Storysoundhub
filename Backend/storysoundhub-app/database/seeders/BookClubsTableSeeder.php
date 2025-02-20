@@ -12,6 +12,16 @@ class BookClubsTableSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        DB::table('book_clubs')->insert([
+            [
+                'club_id' => Str::uuid(),
+                'club_name' => 'Sci-Fi Enthusiasts',
+                'creator_user_id' => DB::table('users')->where('username', 'john_doe')->value('id'),
+                'description' => 'A club for sci-fi book lovers.',
+                'created_date' => Carbon::now(),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+        ]);
     }
 }

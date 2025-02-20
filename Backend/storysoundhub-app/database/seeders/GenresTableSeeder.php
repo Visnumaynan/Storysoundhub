@@ -12,6 +12,10 @@ class GenresTableSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        // Seeding Genres Table
+        DB::table('genres')->insert([
+            ['genre_id' => Str::uuid(), 'name' => 'Science Fiction', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
+            ['genre_id' => Str::uuid(), 'name' => 'Fantasy', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
+        ]);
     }
 }

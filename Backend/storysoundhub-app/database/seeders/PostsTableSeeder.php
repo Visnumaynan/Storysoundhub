@@ -12,6 +12,16 @@ class PostsTableSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        DB::table('posts')->insert([
+            [
+                'post_id' => 1,
+                'membership_id' => 1,
+                'club_id' => DB::table('book_clubs')->where('club_name', 'Sci-Fi Enthusiasts')->value('club_id'),
+                'content' => 'Excited for our next book discussion!',
+                'media' => null,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+        ]);
     }
 }
