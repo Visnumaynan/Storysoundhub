@@ -1,0 +1,103 @@
+.hero-section {
+  min-height: 550px;
+  background-color: #f3f4f6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.2s;
+}
+
+.dark .hero-section {
+  background-color: #111827;
+  color: white;
+}
+
+.hero-container {
+  padding-bottom: 2rem;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+  margin-top: 20%;
+  height: 300px; /* Set a fixed height for the text container */
+  width: 700px;
+  padding: 1rem; /* Optional: add some padding for aesthetics */
+}
+
+.hero-title {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.hero-description {
+  font-size: 0.875rem;
+}
+
+.order-button {
+  background: linear-gradient(to right, var(--primary), var(--secondary));
+  transition: transform 0.2s;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+}
+
+.order-button:hover {
+  transform: scale(1.05);
+}
+
+.hero-image-section {
+  min-height: 450px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.hero-image-wrapper {
+  height: 450px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-main-image {
+  width: 270px;
+  height: 270px;
+  object-fit: contain;
+  transform: scale(1.25);
+}
+
+.hero-thumbnail-wrapper {
+  display: flex;
+  gap: 1rem;
+  position: absolute;
+  bottom: -40px;
+  background-color: rgba(255, 255, 255, 0);
+  border-radius: 10px;
+  padding: 0.5rem;
+  flex-direction: column;
+  top: 50%;
+  right: -10px;
+  transform: translateY(-50%);
+}
+
+.hero-thumbnail {
+  max-width: 100px;
+  height: 100px;
+  object-fit: contain;
+  transition: transform 0.2s;
+}
+
+.hero-thumbnail:hover {
+  transform: scale(1.1);
+}
