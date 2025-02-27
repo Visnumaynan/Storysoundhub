@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"; 
 import Hero from "./components/Hero/Hero";
 import Services from "./components/Services/Services.jsx";
+import Footer from "./components/Footer/Footer.jsx";
 import AOS from "aos";
 
 const App = () => {
@@ -25,6 +26,7 @@ const App = () => {
               <>
                 <Hero />
                 <Services />
+                <Footer />
               </>
             }
           />
