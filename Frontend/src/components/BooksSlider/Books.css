@@ -1,0 +1,118 @@
+.books-container {
+  margin-top: 3.5rem;
+  margin-bottom: 3rem;
+}
+
+.container {
+  text-align: center;
+}
+
+.top-bar {
+  display: flex;
+  align-items: center;
+  margin-right: 50px;
+}
+
+.add-book-button {
+  margin-top: -90px;
+  background-color: rgba(255, 255, 255, 0.064);
+  width: 60px;
+  height: 60px;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.add-book-button img {
+  width: 40px;
+  height: 40px;
+}
+
+.search-bar {
+  width: 100%;
+  margin-bottom: 90px;
+  max-width: 500px; /* Optional: set a max width for the search bar */
+  padding: 0.5rem;
+  border: 1px solid #134caff8; /* Light border */
+  border-radius: 50px;
+  background-color:rgba(255, 255, 255, 0.208);
+  color: #000;
+  margin-left: 500px;
+  border-color: #000;
+}
+
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 5 books per row */
+  gap: 20px; /* Space between each book */
+  row-gap: 60px;
+  justify-items: center; /* Center-align the books within each column */
+}
+
+.book-card {
+  width: 150px;
+  text-align: left;
+  background-color: #f9f9f900;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(255, 255, 255, 0);
+  overflow: hidden;
+  transition: transform 0.2s ease-in-out;
+}
+
+.book-card:hover {
+  transform: scale(1.05); /* Slight zoom effect on hover */
+}
+
+.book-image {
+  height: 220px;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.book-title {
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.book-author {
+  font-size: 15px;
+  color: #777; /* Light gray for a subtle look */
+  margin-top: -10px;
+  margin-bottom: 5px;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.book-rating {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  justify-content: left;
+  margin-top: 5px;
+}
+
+.star-icon {
+  color: #facc15;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2.5rem;
+}
+
+.view-all-button {
+  cursor: pointer;
+  background-color: #0066cc; /* Adjusted primary color */
+  color: white;
+  padding: 0.5rem 1.25rem;
+  border-radius: 25px;
+  border: none;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.view-all-button:hover {
+  background-color: #004b8d; /* Darker shade on hover */
+}

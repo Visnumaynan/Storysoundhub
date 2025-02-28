@@ -5,6 +5,7 @@ import Hero from "./components/Hero/Hero";
 import Services from "./components/Services/Services.jsx";
 import Footer from "./components/Footer/Footer.jsx";
 import LoginRegister from "./components/LoginRegister/LoginRegister.jsx"; 
+import Books from "./components/BooksSlider/Books.jsx";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -42,6 +43,15 @@ const App = () => {
           <Footer />
           </>
         } />
+        <Route
+            path="/shop"
+            element={
+              <>
+                <Books />
+                <Footer />
+              </>
+            }
+          />
         </Routes>
       </div>
     </Router>

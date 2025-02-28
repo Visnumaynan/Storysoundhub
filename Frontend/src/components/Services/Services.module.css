@@ -41,15 +41,15 @@
 }
 
 .serviceCard {
-    background-color: rgba(255, 255, 255, 0.056);
+    background-color: rgba(255, 255, 255, 0.136);
     border-radius: 15px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.103);
     text-align: center;
     width: 250px;
     height: 300px;
     transition: 0.3s;
     padding: 15px;
-    color: #f4f0f0;
+    color: #010417;
 }
 
 .serviceCard:hover {
