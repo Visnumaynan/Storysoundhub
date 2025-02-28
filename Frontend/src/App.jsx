@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Hero from "./components/Hero/Hero";
 import Services from "./components/Services/Services.jsx";
 import Footer from "./components/Footer/Footer.jsx";
+import LoginRegister from "./components/LoginRegister/LoginRegister.jsx"; 
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -33,6 +34,14 @@ const App = () => {
               </>
             }
           />
+          {/* Login/Register Page Route */}
+          <Route path="/loginRegister" 
+          element={
+          <>
+          <LoginRegister /> 
+          <Footer />
+          </>
+        } />
         </Routes>
       </div>
     </Router>
