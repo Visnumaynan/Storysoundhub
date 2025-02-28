@@ -1,0 +1,32 @@
+/* Dark Mode Toggle Container */
+.dark-mode-container {
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Dark Mode Toggle Button */
+  .dark-mode-toggle {
+    width: 55px; 
+    cursor: pointer;
+    transition: opacity 0.3s ease-in-out;
+  }
+  
+  /* Light Mode Styles (Default) */
+  :root {
+    --background-color: #ffffff;
+    --text-color: #000000;
+  }
+  
+  /* Dark Mode Styles */
+  .dark {
+    --background-color: #111827;
+    --text-color: #ffffff;
+  }
+  
+  /* Apply Theme */
+  body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
