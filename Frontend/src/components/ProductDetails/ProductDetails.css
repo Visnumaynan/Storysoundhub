@@ -1,0 +1,142 @@
+/* ProductDetails.css */
+.product-details {
+  width: 70%;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  height: 600px;
+  display: flex;
+  margin-left: 12%;
+  justify-content: center;
+  gap: 50px;
+  padding: 50px;
+  color: #333;
+  font-family: "Arial", sans-serif;
+  background-color: #ffffff33;
+}
+
+.book-image-large {
+  width: 400px;
+  height: 600px;
+  border-radius: 10px;
+  margin-top: 4px;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.book-info {
+  max-width: 500px;
+  max-height: fit-content;
+  background: rgba(255, 255, 255, 0.922);
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 2px 5px 15px rgba(0, 0, 0, 0.51);
+  position: relative;
+  z-index: 2;
+}
+
+h1 {
+  font-size: 28px;
+}
+
+.book-rating {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 18px;
+  margin-bottom: 40px;
+}
+
+.star-icon {
+  font-size: 20px;
+}
+
+p {
+  font-size: 16px;
+  color: #000000;
+  display: inline;
+  line-height: 2;
+}
+
+.read-more-btn {
+  color: rgb(0, 0, 0);
+  background-color: #00000000;
+  border: none;
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+  display: inline;
+  margin-right: 6px;
+}
+
+.price {
+  margin-top: 30px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #d32f2f;
+  margin-bottom: 30px;
+}
+
+/* Quantity Selector */
+.quantity-selector {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 15px 0;
+  background-color: #05043c27;
+  width: 110px;
+}
+
+.quantity-btn {
+  background: #05043c;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 2px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.quantity-btn:hover {
+  background: #000000;
+}
+
+.quantity {
+  font-size: 18px;
+  font-weight: bold;
+  min-width: 30px;
+  text-align: center;
+}
+
+/* Buttons */
+.buttons {
+  display: flex;
+  gap: 35px;
+}
+
+.buy-btn, .wishlist-btn {
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.buy-btn {
+  margin-top: 13px;
+  height: 40px;
+  background: #05043c;
+  color: white;
+}
+
+.buy-btn:hover {
+  background:  #000000e4;
+}
+
+.wishlist-btn {
+  margin-top: 13px;
+  height: 40px;
+  background: #05043c;
+  color: rgb(255, 255, 255);
+}
+
+.wishlist-btn:hover {
+  background: #000000;
+}

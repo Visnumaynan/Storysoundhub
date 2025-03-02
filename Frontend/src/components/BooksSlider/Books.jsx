@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Book1 from "../../assets/books/book1.jpg";
 import Book2 from "../../assets/books/book2.jpg";
 import Book3 from "../../assets/books/book3.jpg";
@@ -97,6 +98,7 @@ const booksData = [
 const Books = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [showAll, setShowAll] = useState(false);
+  const navigate = useNavigate();
 
   // Filter books based on the search term
   const filteredBooks = booksData.filter((book) =>
@@ -126,7 +128,10 @@ const Books = () => {
         {/* Books Grid */}
         <div className="books-grid">
           {displayedBooks.map(({ id, img, title, author, rating }) => (
-            <div key={id} className="book-card">
+            <div key={id} className="book-card"
+            onClick={() => navigate(`/product-details/${id}`)} // Navigate to book details
+            style={{ cursor: "pointer" }} // Add pointer cursor
+          >
               <img src={img} alt={title} className="book-image" />
               <h3 className="book-title">{title}</h3>
               <p className="book-author">{author}</p> {/* Author Below Title */}

@@ -6,6 +6,7 @@ import Services from "./components/Services/Services.jsx";
 import Footer from "./components/Footer/Footer.jsx";
 import LoginRegister from "./components/LoginRegister/LoginRegister.jsx"; 
 import Books from "./components/BooksSlider/Books.jsx";
+import ProductDetails from "./components/ProductDetails/ProductDetails.jsx";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -23,9 +24,9 @@ const App = () => {
   return (
     <Router>
       <div className="bg-white dark:bg-gray-900 dark:text-white duration-200">
-      <Navbar />
+        <Navbar />
         <Routes>
-          <Route
+        <Route
             path="/"
             element={
               <>
@@ -52,6 +53,16 @@ const App = () => {
               </>
             }
           />
+
+        <Route 
+            path="/product-details/:id" 
+            element={
+              <>
+                <ProductDetails /> 
+                <Footer />
+              </>
+            } 
+          /> 
         </Routes>
       </div>
     </Router>
