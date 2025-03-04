@@ -66,7 +66,7 @@ const booksData = [
         {
           "userName": "Samantha_K",
           "userId": "3",
-          "review": "A deeply emotional read. I couldn't put it down, and it really made me reflect on my own life.😍"
+          "review": "A deeply emotional read. I couldn't put it down, and it really made me reflect on my own life.🥹🥹"
         }
         ,
         {
@@ -324,7 +324,7 @@ const ProductDetails = () => {
             </button>
           </div>
 
-          <p><strong>Description:</strong> {showFullDescription ? book.description : shortDescription}</p>
+          <p><strong></strong> {showFullDescription ? book.description : shortDescription}</p>
 
           {isLongDescription && (
             <button

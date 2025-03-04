@@ -120,7 +120,7 @@ const Books = () => {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-          <button className="add-book-button">
+          <button className="add-book-button" onClick={() => navigate("/BookForm")}>
             <img src={addBook} alt="Add Book" />
           </button>
         </div>

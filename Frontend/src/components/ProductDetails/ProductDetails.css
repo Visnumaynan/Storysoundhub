@@ -439,8 +439,9 @@ h2{
 }
 
 .review p strong {
+  font-size: large;
   font-weight: 600;
-  color: #000000;
+  color: #8096b6;
 }
 
 .reviews-btn {
