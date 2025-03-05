@@ -19,7 +19,7 @@ const AddReviews = () => {
     e.preventDefault();
     console.log("Review Submitted:", review);
     alert("Thank you for your review!");
-    navigate("/"); // Redirect to the home page after submitting
+    navigate("/"); 
   };
 
   return (
@@ -35,6 +35,16 @@ const AddReviews = () => {
           required
           placeholder="Enter your name"
         />
+
+        <label>Rating:</label>
+        <select name="rating" value={review.rating} onChange={handleChange} required>
+          <option value="">Select Rating</option>
+          <option value="1">⭐ 1</option>
+          <option value="2">⭐⭐ 2</option>
+          <option value="3">⭐⭐⭐ 3</option>
+          <option value="4">⭐⭐⭐⭐ 4</option>
+          <option value="5">⭐⭐⭐⭐⭐ 5</option>
+        </select>
 
         <label>Comment:</label>
         <textarea
