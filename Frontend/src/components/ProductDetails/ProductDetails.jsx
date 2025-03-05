@@ -307,6 +307,10 @@ const ProductDetails = () => {
       }
     }, 50); 
   };
+
+  const handleAddReviewClick = () => {
+    navigate("/AddReviews");
+  };
   
 
   return (
@@ -320,7 +324,7 @@ const ProductDetails = () => {
             <FaStar className="star-icon" />
             <span>{book.rating}</span>
             <button onClick={handleReviewClick} className="reviews-btn">
-              See Customer Reviews
+            See & Add Customer Reviews
             </button>
           </div>
 
@@ -380,6 +384,9 @@ const ProductDetails = () => {
       {showReviews && (
         <div id="reviews-section" className="reviews-container">
           <h2>Book Reviews</h2>
+          <button onClick={handleAddReviewClick} className="add_reviews-btn">
+              + Add Reviews
+            </button>
           <div className="reviews">
             {book.reviews.map((review, index) => (
               <div key={index} className="review">

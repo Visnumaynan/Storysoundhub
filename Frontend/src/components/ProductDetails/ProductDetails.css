@@ -469,3 +469,32 @@ h2{
 .review .review-author {
   font-weight: 600;
 }
+
+
+.add_reviews-btn {
+  background-color: #0a69a3; /* Primary blue color */
+  margin-bottom: 50px;
+  margin-left: 1050px;
+  color: white; /* White text */
+  font-size: 14px;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.add_reviews-btn:hover {
+  background-color: #334ee8; /* Brighter blue on hover */
+  transform: scale(1.05);
+}
+
+.add_reviews-btn:active {
+  background-color: #003f7f; /* Darker blue on click */
+  transform: scale(0.95);
+}
+
+.add_reviews-btn:focus {
+  outline: none;
+}
