@@ -47,6 +47,7 @@ input::placeholder {
   flex: 1;
   display: flex;
   flex-direction: column;
+  gap: 11px;
 }
 
 .form-group {
@@ -68,7 +69,7 @@ input::placeholder {
 /* ----------- */
 .form-group-2 {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 15px; 
   margin-bottom: 20px;
 }
@@ -81,13 +82,13 @@ input::placeholder {
 }
 
 .form-group-2 label {
-  font-size: 16px;
+  font-size: 13px;
   font-weight: 600;
-  margin-bottom: 5px;
+  margin-top: 10px;
 }
 
 .form-group-2 input {
-  width: 100%;
+  width: 80px;
   padding: 10px;
   background-color: #ffffff48;
   border: 1px solid #ccc;
@@ -110,6 +111,13 @@ input::placeholder {
   width: 300px;
   height: 120px;
 
+}
+
+.form-group-3 label {
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 10px;
+  margin-left: 90px;
 }
 
 .submit-button {
