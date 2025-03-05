@@ -22,4 +22,10 @@ class genres extends Model
 
     // Allow mass assignment
     protected $fillable = ['genre_id', 'name'];
+
+    // Relationships
+    public function books()
+    {
+        return $this->hasMany(book::class, 'genre_id');
+    }
 }
