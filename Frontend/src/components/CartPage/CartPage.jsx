@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Book1 from "../../assets/books/book1.jpg";
 import Book2 from "../../assets/books/book2.jpg";
 import Book3 from "../../assets/books/book3.jpg";
+import styles from "./CartPage.module.css";
 
 const CartPage = () => {
   const [cart, setCart] = useState([
@@ -11,7 +12,7 @@ const CartPage = () => {
       title: "Machine Learning Mastery",
       rating: 4.3,
       author: "Tech Enthusiast",
-      price: 29.99,
+      price: 2999,
     },
     {
       id: 7,
@@ -19,7 +20,7 @@ const CartPage = () => {
       title: "The Midnight Library",
       rating: 4.6,
       author: "Matt Haig",
-      price: 19.99,
+      price: 1950,
     },
     {
       id: 8,
@@ -27,7 +28,7 @@ const CartPage = () => {
       title: "The Silent Patient",
       rating: 4.8,
       author: "Alex Michaelides",
-      price: 24.99,
+      price: 1800,
     },
     {
       id: 9,
@@ -35,7 +36,7 @@ const CartPage = () => {
       title: "Educated: A Memoir",
       rating: 4.9,
       author: "Tara Westover",
-      price: 22.99,
+      price: 2500,
     },
     {
       id: 10,
@@ -43,7 +44,7 @@ const CartPage = () => {
       title: "The Alchemist",
       rating: 5.0,
       author: "Paulo Coelho",
-      price: 14.99,
+      price: 1000,
     },
   ]);
 
@@ -56,7 +57,7 @@ const CartPage = () => {
   };
 
   return (
-    <div className="cart-container">
+    <div className={styles["cart-container"]}>
       <h2>Shopping Cart</h2>
       {cart.length === 0 ? (
         <p>Your cart is empty.</p>
@@ -77,7 +78,7 @@ const CartPage = () => {
                     <img src={item.img} alt={item.title} style={{ width: '50px' }} /> {/* Display image */}
                     {item.title}
                   </td>
-                  <td>${item.price}</td>
+                  <td>Rs.{item.price}</td>
                   <td>
                     <button onClick={() => removeItem(item.id)}>Remove</button>
                   </td>
@@ -85,8 +86,9 @@ const CartPage = () => {
               ))}
             </tbody>
           </table>
-          <h3>Total: ${getTotalPrice()}</h3>
+          <h3>Total: Rs.{getTotalPrice()}</h3>
         </>
+        
       )}
     </div>
   );
