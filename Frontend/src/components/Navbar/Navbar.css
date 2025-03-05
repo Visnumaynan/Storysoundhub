@@ -113,42 +113,37 @@
   display: block;
 }
 
-/* Order Section */
-.order-section {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-/* Order Button */
-.order-button {
+.cart-icon {
   background: #6ba9ff !important;
   color: white !important;
-  padding: 8px 16px;
-  border-radius: 20px;
+  padding: 4px 10px; 
+  font-size: 0.9rem; 
+  border-radius: 30px; 
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px; 
   transition: 0.2s;
   border: none;
   cursor: pointer;
+  width: 70px;
+  height: 10px;
 }
 
+/* Smaller Cart Icon */
+.cart-icon svg {
+  width: 16px; 
+  height: 16px;
+}
 
-/* Dark Mode Order Button */
-.dark .order-button {
+/* Dark Mode */
+.dark .cart-icon {
   color: rgb(255, 255, 255) !important;
   background-color: #13ace9;
 }
 
 /* Hover Effect */
-.order-button:hover {
-  transform: scale(1.05);
-}
-
-/* Cart Icon */
-.cart-icon {
-  font-size: 1.2rem;
+.cart-icon:hover {
+  transform: scale(1.02);
 }
 
 /* User Profile Icon */
