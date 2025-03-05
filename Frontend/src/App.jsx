@@ -9,6 +9,7 @@ import Books from "./components/BooksSlider/Books.jsx";
 import ProductDetails from "./components/ProductDetails/ProductDetails.jsx";
 import BookForm from "./components/BookForm/BookForm.jsx";
 import AddReviews from "./components/AddReviews/AddReviews.jsx";
+import CartPage from "./components/CartPage/CartPage.jsx";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -56,6 +57,7 @@ const App = () => {
             }
           />
 
+        <Route path="/CartPage" element={<CartPage />} />
         <Route 
             path="/product-details/:id" 
             element={
