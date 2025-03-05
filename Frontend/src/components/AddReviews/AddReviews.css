@@ -27,7 +27,7 @@
     height: 20px;
   }
   
-  input, textarea {
+  input, select, textarea {
     background-color: #ffffff48;
     /* height: 40px; */
     width: 100%;
@@ -35,6 +35,10 @@
     color: #000;
     border-radius: 5px;
     font-size: 16px;
+  }
+
+  select{
+    height: 50px;
   }
   
   textarea {
