@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import BookFormWall from "../../assets/website/AddReviws.png";
 import "./AddReviews.css";
 
 const AddReviews = () => {
@@ -23,8 +24,16 @@ const AddReviews = () => {
   };
 
   return (
+
     <div className="add-reviews-container">
       <h2>Add Your Review</h2>
+    
+      {/* Left side with image */}
+      <div className="image-side">
+      <img src={BookFormWall} alt="Book Form Background" className="Add-Review-image" />
+      </div>
+    
+
       <form onSubmit={handleSubmit} className="review-form">
         <label>Name:</label>
         <input

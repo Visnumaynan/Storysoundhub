@@ -6,7 +6,14 @@
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.581);
     text-align: center;
   }
-  
+  .Add-Review-image {
+    flex: 1;
+    max-width: 50%;
+    height: auto;
+    height: 210px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0);
+  }
+
   h2 {
     margin-bottom: 20px;
   }

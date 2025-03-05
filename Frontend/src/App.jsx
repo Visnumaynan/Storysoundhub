@@ -71,7 +71,7 @@ const App = () => {
         <Route path="/BookForm" element={<><BookForm /><Footer /></>} />
 
         <Route path="/product/:id" element={<ProductDetails />} />
-        <Route path="/AddReviews" element={<AddReviews />} />
+        <Route path="/AddReviews" element={<><AddReviews /><Footer /></>} />
       </Routes>
         
       </div>
