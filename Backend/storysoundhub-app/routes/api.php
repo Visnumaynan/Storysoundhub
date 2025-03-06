@@ -11,7 +11,7 @@ Route::get('/user', function (Request $request) {
 Route::get('/test', function () {
     return response()->json(['message' => 'API is working!']);
 });
-
+// test
 Route::prefix('genres')->group(function () {
     // Get all genres
     Route::get('/', [GenreController::class, 'index']);
