@@ -1,0 +1,152 @@
+
+.footer-container {
+    background-color: #f3f4f6; 
+    color: #333;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Dark Mode Styles */
+.dark .footer-container {
+    background-color: #13161b;
+    color: #e5e7eb;
+}
+
+/* Footer Section */
+.footer-section {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px 0;
+}
+
+/* Footer Grid */
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 20px 0;
+}
+
+.footer-company {
+    padding: 20px;
+}
+
+.footer-logo img {
+    max-width: 200px;
+}
+
+.footer-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* Description */
+.footer-description {
+    padding: 10px;
+    margin-left: 50px;
+}
+
+.footer-quote {
+    width: 400px;
+    font-size: 1rem;
+    color: #1b1919;
+    margin-bottom: 40px;
+}
+
+.dark .footer-quote,
+.dark .footer-title,
+.dark .footer-links-title {
+    color: #e5e7eb;
+}
+
+.footer-email {
+    color: gray;
+}
+
+.dark .footer-email {
+    color: #9ca3af;
+}
+
+/* Important Links */
+.footer-links {
+    width: 200px;
+    padding: 20px;
+    margin-left: 50px;
+}
+
+.footer-links-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.footer-link-item {
+    list-style: none;
+    margin-bottom: 8px;
+}
+
+.footer-link-item a {
+    text-decoration: none;
+    color: gray;
+    transition: 0.3s;
+}
+
+.dark .footer-link-item a {
+    color: #9ca3af;
+}
+
+.footer-link-item a:hover {
+    color: #007bff;
+}
+
+.dark .footer-link-item a:hover {
+    color: #60a5fa;
+}
+
+.arrow {
+    margin-right: 5px;
+}
+
+/* Social Icons */
+.footer-social ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    margin-top: 20px;
+    margin-left: 50px;
+}
+
+.social-icon {
+    font-size: 2rem;
+    color: gray;
+    transition: 0.3s;
+}
+
+.dark .social-icon {
+    color: #9ca3af;
+}
+
+.social-icon:hover {
+    color: #007bff;
+    transform: translateX(5px);
+}
+
+.dark .social-icon:hover {
+    color: #60a5fa;
+}
+
+/* Copyright */
+.footer-copyright {
+    text-align: center;
+    padding: 20px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    font-size: 0.9rem;
+    color: gray;
+}
+
+.dark .footer-copyright {
+    color: #9ca3af;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
