@@ -21,7 +21,7 @@ return new class extends Migration
             $table->foreignuuid('genre_id')->constrained('genres', 'genre_id');
             $table->decimal('price', 8, 2);
             $table->text('short_description')->nullable();
-            $table->foreignuuid('owner_id')->constrained('users', 'id');
+            $table->foreignID('owner_id')->constrained('users', 'id');
             $table->string('condition');
             $table->integer('quantity');
             $table->timestamp('upload_date')->useCurrent();
