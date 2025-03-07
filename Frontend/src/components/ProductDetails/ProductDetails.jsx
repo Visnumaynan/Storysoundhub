@@ -66,7 +66,7 @@ const booksData = [
         {
           "userName": "Samantha_K",
           "userId": "3",
-          "review": "A deeply emotional read. I couldn't put it down, and it really made me reflect on my own life.😍"
+          "review": "A deeply emotional read. I couldn't put it down, and it really made me reflect on my own life.🥹🥹"
         }
         ,
         {
@@ -307,6 +307,10 @@ const ProductDetails = () => {
       }
     }, 50); 
   };
+
+  const handleAddReviewClick = () => {
+    navigate("/AddReviews");
+  };
   
 
   return (
@@ -320,11 +324,11 @@ const ProductDetails = () => {
             <FaStar className="star-icon" />
             <span>{book.rating}</span>
             <button onClick={handleReviewClick} className="reviews-btn">
-              See Customer Reviews
+            See & Add Customer Reviews
             </button>
           </div>
 
-          <p><strong>Description:</strong> {showFullDescription ? book.description : shortDescription}</p>
+          <p><strong></strong> {showFullDescription ? book.description : shortDescription}</p>
 
           {isLongDescription && (
             <button
@@ -380,6 +384,9 @@ const ProductDetails = () => {
       {showReviews && (
         <div id="reviews-section" className="reviews-container">
           <h2>Book Reviews</h2>
+          <button onClick={handleAddReviewClick} className="add_reviews-btn">
+              + Add Reviews
+            </button>
           <div className="reviews">
             {book.reviews.map((review, index) => (
               <div key={index} className="review">

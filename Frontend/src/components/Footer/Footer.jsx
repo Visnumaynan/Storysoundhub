@@ -28,7 +28,7 @@ const Footer = () => {
               "Where Every Book Takes You on a Journey Through a Universe of
               Extraordinary Wonders and Limitless Imagination"
             </p>
-            <p className="footer-email">Email: info@example.com</p>
+            <p className="footer-email"></p>
           </div>
 
           {/* Important Links */}

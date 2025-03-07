@@ -7,6 +7,9 @@ import Footer from "./components/Footer/Footer.jsx";
 import LoginRegister from "./components/LoginRegister/LoginRegister.jsx"; 
 import Books from "./components/BooksSlider/Books.jsx";
 import ProductDetails from "./components/ProductDetails/ProductDetails.jsx";
+import BookForm from "./components/BookForm/BookForm.jsx";
+import AddReviews from "./components/AddReviews/AddReviews.jsx";
+import CartPage from "./components/CartPage/CartPage.jsx";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -54,6 +57,7 @@ const App = () => {
             }
           />
 
+        <Route path="/CartPage" element={<CartPage />} />
         <Route 
             path="/product-details/:id" 
             element={
@@ -64,6 +68,14 @@ const App = () => {
             } 
           /> 
         </Routes>
+        {/* Add Book Form Route */}
+        <Routes>
+        <Route path="/BookForm" element={<><BookForm /><Footer /></>} />
+
+        <Route path="/product/:id" element={<ProductDetails />} />
+        <Route path="/AddReviews" element={<><AddReviews /><Footer /></>} />
+      </Routes>
+        
       </div>
     </Router>
   );

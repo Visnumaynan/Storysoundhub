@@ -33,10 +33,9 @@ const Navbar = () => {
               <a href="#community" className="nav-item">Community</a>
             </li>
             <li>
-              <button className="order-button">
-                Order
-                <FaCartShopping className="cart-icon" />
-              </button>
+            <Link to="/CartPage" className="cart-icon">
+            Order <FaCartShopping size={16} />
+            </Link>
             </li>
             <li>
               <Link to="/loginRegister" className="user-profile">
