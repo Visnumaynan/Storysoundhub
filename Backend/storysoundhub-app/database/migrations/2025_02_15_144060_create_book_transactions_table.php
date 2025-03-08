@@ -14,8 +14,8 @@ return new class extends Migration
     Schema::create('book_transactions', function (Blueprint $table) {
         $table->id('transaction_id');
         $table->foreignUuid('book_id')->constrained('books', 'book_id')->onDelete('cascade');
-        $table->foreignuuid('buyer_id')->constrained('users', 'id')->onDelete('cascade');
-        $table->foreignuuid('seller_id')->constrained('users', 'id')->onDelete('cascade');
+        $table->foreignID('buyer_id')->constrained('users', 'id')->onDelete('cascade');
+        $table->foreignID('seller_id')->constrained('users', 'id')->onDelete('cascade');
         $table->decimal('price', 8, 2);
         $table->enum('status', ['pending', 'completed', 'cancelled'])->default('pending');
         $table->timestamp('transaction_date')->useCurrent();
