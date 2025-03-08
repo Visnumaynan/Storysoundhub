@@ -9,15 +9,13 @@ return new class extends Migration {
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->uuid('id')-> primary();
-            $table->string('username');
-            $table->string('email')->unique();
-            $table->string('password_hash');
-            $table->string('profile_picture')->nullable();
-            $table->integer('phone');
-            $table->string('location')->nullable();
-            $table->timestamp('date_joined')->useCurrent();
-            $table->timestamps();
+            $table->id('id')->primary();  // Auto-incrementing primary key
+            $table->string('name'); // User's name
+            $table->string('email')->unique(); // Unique email field
+            $table->timestamp('email_verified_at')->nullable(); // Email verification
+            $table->string('password'); // Hashed password
+            $table->rememberToken(); // Token for "Remember Me" feature
+            $table->timestamps(); 
         });
     }
 
