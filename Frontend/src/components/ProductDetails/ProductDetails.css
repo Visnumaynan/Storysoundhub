@@ -254,12 +254,17 @@ h2{
   margin-right: 6px;
 }
 
+.read-more-btn:hover {
+  background: #94070700;
+}
 .price {
   margin-top: 30px;
   font-size: 24px;
   font-weight: bold;
   color: #db1616;
+  width: 70px;
   margin-bottom: 30px;
+  margin-left: 2px;
 }
 
 /* Quantity Selector */
@@ -378,9 +383,10 @@ h2{
 
 .book-title {
   font-weight: bold;
-  font-weight: 600;
+  font-weight: 1200;
   font-size: 16px;
   margin-top: 10px;
+  font-Weight: "bold";
 }
 
 .book-author {
@@ -444,20 +450,20 @@ h2{
   color: #8096b6;
 }
 
-.reviews-btn {
+.reviewsBt {
   color: #0a69a3;
   border: none;
   cursor: pointer;
   font-size: 13px;
-  background-color: #00000000;
+  background-color: #ff000000;
   font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-.reviews-btn:hover {
+.reviewsBt:hover {
   color: #334ee8;
 }
 
-.reviews-btn:focus {
+.reviewsBt:focus {
   outline: none;
 }
 
@@ -482,16 +488,16 @@ h2{
   border-radius: 5px;
   cursor: pointer;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+ 
 }
 
 .add_reviews-btn:hover {
-  background-color: #334ee8; /* Brighter blue on hover */
+  background-color: #000000; /* Brighter blue on hover */
   transform: scale(1.05);
 }
 
 .add_reviews-btn:active {
-  background-color: #003f7f; /* Darker blue on click */
+  background-color: #000000; /* Darker blue on click */
   transform: scale(0.95);
 }
 
