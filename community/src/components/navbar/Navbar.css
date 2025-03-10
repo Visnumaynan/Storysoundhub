@@ -4,6 +4,13 @@
   background-color: white;
   transition: 0.2s;
   height: 100px;
+  position: fixed; /* Make the navbar fixed */
+  top: 0; /* Stick to the top */
+  left: 0; /* Start from the left edge */
+  right: 0; /* Extend to the right edge */
+  width: 100%; /* Full width */
+  z-index: 1000; /* Ensure it stays on top of other content */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: add shadow for better visibility */
 }
 
 /* Dark Mode Support */
@@ -154,3 +161,7 @@
   object-fit: cover;
 }
 
+/* Add padding to the body to prevent content from being hidden under the navbar */
+body {
+  padding-top: 100px; /* Should match navbar height */
+}
