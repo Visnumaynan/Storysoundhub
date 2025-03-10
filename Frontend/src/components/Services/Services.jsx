@@ -3,7 +3,7 @@ import Img1 from "../../assets/books/book2.jpg";
 import Img2 from "../../assets/books/book1.jpg";
 import Img3 from "../../assets/books/book3.jpg";
 import { FaStar } from "react-icons/fa";
-import styles from "./Services.module.css"; // Correct import
+import styles from "./Services.module.css";
 
 const ServicesData = [
   {
@@ -21,7 +21,16 @@ const ServicesData = [
     img: Img3,
     title: "It Ends With Us",
   },
-  
+  {
+    id: 1,
+    img: Img1,
+    title: "Artificial Intelligence & Generative AI for Beginners",
+  },
+  {
+    id: 3,
+    img: Img3,
+    title: "It Ends With Us",
+  },
 ];
 
 const Services = ({ handleOrderPopup }) => {
@@ -34,7 +43,8 @@ const Services = ({ handleOrderPopup }) => {
             <h1>Books</h1>
           </div>
           <div className={styles.servicesGrid}>
-            {ServicesData.map((service) => (
+            {/* Limit to the first 3 items */}
+            {ServicesData.slice(0, 3).map((service) => (
               <div key={service.id} className={styles.serviceCard} data-aos="zoom-in">
                 <div className={styles.serviceImage}>
                   <img src={service.img} alt={service.title} />
