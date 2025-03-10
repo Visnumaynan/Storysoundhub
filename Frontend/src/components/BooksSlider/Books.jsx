@@ -68,7 +68,7 @@ const booksData = [
   {
     id: 9,
     img: Book2,
-    title: "Educated: A Memoir",
+    title: "A Memoir",
     rating: 4.9,
     author: "Tara Westover",
   },
@@ -108,6 +108,14 @@ const Books = () => {
   // Show only the first 10 books or all books based on `showAll`
   const displayedBooks = showAll ? filteredBooks : filteredBooks.slice(0, 10);
 
+  const bookTitleStyle = {
+    fontSize: "1.0rem",
+    fontWeight: "bold",
+    textAlign: "left",
+    marginTop: "10px",
+    width:"200px"
+  };
+
   return (
     <div className="books-container">
       <div className="container">
@@ -120,8 +128,8 @@ const Books = () => {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-          <button className="add-book-button" onClick={() => navigate("/BookForm")}>
-            <img src={addBook} alt="Add Book" />
+          <button className="addBookButton" onClick={() => navigate("/BookForm")}>
+          +
           </button>
         </div>
 
@@ -133,7 +141,7 @@ const Books = () => {
             style={{ cursor: "pointer" }} // Add pointer cursor
           >
               <img src={img} alt={title} className="book-image" />
-              <h3 className="book-title">{title}</h3>
+              <h3 className="book-title" style={bookTitleStyle}>{title}</h3>
               <p className="book-author">{author}</p> {/* Author Below Title */}
               <div className="book-rating">
                 <FaStar className="star-icon" />

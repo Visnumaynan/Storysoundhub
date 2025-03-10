@@ -323,9 +323,9 @@ const ProductDetails = () => {
           <div className="book-rating">
             <FaStar className="star-icon" />
             <span>{book.rating}</span>
-            <button onClick={handleReviewClick} className="reviews-btn">
+            <div onClick={handleReviewClick} className="reviewsBt">
             See & Add Customer Reviews
-            </button>
+            </div>
           </div>
 
           <p><strong></strong> {showFullDescription ? book.description : shortDescription}</p>
