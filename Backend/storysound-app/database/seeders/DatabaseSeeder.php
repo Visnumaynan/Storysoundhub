@@ -19,8 +19,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             // List all your seeders here
             UsersTableSeeder::class,
-            BooksTableSeeder::class,
             GenresTableSeeder::class,
+            BooksTableSeeder::class,
             BookClubsTableSeeder::class,
             BookClubMembersTableSeeder::class,
             PostsTableSeeder::class,
