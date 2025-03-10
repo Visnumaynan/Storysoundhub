@@ -23,5 +23,6 @@ class GenresTableSeeder extends Seeder
             ['genre_id' => Str::uuid(), 'name' => 'Romance', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
             ['genre_id' => Str::uuid(), 'name' => 'Non-Fiction', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
         ]);
+        
     }
 }

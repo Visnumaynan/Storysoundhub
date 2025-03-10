@@ -13,13 +13,13 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
+            GenresTableSeeder::class,
             BooksTableSeeder::class,  // First, seed the genres table
             BookClubsTableSeeder::class,   // Then, seed the books table
             BookClubMembersTableSeeder::class,
             BookTransactionsTableSeeder::class,
             BookWishlistTableSeeder::class,
             CommentsTableSeeder::class,
-            GenresTableSeeder::class,
             PostsTableSeeder::class,
             ReactionsTableSeeder::class
         ]);
