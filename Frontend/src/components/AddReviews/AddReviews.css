@@ -1,69 +1,103 @@
 .add-reviews-container {
-    width: 40%;
-    margin: 50px auto;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.581);
-    text-align: center;
-  }
-  .Add-Review-image {
-    flex: 1;
-    max-width: 50%;
-    height: auto;
-    height: 210px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0);
-  }
+  width: 30%;
+  margin: 50px auto;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.581);
+  text-align: center;
+}
+.Add-Review-image {
+  flex: 1;
+  max-width: 50%;
+  height: auto;
+  height: 210px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0);
+}
 
-  h2 {
-    margin-bottom: 20px;
-  }
-  
-  .review-form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  label {
-    font-weight: bold;
-    text-align: left;
-  }
+h2 {
+  margin-bottom: 30px;
+  font-size: 40px;
+}
 
-  input{
-    background-color: #a8afb7;
-    height: 20px;
-  }
-  
-  input, select, textarea {
-    background-color: #ffffff48;
-    /* height: 40px; */
-    width: 100%;
-    border: 1px solid #ccc;
-    color: #000;
-    border-radius: 5px;
-    font-size: 16px;
-  }
+.review-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
 
-  select{
-    height: 50px;
-  }
-  
-  textarea {
-    height: 100px;
-    resize: none;
-  }
-  
-  .submit-btn {
-    background: #007bff;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
-  .submit-btn:hover {
-    background: #0056b3;
-  }
-  
+label {
+  font-weight: bold;
+  text-align: left;
+}
+
+input{
+  background-color: #a8afb7;
+  height: 20px;
+}
+
+input, select, textarea {
+  background-color: #ffffff48;
+  /* height: 40px; */
+  width: 100%;
+  border: 1px solid #ccc;
+  color: #000;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+select{
+  height: 50px;
+}
+
+textarea {
+  height: 100px;
+  resize: none;
+}
+
+.submit-btn {
+  background: #007bff;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 30px;
+}
+.star-rating {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.submit-btn :hover{
+  background-color: #000;
+}
+.stars {
+  background: none;
+  border: none;
+  font-size: 30px;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+  color: transparent; /* Transparent stars initially */
+  text-shadow: 0 0 0 rgba(233, 222, 3, 0.368); /* Black border effect */
+}
+
+.star:hover {
+  transform: scale(1.2);
+}
+
+.selected {
+  color: gold; /* Turns gold when selected */
+  text-shadow: none; /* Removes black border effect */
+}
+
+.star-icons {
+  width: 40px; /* Adjust size as needed */
+  height: 40px;
+  cursor: pointer;
+}
+.star.selected .star-icons {
+  filter: brightness(1.2); /* Optional effect for selected stars */
+}

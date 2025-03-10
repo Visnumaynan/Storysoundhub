@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import BookFormWall from "../../assets/website/AddReviws.png";
+import StarIcon from "../../assets/website/star.png";
+import StarIconYellow from "../../assets/website/starYellow.png";
 import "./AddReviews.css";
 
 const AddReviews = () => {
@@ -16,45 +17,46 @@ const AddReviews = () => {
     setReview({ ...review, [e.target.name]: e.target.value });
   };
 
+  const handleRating = (ratingValue) => {
+    setReview({ ...review, rating: ratingValue });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Review Submitted:", review);
-    alert("Thank you for your review!");
-    navigate("/"); 
+    alert(`Thank you for your ${review.rating}-star review!`);
+    navigate("/");
   };
 
   return (
-
     <div className="add-reviews-container">
       <h2>Add Your Review</h2>
-    
-      {/* Left side with image */}
-      <div className="image-side">
-      <img src={BookFormWall} alt="Book Form Background" className="Add-Review-image" />
-      </div>
-    
+
 
       <form onSubmit={handleSubmit} className="review-form">
-        <label>Name:</label>
-        <input
-          type="text"
-          name="name"
-          value={review.name}
-          onChange={handleChange}
-          required
-          placeholder="Enter your name"
-        />
+      
+      <p>Click to rate your experience!</p>
+        <div className="star-rating">
+        
+          {[1, 2, 3, 4, 5].map((star) => (
+            <button
+              key={star}
+              type="button"
+              className={`stars ${review.rating >= star ? "selected" : ""}`}
+              onClick={() => handleRating(star)}
+            >
+              <img
+                src={review.rating >= star ? StarIconYellow : StarIcon} 
+                alt="Stars"
+                className="star-icons"
+              />
+              
+            </button>
+            
+          ))}
+        </div>
 
-        <label>Rating:</label>
-        <select name="rating" value={review.rating} onChange={handleChange} required>
-          <option value="1">⭐ 1</option>
-          <option value="2">⭐⭐ 2</option>
-          <option value="3">⭐⭐⭐ 3</option>
-          <option value="4">⭐⭐⭐⭐ 4</option>
-          <option value="5">⭐⭐⭐⭐⭐ 5</option>
-        </select>
-
-        <label>Comment:</label>
+        <p>Share your comment!</p>
         <textarea
           name="comment"
           value={review.comment}
@@ -69,3 +71,5 @@ const AddReviews = () => {
 };
 
 export default AddReviews;
+
+  
