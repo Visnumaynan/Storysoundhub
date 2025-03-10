@@ -22,16 +22,16 @@ class book_transaction extends Model
 
     public function book()
     {
-        return $this->belongsTo(book::class, 'book_id');
+        return $this->belongsTo(Book::class, 'book_id');
     }
 
     public function buyer()
     {
-        return $this->belongsTo(user::class, 'buyer_id');
+        return $this->belongsTo(User::class, 'buyer_id');
     }
 
     public function seller()
     {
-        return $this->belongsTo(user::class, 'seller_id');
+        return $this->belongsTo(User::class, 'seller_id');
     }
 }
