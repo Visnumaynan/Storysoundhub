@@ -52,7 +52,7 @@ class BookWishlistTableSeeder extends Seeder
             [
                 'wishlist_id' => 5,
                 'user_id' =>1,
-                'book_id' => DB::table('books')->where('title', 'Brave New World')->value('book_id'),
+                'book_id' => DB::table('books')->where('title', 'The Catcher in the Rye')->value('book_id'),
                 'picture' => 'placeholder.jpg',
                 'wishlist_date' => Carbon::now(),
                 'created_at' => Carbon::now(),
