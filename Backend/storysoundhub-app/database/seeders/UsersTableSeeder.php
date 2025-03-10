@@ -20,7 +20,7 @@ class UsersTableSeeder extends Seeder
                 'email' => 'john@example.com',
                 'password_hash' => bcrypt('password123'),
                 'profile_picture' => null,
-                'phone' => 1234567890,
+                'phone' => +1234567890,
                 'location' => 'New York',
                 'date_joined' => Carbon::now(),
                 'created_at' => Carbon::now(),

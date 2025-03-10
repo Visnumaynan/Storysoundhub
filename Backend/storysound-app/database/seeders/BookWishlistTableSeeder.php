@@ -4,6 +4,9 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB; 
+use Illuminate\Support\Str;
+use Carbon\Carbon;
 
 class BookWishlistTableSeeder extends Seeder
 {
@@ -52,7 +55,7 @@ class BookWishlistTableSeeder extends Seeder
             [
                 'wishlist_id' => 5,
                 'user_id' =>1,
-                'book_id' => DB::table('books')->where('title', 'Brave New World')->value('book_id'),
+                'book_id' => DB::table('books')->where('title', 'The Catcher in the Rye')->value('book_id'),
                 'picture' => 'placeholder.jpg',
                 'wishlist_date' => Carbon::now(),
                 'created_at' => Carbon::now(),
