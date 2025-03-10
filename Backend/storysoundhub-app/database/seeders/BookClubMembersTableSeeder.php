@@ -21,6 +21,38 @@ class BookClubMembersTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
+            [
+                'membership_id' => 2,
+                'club_id' => DB::table('book_clubs')->where('club_name', 'Fantasy Readers')->value('club_id'),
+                'user_id' => DB::table('users')->where('username', 'jane_doe')->value('id'),
+                'join_date' => Carbon::now(),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'membership_id' => 3,
+                'club_id' => DB::table('book_clubs')->where('club_name', 'Classic Literature Lovers')->value('club_id'),
+                'user_id' => DB::table('users')->where('username', 'alice_smith')->value('id'),
+                'join_date' => Carbon::now(),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'membership_id' => 4,
+                'club_id' => DB::table('book_clubs')->where('club_name', 'Mystery Solvers')->value('club_id'),
+                'user_id' => DB::table('users')->where('username', 'bob_jones')->value('id'),
+                'join_date' => Carbon::now(),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'membership_id' => 5,
+                'club_id' => DB::table('book_clubs')->where('club_name', 'Philosophy & Thought')->value('club_id'),
+                'user_id' => DB::table('users')->where('username', 'charlie_brown')->value('id'),
+                'join_date' => Carbon::now(),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
         ]);
     }
 }
