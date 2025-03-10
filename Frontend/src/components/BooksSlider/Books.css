@@ -1,118 +1,137 @@
-.books-container {
-  margin-top: 3.5rem;
-  margin-bottom: 3rem;
-}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
-.container {
-  text-align: center;
+body {
+  font-family: 'Poppins', sans-serif;
 }
-
-.top-bar {
+.book-form-container {
   display: flex;
+  height: 100vh;
   align-items: center;
-  margin-right: 50px;
+  justify-content: center;
+  padding: 20px;
+  height: 130vh;
 }
 
-.add-book-button {
-  margin-top: -90px;
-  background-color: rgba(255, 255, 255, 0.064);
-  width: 60px;
-  height: 60px;
-  border-radius: 50px;
-  border: none;
-  cursor: pointer;
-  margin-left: 10px;
+.image-side {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.add-book-button img {
-  width: 40px;
-  height: 40px;
+.form-image {
+  flex: 1;
+  max-width: 90%;
+  height: auto;
+  height: 889px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-.search-bar {
-  width: 100%;
-  margin-bottom: 90px;
-  max-width: 500px; /* Optional: set a max width for the search bar */
-  padding: 0.5rem;
-  border: 1px solid #134caff8; /* Light border */
-  border-radius: 50px;
-  background-color:rgba(255, 255, 255, 0.208);
+.form-card {
+  padding: 2rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.581);
+  width: 600px;
+  height: 820px;
+}
+
+input::placeholder {
+  color: rgba(0, 0, 0, 0.41);
+}
+
+.form-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.book-form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.form-group {
+  display: flex;
   color: #000;
-  margin-left: 500px;
-  border-color: #000;
+  gap: 10px;
+  margin-bottom: 1rem;
 }
 
-.books-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr); /* 5 books per row */
-  gap: 20px; /* Space between each book */
-  row-gap: 60px;
-  justify-items: center; /* Center-align the books within each column */
+.book-form input {
+  flex: 1;
+  padding: 10px;
+  color: #000000;
+  background-color: #ffffff48;
+  border: 1px solid #000000;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+/* ----------- */
+.form-group-2 {
+  display: flex;
+  flex-direction: row;
+  gap: 15px; 
+  margin-bottom: 20px;
 }
 
-.book-card {
-  width: 150px;
-  text-align: left;
-  background-color: #f9f9f900;
-  border-radius: 10px;
-  box-shadow: 0px 4px 6px rgba(255, 255, 255, 0);
-  overflow: hidden;
-  transition: transform 0.2s ease-in-out;
+.form-group label {
+  align-items: center;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 5px;
 }
 
-.book-card:hover {
-  transform: scale(1.05); /* Slight zoom effect on hover */
-}
-
-.book-image {
-  height: 220px;
-  width: 100%;
-  object-fit: cover;
-  border-radius: 10px;
-}
-
-.book-title {
+.form-group-2 label {
+  font-size: 13px;
   font-weight: 600;
   margin-top: 10px;
 }
 
-.book-author {
-  font-size: 15px;
-  color: #777; /* Light gray for a subtle look */
-  margin-top: -10px;
-  margin-bottom: 5px;
-  font-family:Verdana, Geneva, Tahoma, sans-serif;
+.form-group-2 input {
+  width: 80px;
+  padding: 10px;
+  background-color: #ffffff48;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  transition: all 0.3s ease;
 }
 
-.book-rating {
+.form-group-2 input:focus {
+  border-color: #000000;
+  outline: none;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+}
+.form-group-3 {
+  margin-left: 25%;
   display: flex;
-  align-items: center;
-  gap: 0.25rem;
-  justify-content: left;
-  margin-top: 5px;
+  flex-direction: column;
+  gap: 15px; 
+  margin-bottom: 20px;
+  width: 300px;
+  height: 120px;
+
 }
 
-.star-icon {
-  color: #facc15;
+.form-group-3 label {
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 10px;
+  margin-left: 90px;
 }
 
-.button-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 2.5rem;
-}
-
-.view-all-button {
-  cursor: pointer;
-  background-color: #0066cc; /* Adjusted primary color */
+.submit-button {
+  width: 100%;
+  background-color: #6ba9ff;
   color: white;
-  padding: 0.5rem 1.25rem;
-  border-radius: 25px;
   border: none;
+  padding: 12px;
   font-size: 1rem;
-  transition: background-color 0.3s ease;
+  border-radius: 8px;
+  cursor: pointer;
 }
 
-.view-all-button:hover {
-  background-color: #004b8d; /* Darker shade on hover */
+.submit-button:hover{
+  background-color: #030d12;
 }
+
