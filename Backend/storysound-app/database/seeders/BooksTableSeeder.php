@@ -4,6 +4,9 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB; 
+use Illuminate\Support\Str;
+use Carbon\Carbon;
 
 class BooksTableSeeder extends Seeder
 {
@@ -57,7 +60,7 @@ class BooksTableSeeder extends Seeder
                 'genre_id' =>1,
                 'price' => 12.99,
                 'short_description' => 'A novel of racial injustice and moral growth.',
-                'owner_id' => DB::table('users')->where('username', 'john_doe')->value('id'),
+                'owner_id' => 2,
                 'condition' => 'Like New',
                 'quantity' => 4,
                 'upload_date' => Carbon::now(),
