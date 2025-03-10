@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class reactions extends Model
+class Reactions extends Model
 {
     use HasFactory;
 
@@ -32,6 +32,6 @@ class reactions extends Model
 
     public function bookClubMember()
     {
-        return $this->belongsTo(Book_club_members::class, 'membership_id');
+        return $this->belongsTo(Book_club_members::class,  'membership_id');
     }
 }

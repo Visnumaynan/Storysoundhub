@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id('comment_id')-> primary();
-            $table->foreignid('post_id')->constrained('posts', 'post_id')->onDelete('cascade');
+            $table->foreignuuid('post_id')->constrained('posts', 'post_id')->onDelete('cascade');
             $table->foreignid('membership_id')->constrained('book_club_members', 'membership_id')->onDelete('cascade');
             $table->text('content');
             $table->timestamps();
