@@ -32,6 +32,6 @@ class reactions extends Model
 
     public function bookClubMember()
     {
-        return $this->belongsTo(Book_club_members::class, 'membership_id');
+        return $this->belongsTo(Book_club_members::class,  'membership_id');
     }
 }
