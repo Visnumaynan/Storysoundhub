@@ -15,11 +15,14 @@ return new class extends Migration {
             $table->timestamp('email_verified_at')->nullable(); // Email verification
             $table->string('password'); // Hashed password
             $table->rememberToken(); // Token for "Remember Me" feature
-            $table->timestamps(); // Created_at and updated_at timestamps
+            $table->timestamps(); 
         });
     }
 
-    public function down()
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
     {
         Schema::dropIfExists('users');
     }
