@@ -5,6 +5,7 @@ import DarkMode from "./DarkMode";
 import { FaCartShopping } from "react-icons/fa6";
 import UserIcon from "../../assets/website/user .png"; 
 import "./Navbar.css";
+import { FaHeart } from "react-icons/fa";
 
 const Navbar = () => {
   return (
@@ -32,12 +33,10 @@ const Navbar = () => {
             <li>
               <a href="#community" className="nav-item">Community</a>
             </li>
-            <li>
-            <Link to="/CartPage" className="cart-icon">
-            Order <FaCartShopping size={16} />
-            </Link>
-            </li>
-            <li>
+              <Link to="/CartPage" className="cart-icon">
+              <FaHeart className="inline-block text-white" /> My List
+              </Link>
+             <li>
               <Link to="/loginRegister" className="user-profile">
                 <img src={UserIcon} alt="User" className="user-icon" />
               </Link>

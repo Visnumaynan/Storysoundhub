@@ -113,10 +113,10 @@
   display: block;
 }
 
-.cart-icon {
+.cart-icon { 
   background: #007bff !important;
   color: white !important;
-  padding: 4px 10px; 
+  padding: 6px 12px;
   font-size: 0.9rem; 
   border-radius: 30px; 
   display: flex;
@@ -125,8 +125,9 @@
   transition: 0.2s;
   border: none;
   cursor: pointer;
-  width: 70px;
-  height: 10px;
+  width: auto; 
+  height: auto; 
+  text-decoration: none; /* Remove underline from Link */
 }
 
 /* Smaller Cart Icon */
@@ -143,10 +144,11 @@
 
 /* Hover Effect */
 .cart-icon:hover {
-  transform: scale(1.02);
+  transform: scale(1.05); 
+  background: #0056b3; 
 }
 
-.dark .cart-icon:hover{
+.dark .cart-icon:hover {
   color: #000;
 }
 
@@ -157,4 +159,3 @@
   border-radius: 50%;
   object-fit: cover;
 }
-
