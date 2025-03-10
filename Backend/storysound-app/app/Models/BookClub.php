@@ -36,6 +36,6 @@ class BookClub extends Model
 
     public function members()
     {
-        return $this->hasMany(book_club_members::class, 'club_id');
+        return $this->hasMany(Book_club_members::class, 'club_id');
     }
 }

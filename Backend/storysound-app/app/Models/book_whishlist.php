@@ -19,11 +19,11 @@ class book_whishlist extends Model
 
     public function user()
     {
-        return $this->belongsTo(user::class, 'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function book()
     {
-        return $this->belongsTo(book::class, 'book_id');
+        return $this->belongsTo(Book::class, 'book_id');
     }
 }

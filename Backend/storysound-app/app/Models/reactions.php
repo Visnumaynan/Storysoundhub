@@ -22,16 +22,16 @@ class reactions extends Model
 
     public function post()
     {
-        return $this->belongsTo(posts::class, 'post_id');
+        return $this->belongsTo(Posts::class, 'post_id');
     }
 
     public function comment()
     {
-        return $this->belongsTo(comments::class, 'comment_id');
+        return $this->belongsTo(Comments::class, 'comment_id');
     }
 
     public function bookClubMember()
     {
-        return $this->belongsTo(book_club_members::class, 'membership_id');
+        return $this->belongsTo(Book_club_members::class, 'membership_id');
     }
 }
