@@ -30,6 +30,14 @@ const ImageList = [
     description:
       "Lost Boy, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   },
+  {
+    id: 4,
+    img: Book3,
+    title: "It Ends With Us",
+    author: "Hoover Colleen",
+    description:
+      "Lost Boy, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  },
 ];
 
 const Hero = ({ handleOrderPopup }) => {
@@ -68,7 +76,7 @@ const Hero = ({ handleOrderPopup }) => {
                 <img src={imageId} alt="book" className="hero-main-image" />
               </div>
               <div className="hero-thumbnail-wrapper">
-                {ImageList.map((item) => (
+                {ImageList.slice(0, 3).map((item) => (
                   <img
                     key={item.id}
                     src={item.img}

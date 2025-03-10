@@ -153,7 +153,7 @@ const Books = () => {
 
         {/* View All / Show Less Button */}
         {filteredBooks.length > 10 && (
-          <div className="button-container">
+          <div className="ViewAll-button-container">
             <button
               className="view-all-button"
               onClick={() => setShowAll(!showAll)}
