@@ -128,9 +128,12 @@ const Books = () => {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
+          <div className="addBookButton-wrapper">
           <button className="addBookButton" onClick={() => navigate("/BookForm")}>
-          +
+          <div className="plus">+</div>
           </button>
+          <div className="tooltip">Add a New Book</div> {/* Tooltip Text */}
+          </div>
         </div>
 
         {/* Books Grid */}

@@ -10,24 +10,30 @@
 .top-bar {
   display: flex;
   align-items: center;
-  justify-content: center; /* Adjusting for better centering */
+  justify-content: center; 
   margin-bottom: 20px; /* Space between search bar and book list */
 }
 
-.add-book-button {
-  margin-top: -90px;
-  background-color: rgba(255, 255, 255, 0.064);
-  width: 60px;
-  height: 60px;
+.addBookButton {
+  margin-top: 2px;
+  background-color: #007bff;
+  width: 45px;
+  height: 45px;
   border-radius: 50px;
   border: none;
   cursor: pointer;
   margin-left: 10px;
 }
 
-.add-book-button img {
-  width: 40px;
-  height: 40px;
+.addBookButton:hover {
+  background-color: #0064cf; /* Darker shade on hover */
+}
+
+.plus {
+  font-size: 28px; /* Increase the font size */
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 40px;
 }
 
 .search-bar {
@@ -42,6 +48,7 @@
 }
 
 .books-grid {
+  margin-top: 90px;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 20px;
@@ -126,3 +133,30 @@
     grid-template-columns: 1fr; /* 1 book per row on very small screens */
   }
 }
+
+.addBookButton-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip {
+  position: absolute;
+  top: 56px; 
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.538);
+  color: white;
+  padding: 6px 10px;
+  font-size: 12px;
+  border-radius: 5px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+}
+
+.addBookButton-wrapper:hover .tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+
