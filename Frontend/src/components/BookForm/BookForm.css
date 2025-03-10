@@ -131,6 +131,7 @@ input::placeholder {
   cursor: pointer;
 }
 
-.submit-button:hover {
-  background-color:#004b8d;
+.submit-button:hover{
+  background-color: #030d12;
 }
+
