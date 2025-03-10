@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GenreController;
+use App\Http\Controllers\book_whishlist;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -24,4 +25,15 @@ Route::prefix('genres')->group(function () {
 
     // Delete a specific genre by ID
     Route::delete('/{id}', [GenreController::class, 'destroy']);
+});
+
+Route::prefix('wishlist')->group(function () {
+    // Get wishlist items for a user
+    Route::get('/{userId}', [book_whishlist::class, 'index']);
+
+    // Add a book to wishlist
+    Route::post('/', [book_whishlist::class, 'store']);
+
+    // Remove a book from wishlist
+    Route::delete('/{id}', [book_whishlist::class, 'destroy']);
 });
