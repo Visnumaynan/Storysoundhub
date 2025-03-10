@@ -15,9 +15,9 @@ class BookTransactionsTableSeeder extends Seeder
         DB::table('book_transactions')->insert([
             [
                 'transaction_id' => 1,
-                'book_id' => DB::table('books')->where('title', 'Dune')->value('book_id'),
-                'buyer_id' => 1, // Buyer is different
-                'seller_id' =>2,
+                'book_id' => DB::table('books')->value('book_id'),
+                'buyer_id' => 2, // Buyer is different
+                'seller_id' =>1,
                 'price' => 19.99,
                 'status' => 'completed',
                 'transaction_date' => Carbon::now(),
@@ -26,9 +26,9 @@ class BookTransactionsTableSeeder extends Seeder
             ],
             [
                 'transaction_id' => 2,
-                'book_id' => DB::table('books')->where('title', '1984')->value('book_id'),
-                'buyer_id' => 1,
-                'seller_id' => 2,
+                'book_id' => DB::table('books')->value('book_id'),
+                'buyer_id' => 2,
+                'seller_id' => 1,
                 'price' => 15.50,
                 'status' => 'pending',
                 'transaction_date' => Carbon::now(),
@@ -37,9 +37,9 @@ class BookTransactionsTableSeeder extends Seeder
             ],
             [
                 'transaction_id' => 3,
-                'book_id' => DB::table('books')->where('title', 'To Kill a Mockingbird')->value('book_id'),
-                'buyer_id' => 1,
-                'seller_id' => 2,
+                'book_id' => DB::table('books')->value('book_id'),
+                'buyer_id' => 2,
+                'seller_id' => 1,
                 'price' => 12.75,
                 'status' => 'completed',
                 'transaction_date' => Carbon::now(),
@@ -48,9 +48,9 @@ class BookTransactionsTableSeeder extends Seeder
             ],
             [
                 'transaction_id' => 4,
-                'book_id' => DB::table('books')->where('title', 'The Hobbit')->value('book_id'),
-                'buyer_id' =>1,
-                'seller_id' => 2,
+                'book_id' => DB::table('books')->value('book_id'),
+                'buyer_id' =>2,
+                'seller_id' => 1,
                 'price' => 22.00,
                 'status' => 'shipped',
                 'transaction_date' => Carbon::now(),
@@ -59,9 +59,9 @@ class BookTransactionsTableSeeder extends Seeder
             ],
             [
                 'transaction_id' => 5,
-                'book_id' => DB::table('books')->where('title', 'Brave New World')->value('book_id'),
-                'buyer_id' => 1,
-                'seller_id' =>2,
+                'book_id' => DB::table('books')->value('book_id'),
+                'buyer_id' => 2,
+                'seller_id' =>1,
                 'price' => 18.90,
                 'status' => 'completed',
                 'transaction_date' => Carbon::now(),

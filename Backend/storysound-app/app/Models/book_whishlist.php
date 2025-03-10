@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class book_whishlist extends Model
+class Book_whishlist extends Model
 {
     use HasFactory;
 
