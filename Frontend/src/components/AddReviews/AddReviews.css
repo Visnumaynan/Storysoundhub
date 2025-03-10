@@ -36,11 +36,11 @@ input{
 }
 
 input, select, textarea {
-  background-color: #ffffff48;
+  background-color: #ffffff27;
   /* height: 40px; */
   width: 100%;
   border: 1px solid #ccc;
-  color: #000;
+  color: #000000;
   border-radius: 5px;
   font-size: 16px;
 }
@@ -69,10 +69,15 @@ textarea {
   gap: 5px;
   justify-content: center;
   margin-bottom: 10px;
+  gap: 20px;
+}
+
+.star-rating{
+  background-color: #00000000;
 }
 
 .submit-btn :hover{
-  background-color: #000;
+  background-color: #8f9396;
 }
 .stars {
   background: none;
@@ -86,6 +91,7 @@ textarea {
 
 .star:hover {
   transform: scale(1.2);
+  background-color: #00000000;
 }
 
 .selected {
@@ -98,6 +104,7 @@ textarea {
   height: 40px;
   cursor: pointer;
 }
+
 .star.selected .star-icons {
   filter: brightness(1.2); /* Optional effect for selected stars */
 }

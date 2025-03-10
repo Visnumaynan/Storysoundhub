@@ -103,7 +103,7 @@
 
 .view-all-button {
   cursor: pointer;
-  background-color: #ffffff53;
+  background-color: #007bff;
   color: white;
   padding: 0.5rem 1.25rem;
   border-radius: 25px;
@@ -112,7 +112,7 @@
 }
 
 .view-all-button:hover {
-  background-color: #004b8d00;
+  background-color: #0064cf;
 }
 
 @media (max-width: 768px) {

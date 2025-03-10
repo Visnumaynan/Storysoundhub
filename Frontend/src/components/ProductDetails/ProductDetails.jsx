@@ -349,7 +349,7 @@ const ProductDetails = () => {
             </div>
 
             <button className="buy-btn">Buy</button>
-            <button className="wishlist-btn">Add to Cart</button>
+            <button className="wishlist-btn">Add to wishlist</button>
           </div>
         </div>
       </div>

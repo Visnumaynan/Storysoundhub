@@ -39,7 +39,7 @@ const AddReviews = () => {
         <div className="star-rating">
         
           {[1, 2, 3, 4, 5].map((star) => (
-            <button
+            <div
               key={star}
               type="button"
               className={`stars ${review.rating >= star ? "selected" : ""}`}
@@ -51,7 +51,7 @@ const AddReviews = () => {
                 className="star-icons"
               />
               
-            </button>
+            </div>
             
           ))}
         </div>

@@ -114,7 +114,7 @@
 }
 
 .cart-icon {
-  background: #6ba9ff !important;
+  background: #007bff !important;
   color: white !important;
   padding: 4px 10px; 
   font-size: 0.9rem; 
@@ -138,12 +138,16 @@
 /* Dark Mode */
 .dark .cart-icon {
   color: rgb(255, 255, 255) !important;
-  background-color: #13ace9;
+  background-color: #007bff;
 }
 
 /* Hover Effect */
 .cart-icon:hover {
   transform: scale(1.02);
+}
+
+.dark .cart-icon:hover{
+  color: #000;
 }
 
 /* User Profile Icon */

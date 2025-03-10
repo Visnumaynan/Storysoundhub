@@ -53,7 +53,7 @@
 }
 
 .serviceCard:hover {
-    background-color: #2165ae;
+    background-color: #0068d66d;
     color: white;
 }
 
@@ -116,9 +116,14 @@
 
 .serviceCard:hover .orderButton {
     background-color: white;
-    color: #007bff;
+    color: #0064cf;
 }
 
 .orderButton:hover {
     transform: scale(1.05);
+}
+
+
+.dark .serviceCard  {
+    color: white; 
 }
