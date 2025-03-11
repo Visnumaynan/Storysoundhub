@@ -33,10 +33,13 @@ const BookClubs = () => {
 
   return (
     <div className="bookClubs">
-      <h1>Available Book Clubs</h1>
+      <div className="header-container">
+        <h1>Available Book Clubs</h1>
+        <button className="create-button">Create</button>
+      </div>
       <div className="bookClubsList">
         {bookClubs.map(club => (
-          <Link 
+          <Link
             to={`/book-club/${club.id}`} 
             key={club.id}
             className="bookClubCard"
