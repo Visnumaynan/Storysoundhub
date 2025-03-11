@@ -27,18 +27,18 @@ const Navbar = () => {
               <Link to="/" className="nav-item">Home</Link>
             </li>
             <li>
-              <Link to="/shop" className="nav-item">Shop</Link>
+              <Link to="/" className="nav-item">Shop</Link>
             </li>
             <li>
               <a href="/" className="nav-item">Community</a>
             </li>
             <li>
-            <Link to="/CartPage" className="cart-icon">
+            <Link to="/" className="cart-icon">
             Order <FaCartShopping size={16} />
             </Link>
             </li>
             <li>
-              <Link to="/loginRegister" className="user-profile">
+              <Link to="/" className="user-profile">
                 <img src={UserIcon} alt="User" className="user-icon" />
               </Link>
             </li>
