@@ -10,7 +10,7 @@ const ErrorPage = () => {
       <img src={errorImage} alt="404 Not Found" className="error-image" />
       <h1>Not Found</h1>
       <p>Your visited page was not found. You may go back to the home page.</p>
-       
+      <button className="error-btn">Back to Home Page</button>
     </div>
     <Footer/>
     </div>
