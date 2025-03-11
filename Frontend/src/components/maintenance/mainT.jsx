@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Navbar from '../Navbar/Navbar'; 
 import Footer from '../Footer/Footer';
 import './mainT.css';
-import MImage from '../Images/maintance.jpg'; // Ensure correct path
+import MImage from '../../assets/Images/maintance.jpg';
 
 const Maintenance = () => {
 	return (

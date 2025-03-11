@@ -1,5 +1,5 @@
 import React from 'react';
-import errorImage from '../Images/404.jpg'; 
+import errorImage from '../../assets/Images/404.jpg'; 
 import Navbar from '../Navbar/Navbar'; 
 import Footer from '../Footer/Footer';
 import "./erorPage.css";
