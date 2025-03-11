@@ -56,14 +56,5 @@ class BookTransactionController extends Controller
     }
 
     // Delete a transaction
-    public function destroy($id)
-    {
-        $transaction = Booktransaction::find($id);
-        if (!$transaction) {
-            return response()->json(['message' => 'Transaction not found'], 404);
-        }
-
-        $transaction->delete();
-        return response()->json(['message' => 'Transaction deleted'], 200);
-    }
+ 
 }
