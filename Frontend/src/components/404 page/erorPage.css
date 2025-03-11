@@ -23,5 +23,21 @@
     color: #555;
     margin-bottom: 20px;
   }
+
+  .error-btn {
+    padding: 10px 20px;
+    background: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: 0.3s;
+    border-radius: 50px;
+    border: #0057b322;
+}
+
+.error-btn:hover {
+background: #398ae6;
+}
   
   
