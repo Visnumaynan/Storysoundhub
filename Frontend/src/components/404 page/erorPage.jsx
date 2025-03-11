@@ -8,7 +8,9 @@ const ErrorPage = () => {
       <Navbar/>
     <div className="error-container">
       <img src={errorImage} alt="404 Not Found" className="error-image" />
-      
+      <h1>Not Found</h1>
+      <p>Your visited page was not found. You may go back to the home page.</p>
+       
     </div>
     <Footer/>
     </div>
