@@ -1,129 +1,217 @@
-.servicesSection {
-    padding: 40px 0;
-    font-family: 'Roboto', sans-serif;
-}
-
-.container {
+.booksSection {
+    padding: 80px 0;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
-    opacity: 0;
-    transform: translateY(50px);
-    animation: slideUp 0.8s ease-in-out forwards;
-}
-
-@keyframes slideUp {
-    from {
-        opacity: 0;
-        transform: translateY(50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.servicesHeader {
+  }
+  
+  .booksHeader {
     text-align: center;
-    margin-bottom: 40px;
-}
-
-.servicesHeader h1 {
-    font-size: 24px;
-    font-weight: bold;
-}
-
-.servicesGrid {
+    margin-bottom: 60px;
+  }
+  
+  .booksHeader h2 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  
+  .booksHeader p {
+    font-size: 16px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .booksGrid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    justify-items: center;
-}
-
-.serviceCard {
-    background-color: rgba(255, 255, 255, 0.136);
-    border-radius: 15px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.103);
-    text-align: center;
-    width: 250px;
-    height: 300px;
-    transition: 0.3s;
-    padding: 15px;
-    color: #010417;
-}
-
-.serviceCard:hover {
-    background-color: #0068d66d;
+    margin-left: 150px;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 60px;
+  }
+  
+  .bookCard {
+    background-color: #ffffff0b;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.538);
+    transition: all 0.3s ease;
+    height: 100%;
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .bookCard:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  }
+  
+  .bookImageContainer {
+    position: relative;
+    height: 280px;
+    overflow: hidden;
+  }
+  
+  .bookImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  
+  .bookCard:hover .bookImage {
+    transform: scale(1.05);
+  }
+  
+  .bookCategory {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    padding: 6px 12px;
+    background-color: rgba(33, 101, 174, 0.9);
     color: white;
-}
-
-.serviceImage {
-    height: 120px;
-}
-
-.serviceImage img {
-    max-width: 120px;
-    transform: translateY(-30px);
-    transition: 0.3s;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-.serviceCard:hover .serviceImage img {
-    transform: translateY(-30px) scale(1.05);
-}
-
-.serviceContent {
-    padding: 15px;
-}
-
-.serviceRating {
-    margin-top: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  .quickActions {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+    padding: 16px;
     display: flex;
     justify-content: center;
-    gap: 5px;
-}
-
-.starIcon {
-    color: #ffbf00;
-}
-
-.serviceContent h1 {
-    font-size: 18px;
-    font-weight: bold;
-    margin: 10px 0;
-}
-
-.serviceContent p {
-    color: #555;
-    font-size: 14px;
-    line-height: 1.4;
-}
-
-.serviceCard:hover .serviceContent p {
-    color: white;
-}
-
-.orderButton {
-    background-color: #007bff;
-    color: white;
-    padding: 8px 15px;
-    border-radius: 20px;
-    margin-top: 10px;
-    border: none;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.serviceCard:hover .orderButton {
+    transform: translateY(100%);
+    animation: slideUp 0.3s forwards;
+  }
+  
+  @keyframes slideUp {
+    to {
+      transform: translateY(0);
+    }
+  }
+  
+  .previewButton {
     background-color: white;
-    color: #0064cf;
-}
-
-.orderButton:hover {
+    color: #1a1a2e;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .previewButton:hover {
+    background-color: #f8f9fa;
     transform: scale(1.05);
-}
-
-
-.dark .serviceCard  {
-    color: white; 
-}
+  }
+  
+  .bookContent {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+  
+  .bookRating {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    gap: 2px;
+  }
+  
+  .starIcon {
+    color: #ffc107;
+    font-size: 16px;
+  }
+  
+  .ratingNumber {
+    margin-left: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #6c757d;
+  }
+  
+  .bookTitle {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    width: 100%;
+    align-items: end;
+    text-align: justify;
+    
+  }
+  
+  .bookFooter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+  }
+  
+  .bookPrice {
+    font-size: 18px;
+    font-weight: 700;
+    color: #2165ae;
+  }
+  
+  .orderButton {
+    background-color: #2165ae;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 50px;
+    width: 130px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  
+  .orderButton:hover {
+    background-color: #1a4f8e;
+    transform: scale(1.05);
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .booksGrid {
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 20px;
+    }
+    
+    .bookImageContainer {
+      height: 220px;
+    }
+    
+    .bookTitle {
+      font-size: 16px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .booksHeader h2 {
+      font-size: 28px;
+    }
+    
+    .booksGrid {
+      grid-template-columns: 1fr;
+    }
+  }
