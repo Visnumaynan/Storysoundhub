@@ -14,7 +14,7 @@ const Navbar = () => {
       <div className="brand">
   <Link to="/" className="brand-link">
     <img src={Logo} alt="Logo" className="logo-img" />
-    Story Sound
+    Story Sound Hub
   </Link>
 </div>
 
