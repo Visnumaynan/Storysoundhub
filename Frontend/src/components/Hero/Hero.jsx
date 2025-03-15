@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Book1 from "../../assets/books/book2.jpg";
 import Book2 from "../../assets/books/book1.jpg";
 import Book3 from "../../assets/books/book3.jpg";
-import Vector from "../../assets/website/blue-pattern.png";
 import "./Hero.css";
 
 
 const ImageList = [
   {
-    id: 1,
+    id: 2,
     img: Book1,
     title: "Artificial Intelligence & Generative AI for Beginners",
     author: "John",
@@ -16,7 +16,7 @@ const ImageList = [
       "Discover the fundamentals of AI and how generative models are reshaping our digital landscape in this comprehensive guide.",
   },
   {
-    id: 2,
+    id: 1,
     img: Book2,
     title: "Sands of Eppla",
     author: "Janeal Falor",
@@ -37,6 +37,12 @@ const Hero = ({ handleOrderPopup }) => {
   const [currentBook, setCurrentBook] = useState(ImageList[0]);
   const [isAnimating, setIsAnimating] = useState(false);
 
+  const navigate = useNavigate();
+   
+  const handleBookClick = (bookId) => {
+    navigate(`/product-details/${bookId}`);
+  };
+ 
   const changeBook = (book) => {
     if (book.id === currentBook.id) return;
     setIsAnimating(true);
@@ -58,7 +64,10 @@ const Hero = ({ handleOrderPopup }) => {
             <h1>{currentBook.title}</h1>
             <p className="author">by {currentBook.author}</p>
             <p className="description">{currentBook.description}</p>
-            <button onClick={handleOrderPopup} className="cta-button">
+            <button 
+              onClick={() => handleBookClick(currentBook.id)} 
+              className="cta-button"
+            >
               <span>Order Now</span>
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -69,7 +78,11 @@ const Hero = ({ handleOrderPopup }) => {
         </div>
         
         <div className="hero-visual">
-          <div className={`book-display ${isAnimating ? 'fade' : ''}`}>
+          <div 
+            className={`book-display ${isAnimating ? 'fade' : ''}`}
+            onClick={() => handleBookClick(currentBook.id)}
+            style={{ cursor: "pointer" }}
+          >
             <div className="book-shadow"></div>
             <img 
               src={currentBook.img} 
