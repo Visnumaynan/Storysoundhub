@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Img1 from "../../assets/books/book2.jpg";
 import Img2 from "../../assets/books/book1.jpg";
 import Img3 from "../../assets/books/book3.jpg";
@@ -7,7 +8,7 @@ import styles from "./Services.module.css";
 
 const booksData = [
   {
-    id: 1,
+    id: 2,
     img: Img1,
     title: "Artificial Intelligence ",
     rating: 4.5,
@@ -15,23 +16,7 @@ const booksData = [
     category: "Technology"
   },
   {
-    id: 2,
-    img: Img2,
-    title: "Sands of Eppla",
-    rating: 4.8,
-    price: "$18.99",
-    category: "Fiction"
-  },
-  {
-    id: 3,
-    img: Img3,
-    title: "It Ends With Us",
-    rating: 4.2,
-    price: "$16.99",
-    category: "Romance"
-  },
-  {
-    id: 2,
+    id: 1,
     img: Img2,
     title: "Sands of Eppla",
     rating: 4.8,
@@ -48,6 +33,22 @@ const booksData = [
   },
   {
     id: 1,
+    img: Img2,
+    title: "Sands of Eppla",
+    rating: 4.8,
+    price: "$18.99",
+    category: "Fiction"
+  },
+  {
+    id: 3,
+    img: Img3,
+    title: "It Ends With Us",
+    rating: 4.2,
+    price: "$16.99",
+    category: "Romance"
+  },
+  {
+    id: 2,
     img: Img1,
     title: "Artificial Intelligence ",
     rating: 4.5,
@@ -58,6 +59,11 @@ const booksData = [
 
 const Books = ({ handleOrderPopup }) => {
   const [hoveredBook, setHoveredBook] = useState(null);
+  const navigate = useNavigate();
+  
+  const handleBookClick = (bookId) => {
+    navigate(`/product-details/${bookId}`);
+  };
 
   const renderRating = (rating) => {
     const stars = [];
@@ -93,13 +99,23 @@ const Books = ({ handleOrderPopup }) => {
               onMouseEnter={() => setHoveredBook(book.id)}
               onMouseLeave={() => setHoveredBook(null)}
             >
-              <div className={styles.bookImageContainer}>
+              <div 
+                className={styles.bookImageContainer}
+                onClick={() => handleBookClick(book.id)}
+                style={{ cursor: "pointer" }}
+              >
                 <img src={book.img} alt={book.title} className={styles.bookImage} />
                 <div className={styles.bookCategory}>{book.category}</div>
                 
                 {hoveredBook === book.id && (
                   <div className={styles.quickActions}>
-                    <button className={styles.previewButton}>
+                    <button 
+                      className={styles.previewButton}
+                      onClick={(e) => {
+                        e.stopPropagation(); // Prevent parent div click trigger
+                        handleBookClick(book.id);
+                      }}
+                    >
                       <FaBookOpen /> Preview
                     </button>
                   </div>
@@ -112,13 +128,22 @@ const Books = ({ handleOrderPopup }) => {
                   <span className={styles.ratingNumber}>{book.rating}</span>
                 </div>
                 
-                <h3 className={styles.bookTitle}>{book.title}</h3>
+                <h3 
+                  className={styles.bookTitle}
+                  onClick={() => handleBookClick(book.id)}
+                  style={{ cursor: "pointer" }}
+                >
+                  {book.title}
+                </h3>
                 
                 <div className={styles.bookFooter}>
                   <div className={styles.bookPrice}>{book.price}</div>
                   <button 
                     className={styles.orderButton} 
-                    onClick={handleOrderPopup}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleOrderPopup();
+                    }}
                     aria-label={`Order ${book.title}`}
                   >
                     <FaShoppingCart /> Add to Cart
