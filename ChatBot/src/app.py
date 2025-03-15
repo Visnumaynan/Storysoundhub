@@ -76,3 +76,50 @@ def get_response(user_query: str, db: SQLDatabase, chat_history: list):
         "question": user_query,
         "input": user_query
     })    
+
+# Streamlit UI
+st.set_page_config(page_title="Chat with MySQL", page_icon=":speech_balloon:")
+st.title("Chat with MySQL (phpMyAdmin)")
+
+if "chat_history" not in st.session_state:
+    st.session_state.chat_history = [AIMessage(content="Hello! How can I help you today?")]
+
+with st.sidebar:
+    st.subheader("Database Settings")
+    st.write("Connect to your MySQL database.")
+
+    host = st.text_input("Host", value="localhost", key="host")
+    port = st.text_input("Port", value="3306", key="port")
+    user = st.text_input("User", value="root", key="user")
+    password = st.text_input("Password", type="password", value="", key="password")
+    database = st.text_input("Database", value="book", key="database")
+
+    if st.button("Connect"):
+        with st.spinner("Connecting to database..."):
+            connection = init_database(user, password, host, port, database)
+            if connection:
+                st.session_state.db = connection
+                st.success("✅ Connected to MySQL!")
+
+# Display Chat History
+for message in st.session_state.chat_history:
+    role = "AI" if isinstance(message, AIMessage) else "Human"
+    with st.chat_message(role):
+        st.markdown(message.content)
+
+# Handle User Input
+user_query = st.chat_input("Type your message here...")
+if user_query and user_query.strip():
+    st.session_state.chat_history.append(HumanMessage(content=user_query))
+    
+    with st.chat_message("Human"):
+        st.markdown(user_query)
+
+    if "db" in st.session_state and st.session_state.db:
+        with st.chat_message("AI"):
+            response = get_response(user_query, st.session_state.db, st.session_state.chat_history)
+            st.markdown(response)
+
+        st.session_state.chat_history.append(AIMessage(content=response))
+    else:
+        st.error("❌ No database connection. Please connect first.")
