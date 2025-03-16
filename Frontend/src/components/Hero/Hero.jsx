@@ -92,7 +92,7 @@ const Hero = ({ handleOrderPopup }) => {
           </div>
           
           <div className="book-selector">
-            {ImageList.map((book) => (
+          {ImageList.slice(0, 3).map((book) => (
               <div 
                 key={book.id} 
                 className={`selector-item ${currentBook.id === book.id ? 'active' : ''}`}

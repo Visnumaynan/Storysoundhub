@@ -55,6 +55,14 @@ const booksData = [
     price: "$24.99",
     category: "Technology"
   },
+  {
+    id: 2,
+    img: Img1,
+    title: "Artificial Intelligence ",
+    rating: 4.5,
+    price: "$24.99",
+    category: "Technology"
+  },
 ];
 
 const Books = ({ handleOrderPopup }) => {
@@ -90,7 +98,8 @@ const Books = ({ handleOrderPopup }) => {
         </div>
         
         <div className={styles.booksGrid}>
-          {booksData.map((book) => (
+        
+          {booksData.slice(0, 6).map((book) => (
             <div 
               key={book.id} 
               className={styles.bookCard}
