@@ -1,0 +1,24 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+import Navbar from '../Navbar/Navbar'; 
+import Footer from '../Footer/Footer';
+import './mainT.css';
+import MImage from '../Images/maintance.jpg'; // Ensure correct path
+
+const Maintenance = () => {
+	return (
+		<div>
+		<Navbar /> 
+		<div className="maintenance-container">
+			<img src={MImage} alt="Maintenance Mode" className="maintenance-image" />
+			<h1>Planned Maintenance in Progress</h1>
+			<p>Our engineers are currently performing scheduled maintenance on the fleet.</p>
+			<p>We apologize for any inconvenience.</p>
+			<button className="maintenance-btn">Back to Home Page</button>
+		</div>
+		<Footer/>
+		</div>
+	);
+};
+
+export default Maintenance;
