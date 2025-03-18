@@ -1,4 +1,3 @@
-
 from dotenv import load_dotenv
 import os
 import streamlit as st
@@ -9,6 +8,11 @@ from langchain_openai import ChatOpenAI
 from langchain_core.runnables import RunnableLambda, RunnablePassthrough
 from langchain_core.output_parsers import StrOutputParser
 from langchain_community.utilities import SQLDatabase
+from groq import Groq
+from langchain_groq import ChatGroq
+import re
+
+
 
 # Load environment variables
 load_dotenv()
@@ -22,21 +26,23 @@ def init_database(user, password, host, port, database):
     except Exception as e:
         st.error(f"Error connecting to database: {e}")
         return None
-    
+
+
+
+
 def get_sql_chain(db):
-    # Use a conversation-based prompt template
+    # Define the prompt template with placeholders
     prompt = ChatPromptTemplate.from_messages([
-        ("system", "You are a data analyst at a company. Generate an SQL query to find the required information from the database."),
-        ("human", "Schema: {schema}"),
-        ("human", "Conversation History: {chat_history}"),
-        ("human", "Question: {question}"),
-        ("human", "SQL Query: ")
+        ("system", "You are an SQL assistant. Always return a valid SQL query."),
+        HumanMessage(content="Schema: {schema}"),
+        HumanMessage(content="Conversation History: {chat_history}"),
+        HumanMessage(content="Question: {question}")
     ])
     
-    llm = ChatOpenAI(model="gpt-4-0125-preview")
+    llm = ChatGroq(model_name="llama3-8b-8192", groq_api_key=os.getenv("GROQ_API_KEY"))
 
     # Creating a runnable to fetch schema information from the database
-    get_schema_runnable = RunnableLambda(lambda _: db.get_table_info())
+    get_schema_runnable = RunnableLambda(lambda _: {"schema": db.get_table_info()})
 
     return (
         get_schema_runnable
@@ -45,38 +51,77 @@ def get_sql_chain(db):
         | StrOutputParser()
     )
 
+def is_sql_query(question: str):
+    """Check if the user's question is related to SQL or database queries."""
+    sql_keywords = ["select", "insert", "update", "delete", "from", "where", "join", "database", "table", "column", "schema"]
+    return any(keyword in question.lower() for keyword in sql_keywords)
+
 def get_response(user_query: str, db: SQLDatabase, chat_history: list):
-    sql_chain = get_sql_chain(db)
-
-    # Define the response template based on conversation
-    response_template = ChatPromptTemplate.from_messages([
-        ("system", "You are a data analyst. Generate an SQL query and interpret the result in natural language."),
-        ("human", "Schema: {schema}"),
-        ("human", "Conversation History: {chat_history}"),
-        ("human", "SQL Query: {sql_query}"),
-        ("human", "User Question: {question}"),
-        ("human", "SQL Response: {sql_response}")
-    ])
+    """Handles both SQL and non-SQL queries by deciding which approach to use."""
     
-    llm = ChatOpenAI(model="gpt-4-0125-preview")
+    # Use Groq AI for general conversation
+    llm = ChatGroq(model_name="llama3-8b-8192", groq_api_key=os.getenv("GROQ_API_KEY"))
 
-    # Build chain to pass through schema and execute SQL
-    chain = (
-        RunnablePassthrough.assign(query=sql_chain).assign(
-            schema=lambda _: db.get_table_info(),
-            sql_response=lambda vars: db.run(vars["query"]),
+    if is_sql_query(user_query):
+        # Generate SQL Query
+        sql_chain = get_sql_chain(db)
+        generated_sql = sql_chain.invoke({
+            "chat_history": chat_history,
+            "question": user_query,
+            "schema": db.get_table_info()
+        })
+
+        print("Generated SQL Query:", generated_sql)  # Debugging
+
+        # Ensure the query is valid before execution
+        if not re.match(r"^\s*(SELECT|INSERT|UPDATE|DELETE)\s", generated_sql, re.IGNORECASE):
+            return "⚠️ Error: Invalid SQL query generated."
+
+        try:
+            sql_response = db.run(generated_sql)
+        except Exception as e:
+            return f"❌ SQL Execution Error: {str(e)}"
+
+        # Generate AI response explaining the SQL results
+        response_template = ChatPromptTemplate.from_messages([
+            HumanMessage(content="Schema: {schema}"),
+            HumanMessage(content="Conversation History: {chat_history}"),
+            HumanMessage(content="User Question: {question}"),
+            HumanMessage(content="SQL Query: {sql_query}"),
+            HumanMessage(content="SQL Response: {sql_response}")
+        ])
+
+        chain = (
+            RunnablePassthrough.assign(
+                schema=lambda _: db.get_table_info(),
+                sql_query=generated_sql,
+                sql_response=sql_response
+            )
+            | response_template
+            | llm
+            | StrOutputParser()
         )
-        | response_template
-        | llm
-        | StrOutputParser()
-    )
 
-    # Invoking the chain
+        return chain.invoke({
+            "chat_history": chat_history,
+            "question": user_query,
+            "sql_query": generated_sql,
+            "sql_response": sql_response
+        })
+
+    else:
+        # If it's a general question, use Groq AI to respond
+        response = llm.invoke(user_query)
+        return response.content
+
+    # Invoke the chain, passing the chat history and user question
     return chain.invoke({
         "chat_history": chat_history,
         "question": user_query,
-        "input": user_query
-    })    
+        "schema": db.get_table_info()  # Ensure this is passed correctly
+    })
+
+
 
 # Streamlit UI
 st.set_page_config(page_title="Chat with MySQL", page_icon=":speech_balloon:")
