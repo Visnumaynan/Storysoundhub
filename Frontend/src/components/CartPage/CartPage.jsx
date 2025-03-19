@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Book1 from "../../assets/books/book1.jpg";
 import Book2 from "../../assets/books/book2.jpg";
 import Book3 from "../../assets/books/book3.jpg";
 import styles from "./CartPage.module.css";
 
 const CartPage = () => {
+
   const [cart, setCart] = useState([
     {
       id: 6,
@@ -53,45 +55,83 @@ const CartPage = () => {
   };
 
   const getTotalPrice = () => {
-    return cart.reduce((total, item) => total + item.price, 0); // Simply sum the prices
+    return cart.reduce((total, item) => total + item.price, 0);
   };
 
+  const navigate = useNavigate();
+
   return (
-    <div className={styles["cart-container"]}>
-      <h2>Shopping Cart</h2>
+    <div className={styles.container}>
+      <div className={styles.header}>
+        <h1>Your Cart</h1>
+        <span className={styles.itemCount}>{cart.length} items</span>
+      </div>
+
       {cart.length === 0 ? (
-        <p>Your cart is empty.</p>
+        <div className={styles.emptyCart}>
+          <div className={styles.emptyCartIcon}>🛒</div>
+          <h3>Your cart is empty</h3>
+          <p>Looks like you haven't added any books to your cart yet.</p>
+          <button className={styles.continueShopping}>Continue Shopping</button>
+        </div>
       ) : (
-        <>
-          <table>
-            <thead>
-              <tr>
-                <th>Item</th>
-                <th>Price</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {cart.map((item) => (
-                <tr key={item.id}>
-                  <td>
-                    <img src={item.img} alt={item.title} style={{ width: '50px' }} /> {/* Display image */}
-                    {item.title}
-                  </td>
-                  <td>Rs.{item.price}</td>
-                  <td>
-                    <button onClick={() => removeItem(item.id)}>Remove</button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          <h3>Total: Rs.{getTotalPrice()}</h3>
-        </>
-        
+        <div className={styles.cartLayout}>
+          <div className={styles.cartItems}>
+            {cart.map((item) => (
+              <div key={item.id} className={styles.cartItem}>
+                <div className={styles.itemImage}>
+                  <img src={item.img} alt={item.title} />
+                </div>
+                <div className={styles.itemDetails}>
+                  <h3>{item.title}</h3>
+                  <p className={styles.author}>by {item.author}</p>
+                  <div className={styles.rating}>
+                    {'★'.repeat(Math.floor(item.rating))}
+                    {item.rating % 1 >= 0.5 ? '½' : ''}
+                    {'☆'.repeat(5 - Math.ceil(item.rating))}
+                    <span>{item.rating}</span>
+                  </div>
+                </div>
+                <div className={styles.itemPrice}>
+                  <span>Rs.{item.price.toLocaleString()}</span>
+                </div>
+                <div className={styles.itemActions}>
+                  <button className={styles.removeButton} onClick={() => removeItem(item.id)}>
+                    <span className={styles.removeIcon}>×</span>
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className={styles.orderSummary}>
+            <h2>Order Summary</h2>
+            <div className={styles.summaryItem}>
+              <span>Subtotal</span>
+              <span>Rs.{getTotalPrice().toLocaleString()}</span>
+            </div>
+            <div className={styles.summaryItem}>
+              <span>Shipping</span>
+              <span>Free</span>
+            </div>
+            <div className={styles.summaryItem}>
+              <span>Tax</span>
+              <span>Rs.{Math.round(getTotalPrice() * 0.05).toLocaleString()}</span>
+            </div>
+            <div className={`${styles.summaryItem} ${styles.summaryTotal}`}>
+              <span>Total</span>
+              <span>Rs.{(getTotalPrice() + Math.round(getTotalPrice() * 0.05)).toLocaleString()}</span>
+            </div>
+            <button 
+              className={styles.continueShoppingBtn} 
+              onClick={() => navigate("/shop")} // Navigate on button click
+            >
+              Continue Shopping
+            </button>
+            </div>
+        </div>
       )}
     </div>
   );
 };
-
 export default CartPage;

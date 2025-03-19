@@ -33,18 +33,43 @@ const BookForm = () => {
           </div>
           <div className="form-group">
             <input {...register("type")} type="text" placeholder="Type" required />
-            <input {...register("picture")} type="text" placeholder="Picture URL" required />
+            
+            <input {...register("price",{
+              required:true,
+              min:{
+                value:500,
+                message:"Price cant be maines"
+              },
+              valueAsNumber:true
+            })} type="number" 
+            placeholder="Price" 
+            min = "200"
+            step="1"
+             />
           </div>
           <div className="form-group">
             <input {...register("genre_id")} type="text" placeholder="Genre ID" required />
-            <input {...register("quantity")} type="number" placeholder="Quantity" required />
+            <input 
+                {...register("quantity", { 
+                  required: true,
+                  min: {
+                    value: 1,
+                    message: "Quantity must be at least 1"
+                  },
+                  valueAsNumber: true
+                })} 
+                type="number" 
+                placeholder="Quantity" 
+                min="1"
+                step="1"
+              />
           </div>
           <div className="form-group">
             <input {...register("owner_id")} type="text" placeholder="Owner ID" required />
             <input {...register("condition")} type="text" placeholder="Condition" required />
           </div>
-          <div className="form-group">
-            <input {...register("price")} type="number" placeholder="Price" required />
+          <div>
+             <input {...register("description")} type="text" placeholder="small description" required />
           </div>
           <div className="form-group-2">
             <label>Created At</label>
