@@ -19,7 +19,7 @@ const booksData = [
   {
     id: 2,
     img: Book2,
-    title: "Artificial Intelligence & Generative AI for Beginners",
+    title: "Artificial Intelligence & Generative AI",
     rating: 4.6,
     author: "John Miller",
     featured: false
@@ -51,7 +51,7 @@ const booksData = [
   {
     id: 6,
     img: Book2,
-    title: "Machine Learning Mastery",
+    title: "Machine Learning ingt Mastery",
     rating: 4.3,
     author: "David Chen",
     featured: false
