@@ -373,6 +373,8 @@ const ProductDetails = () => {
     }
   };
 
+  const originalPrice = Math.round(book.price / 0.85);
+
   return (
     <div className="product-page-container">
       {showAddedToCart && (
@@ -387,7 +389,6 @@ const ProductDetails = () => {
         <div className="product-image-container">
           <div className="image-gallery">
             <img src={book.img} alt={book.title} className="book-image-large" />
-            <div className="book-type-badge">{book.bookType}</div>
           </div>
         </div>
 
