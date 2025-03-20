@@ -34,4 +34,5 @@ class BookTransaction extends Model
     {
         return $this->belongsTo(user::class, 'seller_id');
     }
+    
 }
