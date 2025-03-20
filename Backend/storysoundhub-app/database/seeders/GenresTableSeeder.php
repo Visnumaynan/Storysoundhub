@@ -16,6 +16,9 @@ class GenresTableSeeder extends Seeder
         DB::table('genres')->insert([
             ['genre_id' => Str::uuid(), 'name' => 'Science Fiction', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
             ['genre_id' => Str::uuid(), 'name' => 'Fantasy', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
+            ['genre_id' => Str::uuid(), 'name' => 'Mystery', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
+            ['genre_id' => Str::uuid(), 'name' => 'Romance', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
+            ['genre_id' => Str::uuid(), 'name' => 'Non-Fiction', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
         ]);
     }
 }

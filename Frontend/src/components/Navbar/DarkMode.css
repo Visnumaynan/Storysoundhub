@@ -1,0 +1,54 @@
+/* Dark Mode Toggle Container */
+.dark-mode-container {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  margin-right: 1rem;
+}
+
+/* Dark Mode Toggle Button */
+.dark-mode-toggle {
+  width: 55px;
+  height: 32px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 50%;
+  padding: 8px;
+}
+
+/* Light Mode Styles (Default) */
+:root {
+  --background-color: #ffffff;
+  --text-color: #1a1a1a;
+  --nav-bg: #ffffff;
+  --card-bg: #f8f9fa;
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  --accent-color: #6f97c2;
+  --hover-color: #4a7ab0;
+  --border-color: #e5e7eb;
+}
+
+/* Dark Mode Styles */
+.dark {
+  --background-color: #0f172a;
+  --text-color: #f1f5f9;
+  --nav-bg: #1e293b;
+  --card-bg: #293548;
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  --accent-color: #60a5fa;
+  --hover-color: #3b82f6;
+  --border-color: #374151;
+}
+
+/* Apply Theme */
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.4s ease, color 0.4s ease;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Smooth transitions for all themed elements */
+*, *::before, *::after {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}

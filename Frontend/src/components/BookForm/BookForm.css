@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+body {
+  font-family: 'Poppins', sans-serif;
+}
+.book-form-container {
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  height: 130vh;
+}
+
+.image-side {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-image {
+  flex: 1;
+  max-width: 90%;
+  height: auto;
+  height: 889px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.form-card {
+  padding: 2rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.581);
+  width: 600px;
+  height: 820px;
+}
+
+.dark.form-card{
+  background-color:#1e1e1e ;
+}
+
+
+input::placeholder {
+  color: rgba(0, 0, 0, 0.41);
+}
+
+.form-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.book-form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.form-group {
+  display: flex;
+  color: #000;
+  gap: 10px;
+  margin-bottom: 1rem;
+}
+
+.book-form input {
+  flex: 1;
+  padding: 10px;
+  color: #000000;
+  background-color: #ffffff48;
+  border: 1px solid #000000;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+/* ----------- */
+.form-group-2 {
+  display: flex;
+  flex-direction: row;
+  gap: 15px; 
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  align-items: center;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.form-group-2 label {
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.form-group-2 input {
+  width: 80px;
+  padding: 10px;
+  background-color: #ffffff48;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.form-group-2 input:focus {
+  border-color: #000000;
+  outline: none;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+}
+.form-group-3 {
+  margin-left: 25%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px; 
+  margin-bottom: 20px;
+  width: 300px;
+  height: 120px;
+
+}
+
+.form-group-3 label {
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 10px;
+  margin-left: 90px;
+}
+
+.submit-button {
+  width: 100%;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 12px;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.submit-button:hover{
+  background-color: #0064cf;
+}
+
+
