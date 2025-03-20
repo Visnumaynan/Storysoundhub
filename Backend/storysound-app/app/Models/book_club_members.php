@@ -35,4 +35,5 @@ class Book_club_members extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+    
 }
