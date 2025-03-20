@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class bookTransaction extends Model
+class BookTransaction extends Model
 {
     use HasFactory;
 
@@ -34,5 +34,5 @@ class bookTransaction extends Model
     {
         return $this->belongsTo(user::class, 'seller_id');
     }
-    
+
 }
