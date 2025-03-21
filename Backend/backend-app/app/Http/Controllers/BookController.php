@@ -21,43 +21,92 @@ class BookController extends Controller
     /**
      * Store a newly created book.
      */
+    // public function store(Request $request)
+    // {
+    //     $validator = Validator::make($request->all(), [
+    //         'title' => 'required|string|max:255',
+    //         'isbn' => 'nullable|string|max:20',
+    //         'author' => 'required|string|max:255',
+    //         'type' => 'required|string|max:50',
+    //         'picture' => 'required|string',
+    //         'genre_id' => 'required|exists:genres,genre_id',
+    //         'price' => 'required|numeric|min:0',
+    //         'short_description' => 'nullable|string',
+    //         'owner_id' => 'required|exists:users,id',
+    //         'condition' => 'required|string|max:50',
+    //         'quantity' => 'required|integer|min:1',
+    //     ]);
+
+    //     if ($validator->fails()) {
+    //         return response()->json(['errors' => $validator->errors()], 422);
+    //     }
+
+    //     $book = Book::create([
+    //         'book_id' => (string) Str::uuid(), // Generate UUID
+    //         'title' => $request->title,
+    //         'isbn' => $request->isbn,
+    //         'author' => $request->author,
+    //         'type' => $request->type,
+    //         'picture' => $request->picture,
+    //         'genre_id' => $request->genre_id,
+    //         'price' => $request->price,
+    //         'short_description' => $request->short_description,
+    //         'owner_id' => $request->owner_id,
+    //         'condition' => $request->condition,
+    //         'quantity' => $request->quantity,
+    //     ]);
+
+    //     return response()->json(['message' => 'Book added successfully', 'data' => $book], 201);
+    // }
     public function store(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'title' => 'required|string|max:255',
-            'isbn' => 'nullable|string|max:20',
-            'author' => 'required|string|max:255',
-            'type' => 'required|string|max:50',
-            'picture' => 'required|string',
-            'genre_id' => 'required|exists:genres,genre_id',
-            'price' => 'required|numeric|min:0',
-            'short_description' => 'nullable|string',
-            'owner_id' => 'required|exists:users,id',
-            'condition' => 'required|string|max:50',
-            'quantity' => 'required|integer|min:1',
-        ]);
+{
+    // Validate the incoming request data
+    $validator = Validator::make($request->all(), [
+        'title' => 'required|string|max:255',
+        'isbn' => 'nullable|string|max:20',
+        'author' => 'required|string|max:255',
+        'type' => 'required|string|max:50',
+        'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Ensure uploaded file is an image
+        'genre_id' => 'required|exists:genres,genre_id',
+        'price' => 'required|numeric|min:0',
+        'short_description' => 'nullable|string',
+        'owner_id' => 'required|exists:users,id',
+        'condition' => 'required|string|max:50',
+        'quantity' => 'required|integer|min:1',
+    ]);
 
-        if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 422);
-        }
-
-        $book = Book::create([
-            'book_id' => (string) Str::uuid(), // Generate UUID
-            'title' => $request->title,
-            'isbn' => $request->isbn,
-            'author' => $request->author,
-            'type' => $request->type,
-            'picture' => $request->picture,
-            'genre_id' => $request->genre_id,
-            'price' => $request->price,
-            'short_description' => $request->short_description,
-            'owner_id' => $request->owner_id,
-            'condition' => $request->condition,
-            'quantity' => $request->quantity,
-        ]);
-
-        return response()->json(['message' => 'Book added successfully', 'data' => $book], 201);
+    // Return validation errors if any
+    if ($validator->fails()) {
+        return response()->json(['errors' => $validator->errors()], 422);
     }
+
+    // Handle the picture file if it exists
+    $picturePath = null;
+    if ($request->hasFile('picture')) {
+        $file = $request->file('picture');
+        $picturePath = $file->store('uploads/books', 'public'); // Store in 'storage/app/public/uploads/books'
+    }
+
+    // Create a new Book record
+    $book = Book::create([
+        'book_id' => (string) Str::uuid(), // Generate UUID
+        'title' => $request->title,
+        'isbn' => $request->isbn,
+        'author' => $request->author,
+        'type' => $request->type,
+        'picture' => $picturePath ? asset('storage/' . $picturePath) : null, // Convert to public URL
+        'genre_id' => $request->genre_id,
+        'price' => $request->price,
+        'short_description' => $request->short_description,
+        'owner_id' => $request->owner_id,
+        'condition' => $request->condition,
+        'quantity' => $request->quantity,
+    ]);
+
+    // Return success response
+    return response()->json(['message' => 'Book added successfully', 'data' => $book], 201);
+}
+
 
     /**
      * Display the specified book.
