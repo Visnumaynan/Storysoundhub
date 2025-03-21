@@ -1,5 +1,5 @@
 import React from "react";
-import { FaInstagram, FaLinkedin, FaTwitter, FaFacebook } from "react-icons/fa";
+import { FaInstagram, FaLinkedin, FaTwitter, FaFacebook, FaPinterest } from "react-icons/fa";
 import footerLogo from "../../assets/website/logo.png";
 import "./Footer.css"; // Import external CSS
 
@@ -49,14 +49,18 @@ const Footer = () => {
           {/* Connect - Third Column */}
           <div className="footer-contact">
             <h3 className="footer-heading">Connect With Us</h3>
-            <p className="footer-email">hello@storysound.com</p>
+            <a href="mailto:Sdgpcs146@gmail.com" className="email-link">Sdgpcs146@gmail.com</a>
             <div className="social-icons-container">
               <a href="https://www.instagram.com/storysoundhub/?igsh=cWh1a2t4eWJiejFz" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                 <FaInstagram className="social-icon" />
               </a>
-              <a href="#" aria-label="LinkedIn">
+              <a href="https://www.linkedin.com/company/storysoundhub/" aria-label="LinkedIn">
                 <FaLinkedin className="social-icon" />
               </a>
+              <a href="https://www.pinterest.com/StorySoundHub/" aria-label="Pinterest">
+                <FaPinterest className="social-icon" />
+              </a>
+
             </div>
           </div>
         </div>
