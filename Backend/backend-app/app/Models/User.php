@@ -66,4 +66,12 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function getProfilePhotoUrlAttribute()
+{
+    // Assuming 'profile_photo' is a column that stores the photo path
+    return $this->profile_photo
+        ? asset('storage/' . $this->profile_photo)
+        : 'https://ui-avatars.com/api/?name=' . urlencode($this->name);
+}
+
 }

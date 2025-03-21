@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('condition');
             $table->integer('quantity');
             $table->timestamp('upload_date')->useCurrent();
+            $table->softDeletes(); 
             $table->timestamps();
         });
     }

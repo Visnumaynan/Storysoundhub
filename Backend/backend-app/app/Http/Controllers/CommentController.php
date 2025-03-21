@@ -13,7 +13,7 @@ class CommentController extends Controller
      */
     public function index($postId)
     {
-        $comments = Comment::where('post_id', $postId)->with('membership')->get();
+        $comments = Comment::where('post_id', $postId)->with('bookClubMember')->get();
         return response()->json($comments);
     }
 
