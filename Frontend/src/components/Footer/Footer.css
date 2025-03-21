@@ -95,6 +95,7 @@
     margin-bottom: 1.25rem;
     position: relative;
     padding-bottom: 0.75rem;
+    margin-left: 20px;
 }
 
 /* Footer Links */
@@ -109,6 +110,7 @@
     margin-bottom: 0.75rem;
 }
 
+
 .footer-link-item a {
     text-decoration: none;
     color: #6b7280;
@@ -116,7 +118,7 @@
     position: relative;
     padding-left: 0;
     display: flex;
-    align-items: center;
+    margin-top: 25px;
 }
 
 .dark .footer-link-item a {
@@ -220,6 +222,26 @@
 .dark .footer-bottom-links a:hover {
     color: #60a5fa;
 }
+
+.footer-links-section {
+    padding: 20px 0;
+    text-align: center;
+  }
+
+.email-link {
+    color: #3498db; /* Blue color */
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+    margin-bottom: 50px;
+  }
+  
+  .email-link:hover {
+    color: #2980b9; /* Darker blue on hover */
+    text-decoration: underline;
+  }
+  
 
 /* Responsive Styles */
 @media (max-width: 768px) {
