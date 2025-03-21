@@ -108,3 +108,10 @@ textarea {
 .star.selected .star-icons {
   filter: brightness(1.2); /* Optional effect for selected stars */
 }
+
+@media (max-width: 720px) {
+  .add-reviews-container {
+    width: 80%; /* Ensures the container takes up the full width of the screen */
+    padding: 0 1rem; /* Adds some padding for better spacing */
+  }
+}
