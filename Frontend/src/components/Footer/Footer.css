@@ -254,11 +254,21 @@
         gap: 1rem;
         text-align: center;
     }
+
+    .social-icon{
+        margin-left: 20px;
+    }
+
+    .footer-section {
+        width: 90%;
+        max-width: 100%;
+        margin: 0 auto;
+        height: 700px;
+    }
     
     .footer-contact {
         grid-column: span 2;
     }
-    
 }
 
 @media (max-width: 480px) {
@@ -272,5 +282,20 @@
     
     .social-icons-container {
         justify-content: center;
+    }
+    .footer-section {
+        width: 90%;
+        max-width: 100%;
+        margin: 0 auto;
+        height: 1000px;
+    }
+
+    .social-icon{
+        margin-right: 10px;
+        gap: 19px;
+    }
+
+    .social-icons-container{
+        margin-right: 120px;
     }
 }
