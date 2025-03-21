@@ -137,20 +137,6 @@ book-title-p{
   z-index: 1;
 }
 
-.discount-badge-corner {
-  position: absolute;
-  top: 0;
-  right: 0;
-  background: var(--secondary-color);
-  color: white;
-  padding: 0.5rem 0.5rem 0.8rem 0.8rem;
-  border-bottom-left-radius: 50%;
-  font-size: 0.9rem;
-  font-weight: 700;
-  box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.1);
-  z-index: 1;
-}
-
 .image-thumbnails {
   display: flex;
   gap: 0.5rem;
@@ -313,15 +299,6 @@ book-title-p{
   font-size: 1.1rem;
   color: var(--text-lighter);
   text-decoration: line-through;
-}
-
-.discount-badge {
-  background: var(--secondary-color);
-  color: white;
-  padding: 0.3rem 0.7rem;
-  border-radius: 20px;
-  font-size: 0.9rem;
-  font-weight: 600;
 }
 
 .availability {
