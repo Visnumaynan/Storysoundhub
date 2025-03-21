@@ -5,6 +5,7 @@ import Logo from "../../assets/website/logo.png";
 import DarkMode from "./DarkMode";
 import UserIcon from "../../assets/website/user .png";
 import "./Navbar.css";
+import { SignedIn, SignedOut, UserButton } from '@clerk/clerk-react';
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -39,9 +40,28 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
-        <Link to="/loginRegister" className="user-profile">
+        {/* <Link to="/loginRegister" className="user-profile">
+        
                 <img src={UserIcon} alt="User" className="user-icon" />
-              </Link>
+        </Link> */}
+
+        <div className="user-profile">
+          <SignedIn>
+            <UserButton
+              afterSignOutUrl="/"
+              appearance={{
+                elements: {
+                  userButtonAvatarBox: "w-10 h-10", // Match your user-icon size
+                }
+              }}
+            />
+          </SignedIn>
+          <SignedOut>
+            <Link to="/loginRegister">
+              <img src={UserIcon} alt="User" className="user-icon" />
+            </Link>
+          </SignedOut>
+        </div>
 
         <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>
           {menuOpen ? <FaTimes /> : <FaBars />}
