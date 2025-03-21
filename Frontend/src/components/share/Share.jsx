@@ -1,16 +1,55 @@
 import "./share.scss";
 import Image from "../../assets/img.png";
 import { useUser } from "../../context/UserContext";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Share = () => {
   const { currentUser, joinedBookClubs } = useUser();
   const [desc, setDesc] = useState("");
   const [selectedBookClub, setSelectedBookClub] = useState("");
   const [selectedGenre, setSelectedGenre] = useState("");
+  const [theme, setTheme] = useState(
+    localStorage.getItem("theme") || 
+    (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
+  );
   
   // Sample genres
   const genres = ["Fiction", "Non-Fiction", "Sci-Fi", "Mystery", "Romance", "Thriller", "Fantasy", "Biography"];
+  
+  // Listen for theme changes - improved implementation
+  useEffect(() => {
+    // Function to update theme from localStorage
+    const updateTheme = () => {
+      const storedTheme = localStorage.getItem("theme") || 
+        (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      setTheme(storedTheme);
+    };
+    
+    // Listen for storage events (when theme changes from another tab)
+    window.addEventListener("storage", updateTheme);
+    
+    // Create a MutationObserver to watch for dark class changes on html element
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'class') {
+          const isDark = document.documentElement.classList.contains('dark');
+          setTheme(isDark ? 'dark' : 'light');
+        }
+      });
+    });
+    
+    // Start observing the document element for class changes
+    observer.observe(document.documentElement, { attributes: true });
+    
+    // Check theme periodically as a fallback
+    const intervalId = setInterval(updateTheme, 1000);
+    
+    return () => {
+      window.removeEventListener("storage", updateTheme);
+      observer.disconnect();
+      clearInterval(intervalId);
+    };
+  }, []);
   
   const handleSubmit = (e) => {
     e.preventDefault();

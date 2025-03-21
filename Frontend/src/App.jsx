@@ -67,7 +67,6 @@ function App() {
           </div>
           <RightBar />
         </div>
-        <Footer />
       </div>
     );
   };
