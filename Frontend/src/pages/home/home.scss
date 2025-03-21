@@ -1,16 +1,22 @@
 @use "../../style" as style;
 
-.home{
-  @include style.themify(style.$themes) {
-    padding: 20px 70px;
-    background-color: style.themed("bgSoft");
-
-    @include style.mobile {
-      padding: 10px;
-    }
-
-    @include style.tablet{
-      padding: 20px;
-    }
+.home {
+  padding: 20px 70px;
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  transition: background-color 0.4s ease, color 0.4s ease;
+  min-height: calc(100vh - 80px); // Adjust if needed based on your navbar height
+  
+  &.dark {
+    background-color: var(--card-bg);
+    color: var(--text-color);
   }
- }
+  
+  @media (max-width: 480px) {
+    padding: 10px;
+  }
+  
+  @media (min-width: 481px) and (max-width: 1024px) {
+    padding: 20px;
+  }
+}

@@ -1,11 +1,11 @@
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import "./profile.scss";
 import FacebookTwoToneIcon from "@mui/icons-material/FacebookTwoTone";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import Posts from "../../components/posts/Posts";
-import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
 import { useUser } from "../../context/UserContext";
 import Share from "../../components/share/Share";
 
@@ -13,6 +13,10 @@ const Profile = () => {
   const { id } = useParams();
   const { currentUser } = useUser();
   const [user, setUser] = useState(null);
+  const [theme, setTheme] = useState(
+    localStorage.getItem("theme") || 
+    (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
+  );
 
   // In a real app, you would fetch this data from an API
   const users = [
@@ -33,13 +37,54 @@ const Profile = () => {
   useEffect(() => {
     setUser(users.find(u => u.id === parseInt(id)) || users[0]);
   }, [id]);
+  
+  // Listen for theme changes - improved implementation
+  useEffect(() => {
+    // Function to handle theme changes
+    const handleThemeChange = () => {
+      const currentTheme = localStorage.getItem("theme") || "light";
+      setTheme(currentTheme);
+    };
+    
+    // Set up event listener for storage changes
+    window.addEventListener("storage", handleThemeChange);
+    
+    // Create a MutationObserver to detect class changes on html element
+    const observer = new MutationObserver(mutations => {
+      mutations.forEach(mutation => {
+        if (mutation.attributeName === 'class') {
+          const htmlElement = document.documentElement;
+          const isDark = htmlElement.classList.contains('dark');
+          setTheme(isDark ? 'dark' : 'light');
+        }
+      });
+    });
+    
+    // Start observing the document element for class changes
+    observer.observe(document.documentElement, { attributes: true });
+    
+    // Check for theme changes at regular intervals as a fallback
+    const intervalId = setInterval(() => {
+      const currentTheme = localStorage.getItem("theme") || "light";
+      if (currentTheme !== theme) {
+        setTheme(currentTheme);
+      }
+    }, 1000);
+    
+    // Clean up
+    return () => {
+      window.removeEventListener("storage", handleThemeChange);
+      observer.disconnect();
+      clearInterval(intervalId);
+    };
+  }, [theme]);
 
   if (!user) return <div>Loading...</div>;
 
-  const isCurrentUser = currentUser.id === user.id;
+  const isCurrentUser = currentUser?.id === user.id;
 
   return (
-    <div className="profile">
+    <div className={`profile ${theme === "dark" ? "dark" : ""}`}>
       <div className="images">
         <img
           src={user.coverPic}
