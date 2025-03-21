@@ -14,7 +14,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::with(['membership', 'club'])->get();
+        $posts = Post::with(['bookClubMember', 'club'])->get();
         return response()->json($posts);
     }
 
@@ -50,7 +50,7 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        $post = Post::with(['membership', 'club'])->find($id);
+        $post = Post::with(['bookClubMember', 'club'])->find($id);
 
         if (!$post) {
             return response()->json(['message' => 'Post not found'], 404);
