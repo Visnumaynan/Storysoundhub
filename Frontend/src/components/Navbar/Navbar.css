@@ -1,64 +1,68 @@
-@import url('https://fonts.googleapis.com/css?family=Poppins:400,700,900');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
 .navbar-container {
-  background-color: white;
-  transition: 0.2s;
-  height: 100px;
-}
-
-/* Dark Mode Support */
-.dark .navbar-container {
-  background-color: #1a202c !important; /* Dark background */
+  background-color: var(--nav-bg);
+  box-shadow: var(--shadow);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  height: 80px;
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border-color);
 }
 
 /* Navbar Content */
 .navbar-content {
+  max-width: 1200px;
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px 0;
+  height: 100%;
+  padding: 0 1.5rem;
 }
 
 /* Logo and Brand */
 .brand {
   font-size: 1.5rem;
-  font-weight: bold;
+  font-weight: 700;
   display: flex;
   align-items: center;
-  gap: 8px;
-  color: black; /* Default text color */
-  text-decoration: none;
-}
-
-/* Dark Mode Brand Text */
-.dark .brand {
-  color: white !important;
-}
-
-.brand {
-  display: flex; /* Use flexbox for alignment */
-  align-items: center; /* Center items vertically */
+  gap: 0.5rem;
+  color: var(--text-color);
 }
 
 .brand-link {
-  display: flex; /* Use flexbox for link content */
-  align-items: center; /* Center items vertically in the link */
-  text-decoration: none; 
-  color: inherit; /* Inherit color from parent */
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s ease;
+}
+
+.logo-wrapper {
+  width: 200px; /* Adjust this to reduce the clickable area */
+  height: 100px; /* Adjust this to reduce the clickable area */
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .logo-img {
-  height: 50px; 
-  width: 70px;
-  margin-right: 0.5rem; /* Space between logo and text */
-  margin-left: 0.5rem;
+  margin-left: -100px;
+  margin-top: 30px;
+  height: 180px;
+  width: auto;
+  border-radius: 8px;
 }
+
 
 /* Navigation Links */
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 26px;
+  gap: 1.5rem;
 }
 
 /* Menu List */
@@ -66,91 +70,166 @@
   list-style: none;
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  margin-right: -200px;
 }
 
-.menu li a {
-  padding: 16px;
-  transition: 0.2s;
-  color: black;
-  text-decoration: none;
-  font-family:'Poppins';
-}
-
-/* Dark Mode Menu Links */
-.dark .menu li a {
-  color: white !important;
-  font-family:'Poppins';
-}
-
-.menu li a:hover {
-  color:#6f97c2;
-}
-
-.dark .menu li a:hover {
-  color: #6f97c2 !important;
-}
-
-
-/* Dropdown */
-.dropdown {
+.menu li {
   position: relative;
-  cursor: pointer;
 }
 
-.dropdown-menu {
-  display: none;
-  position: absolute;
-  left: 0;
-  background-color: white;
-  border-radius: 5px;
-  padding: 10px;
-  min-width: 150px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.dropdown:hover .dropdown-menu {
-  display: block;
-}
-
-.cart-icon {
-  background: #6ba9ff !important;
-  color: white !important;
-  padding: 4px 10px; 
-  font-size: 0.9rem; 
-  border-radius: 30px; 
+.nav-item {
+  padding: 0.75rem 1rem;
+  font-weight: 500;
+  color: var(--text-color);
+  text-decoration: none;
+  font-family: 'Poppins', sans-serif;
+  border-radius: 8px;
+  transition: all 0.2s ease;
   display: flex;
   align-items: center;
-  gap: 6px; 
-  transition: 0.2s;
-  border: none;
-  cursor: pointer;
-  width: 70px;
-  height: 10px;
+  gap: 0.5rem;
 }
 
-/* Smaller Cart Icon */
-.cart-icon svg {
-  width: 16px; 
-  height: 16px;
+.nav-item:hover {
+  color: var(--accent-color);
 }
 
-/* Dark Mode */
-.dark .cart-icon {
-  color: rgb(255, 255, 255) !important;
-  background-color: #13ace9;
+/* Cart Icon Button */
+.cart-icon {
+  background: var(--accent-color);
+  color: white;
+  padding: 0.6rem 1rem;
+  font-size: 0.9rem;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  text-decoration: none;
 }
 
-/* Hover Effect */
 .cart-icon:hover {
-  transform: scale(1.02);
+  transform: translateY(-2px);
+  background: var(--hover-color);
+  box-shadow: 0 4px 12px rgba(111, 151, 194, 0.4);
 }
 
 /* User Profile Icon */
-.user-icon {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  object-fit: cover;
+.user-profile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  position: relative;
 }
 
+.user-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.user-profile:hover .user-icon {
+  transform: scale(1.08);
+}
+
+.menu-toggle {
+  display: none;
+  font-size: 1.8rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-color);
+}
+
+@media (max-width: 720px) {
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    justify-content: flex-start; /* Align items to the left */
+  }
+  
+  .menu {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    justify-content: flex-start; /* Ensure menu items stay left */
+  }
+
+  .cart-icon{
+    margin-top: 50px;
+  }
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 80px;
+    right: 0;
+    width: 100%;
+    background: var(--nav-bg);
+    padding: 1rem 0;
+  }
+
+  .nav-item{
+    margin-top: 40px;
+    justify-items: center;
+  }
+  
+  .nav-links.open {
+    display: flex;
+  }
+  
+  .menu {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .menu-toggle {
+    display: block;
+  }
+
+  .logo-img {
+    margin-left: -10px;
+    margin-top: 30px;
+    height: 70px;
+    width: auto;
+    border-radius: 8px;
+  }
+
+  .nav-links{
+    width: 200px;
+    height: 500px;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 80px;
+    right: 0;
+    width: 100%;
+    background: var(--nav-bg);
+    padding: 1rem 0;
+  }
+
+  .menu {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .menu-toggle {
+    display: block;
+  }
+
+}

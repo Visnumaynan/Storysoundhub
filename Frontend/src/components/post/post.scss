@@ -1,0 +1,112 @@
+@use "../../style" as style;
+
+.post {
+  @include style.themify(style.$themes) {
+    -webkit-box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
+    -moz-box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
+    box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
+    border-radius: 20px;
+    background-color: style.themed("bg");
+    color: style.themed("textColor");
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    
+    &.dark {
+      background-color: var(--background-color);
+      color: var(--text-color);
+      box-shadow: var(--shadow);
+    }
+
+    .container {
+      padding: 20px;
+
+      .user {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .userInfo {
+          display: flex;
+          gap: 20px;
+
+          img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+          }
+
+          .details {
+            display: flex;
+            flex-direction: column;
+
+            .name {
+              font-weight: 500;
+            }
+
+            .date {
+              font-size: 12px;
+            }
+          }
+        }
+      }
+      
+      // Add styling for postTags if not already present
+      .postTags {
+        display: flex;
+        gap: 10px;
+        margin: 10px 0;
+        
+        .bookClubTag, .genreTag {
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          padding: 5px 10px;
+          border-radius: 15px;
+          font-size: 12px;
+          color: black;
+          background-color: style.themed("bgSoft");
+          transition: background-color 0.3s ease;
+
+          .genreTag.dark &{
+            color: black;
+          }
+          
+          .post.dark & {
+            background-color: var(--card-bg);
+          }
+        }
+      }
+
+      .content {
+        margin: 20px 0px;
+
+        img {
+          width: 100%;
+          max-height: 500px;
+          object-fit: cover;
+          margin-top: 20px;
+        }
+      }
+
+      .info {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+
+        .item {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          cursor: pointer;
+          font-size: 14px;
+          
+          svg {
+            .post.dark & {
+              color: var(--accent-color);
+            }
+          }
+        }
+      }
+    }
+  }
+}
