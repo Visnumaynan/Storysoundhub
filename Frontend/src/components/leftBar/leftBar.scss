@@ -1,14 +1,24 @@
 @use "../../style" as style;
 
 .leftBar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
   flex: 2;
   position: sticky;
   top: 70px;
   height: calc(100vh - 70px);
+  width: max-content;
   overflow: auto;
   transition: background-color 0.3s ease, color 0.3s ease;
   background-color: var(--background-color);
   color: var(--text-color);
+  z-index: 100;
+  padding: 0.5rem 0.75rem;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
   
   @media (max-width: 480px) {
     display: none;
@@ -34,6 +44,7 @@
           width: 100%;
           padding: 0;
           margin: 0;
+          display: none;
         }
       }
     }
@@ -45,6 +56,11 @@
   
   .container {
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    height: 100%;
     
     .collapseToggle {
       display: flex;
@@ -72,6 +88,8 @@
       display: flex;
       flex-direction: column;
       gap: 20px;
+      display: flex;
+      width: 100%;
       
       span {
         font-size: 14px;
@@ -97,18 +115,26 @@
           object-fit: cover;
           display: block;
         }
+        span {
+          font-size: 0.9rem;
+          font-weight: 500;
+        }
       }
       
       .item {
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: 0.5rem;
         text-decoration: none;
         color: inherit;
         cursor: pointer;
         padding: 5px;
         border-radius: 5px;
         transition: background-color 0.3s ease;
+
+        span {
+          font-size: 0.85rem;
+        }
         
         &:hover {
           background-color: var(--card-bg);
