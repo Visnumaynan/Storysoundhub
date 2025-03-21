@@ -7,10 +7,37 @@ import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import BookIcon from "@mui/icons-material/Book";
 import { Link } from "react-router-dom";
 import Comments from "../comments/Comments";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Post = ({ post }) => {
   const [commentOpen, setCommentOpen] = useState(false);
+  const [theme, setTheme] = useState(
+    localStorage.getItem("theme") || 
+    (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
+  );
+  
+  useEffect(() => {
+    const handleStorageChange = () => {
+      setTheme(localStorage.getItem("theme") || "light");
+    };
+    
+    window.addEventListener("storage", handleStorageChange);
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'class') {
+          const isDark = document.documentElement.classList.contains('dark');
+          setTheme(isDark ? 'dark' : 'light');
+        }
+      });
+    });
+    
+    observer.observe(document.documentElement, { attributes: true });
+    
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+      observer.disconnect();
+    };
+  }, []);
 
   //TEMPORARY
   const liked = false;
@@ -29,7 +56,7 @@ const Post = ({ post }) => {
     : null;
 
   return (
-    <div className="post">
+    <div className={`post ${theme === "dark" ? "dark" : ""}`}>
       <div className="container">
         <div className="user">
           <div className="userInfo">

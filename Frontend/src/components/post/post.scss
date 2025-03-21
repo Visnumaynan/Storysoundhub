@@ -8,6 +8,13 @@
     border-radius: 20px;
     background-color: style.themed("bg");
     color: style.themed("textColor");
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    
+    &.dark {
+      background-color: var(--background-color);
+      color: var(--text-color);
+      box-shadow: var(--shadow);
+    }
 
     .container {
       padding: 20px;
@@ -42,6 +49,33 @@
           }
         }
       }
+      
+      // Add styling for postTags if not already present
+      .postTags {
+        display: flex;
+        gap: 10px;
+        margin: 10px 0;
+        
+        .bookClubTag, .genreTag {
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          padding: 5px 10px;
+          border-radius: 15px;
+          font-size: 12px;
+          color: black;
+          background-color: style.themed("bgSoft");
+          transition: background-color 0.3s ease;
+
+          .genreTag.dark &{
+            color: black;
+          }
+          
+          .post.dark & {
+            background-color: var(--card-bg);
+          }
+        }
+      }
 
       .content {
         margin: 20px 0px;
@@ -65,6 +99,12 @@
           gap: 10px;
           cursor: pointer;
           font-size: 14px;
+          
+          svg {
+            .post.dark & {
+              color: var(--accent-color);
+            }
+          }
         }
       }
     }
