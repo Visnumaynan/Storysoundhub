@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('book_clubs', function (Blueprint $table) {
             $table->uuid('club_id')-> primary();
             $table->string('club_name');
-            $table->foreignId('creator_user_id')->constrained('users', 'id');
+            $table->string('clerk_id');
             $table->text('description');
             $table->timestamp('created_date')->useCurrent();
             $table->timestamps();
