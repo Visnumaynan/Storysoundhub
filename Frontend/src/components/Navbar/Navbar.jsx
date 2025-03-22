@@ -33,18 +33,18 @@ const Navbar = () => {
             <li><Link to="/" className="nav-item">Home</Link></li>
             <li><Link to="/shop" className="nav-item">Shop</Link></li>
             <li><a href="/book-club-home" className="nav-item">Community</a></li>
+            <li><a href="http://localhost:8501/" className="nav-item">Assistant</a></li>
             <li>
               <Link to="/CartPage" className="cart-icon">
                 <FaHeart className="inline-block text-white" /> My List
               </Link>
             </li>
-          </ul>
-        </div>
+         
         {/* <Link to="/loginRegister" className="user-profile">
         
                 <img src={UserIcon} alt="User" className="user-icon" />
         </Link> */}
-
+        <li>
         <div className="user-profile">
           <SignedIn>
             <UserButton
@@ -61,6 +61,9 @@ const Navbar = () => {
               <img src={UserIcon} alt="User" className="user-icon" />
             </Link>
           </SignedOut>
+        </div>
+      </li>
+          </ul>
         </div>
 
         <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>
