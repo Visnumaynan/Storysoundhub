@@ -8,3 +8,20 @@ from langchain_community.utilities import SQLDatabase
 
 # Load environment variables
 load_dotenv()
+# Automatically Connect to MySQL on App Startup
+def init_database():
+    try:
+        db_uri = f"mysql+mysqlconnector://{os.getenv('DB_USER', 'root')}:{os.getenv('DB_PASSWORD', '')}@{os.getenv('DB_HOST', 'localhost')}:{os.getenv('DB_PORT', '3306')}/{os.getenv('DB_NAME', 'backend_app')}"
+        return SQLDatabase.from_uri(db_uri)
+    except Exception as e:
+        st.error(f"❌ Error connecting to database: {e}")
+        return None
+
+if "db" not in st.session_state:
+    with st.spinner("Connecting to database..."):
+        connection = init_database()
+        if connection:
+            st.session_state.db = connection
+            st.success("✅ Auto-connected to MySQL!")
+        else:
+            st.error("❌ Failed to auto-connect. Check credentials.")
