@@ -93,3 +93,31 @@ def get_response(user_query: str, db: SQLDatabase):
 
     # Default response for non-book-related queries
     return "I can only provide book recommendations and related information. Please ask about books."           
+
+# Streamlit UI
+st.title("Assistant 🤖")
+
+if "chat_history" not in st.session_state:
+    st.session_state.chat_history = [AIMessage(content="Hello! Ask me a question.")]
+
+# Display Chat History
+for message in st.session_state.chat_history:
+    role = "AI" if isinstance(message, AIMessage) else "Human"
+    with st.chat_message(role):
+        st.markdown(message.content)
+
+# Handle User Input
+user_query = st.chat_input("Ask about books, genres, or anything database-related...")
+if user_query and user_query.strip():
+    st.session_state.chat_history.append(HumanMessage(content=user_query))
+    
+    with st.chat_message("Human"):
+        st.markdown(user_query)
+
+    if "db" in st.session_state and st.session_state.db:
+        with st.chat_message("AI"):
+            response = get_response(user_query, st.session_state.db)
+            st.markdown(response)
+        st.session_state.chat_history.append(AIMessage(content=response))
+    else:
+        st.error("❌ No database connection. Please connect first.")
