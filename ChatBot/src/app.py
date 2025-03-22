@@ -1,121 +1,104 @@
 from dotenv import load_dotenv
 import os
 import streamlit as st
+st.set_page_config(page_title="Story Sound Hub", page_icon="📚") 
 from langchain_core.messages import AIMessage, HumanMessage
 from langchain_groq import ChatGroq
 from langchain_community.utilities import SQLDatabase
 
 # Load environment variables
 load_dotenv()
-
-# Initialize MySQL Database Connection
-def init_database(user, password, host, port, database):
+# Automatically Connect to MySQL on App Startup
+def init_database():
     try:
-        db_uri = f"mysql+mysqlconnector://{user}:{password}@{host}:{port}/{database}"
-        db = SQLDatabase.from_uri(db_uri)
-        return db
+        db_uri = f"mysql+mysqlconnector://{os.getenv('DB_USER', 'root')}:{os.getenv('DB_PASSWORD', '')}@{os.getenv('DB_HOST', 'localhost')}:{os.getenv('DB_PORT', '3306')}/{os.getenv('DB_NAME', 'backend_app')}"
+        return SQLDatabase.from_uri(db_uri)
     except Exception as e:
-        st.error(f"Error connecting to database: {e}")
+        st.error(f"❌ Error connecting to database: {e}")
         return None
+
+if "db" not in st.session_state:
+    with st.spinner("Connecting to database..."):
+        connection = init_database()
+        if connection:
+            st.session_state.db = connection
+            st.success("✅ Auto-connected to MySQL!")
+        else:
+            st.error("❌ Failed to auto-connect. Check credentials.")
 
 # Check if input is a greeting
 def is_greeting(question: str):
     greetings = ["hi", "hello", "hey", "good morning", "good afternoon", "good evening"]
     return question.lower().strip() in greetings
 
-# Check if a question is related to SQL/database
-def is_database_related(question: str):
-    database_keywords = [
-        "database", "sql", "table", "column", "row", "schema", "index", "query", 
-        "retrieve", "fetch", "store", "insert", "delete", "update", "primary key", 
-        "foreign key", "join", "count", "total", "list", "how many", "show", "retrieve"
-    ]
-    return any(keyword in question.lower() for keyword in database_keywords)
+# Check if a question is about books
+def is_book_related(question: str):
+    book_keywords = ["book", "books", "novel", "author", "genre", "literature", "reading", "recommendation"]
+    return any(keyword in question.lower() for keyword in book_keywords)
 
-# Get SQL query response and return natural language answer
+# Get chatbot response
 def get_response(user_query: str, db: SQLDatabase):
-    """Handles database queries and provides natural language responses."""
-    
+    llm = ChatGroq(model_name="llama3-8b-8192", groq_api_key=os.getenv("GROQ_API_KEY"))
+
     # Greeting Handling
     if is_greeting(user_query):
         return "👋 Hello! How can I assist you today?"
 
-    # Restrict responses to only database-related queries
-    if not is_database_related(user_query):
-        return "🚫 Sorry I am limitted with question  ."
+    # General Book-Related Queries
+    if is_book_related(user_query):
+        try:
+            # Handle book recommendations by genre
+            if "genre" in user_query.lower():
+                query_words = user_query.lower().split()
+                genre_name = None
 
-    # Initialize LLM for natural responses
-    llm = ChatGroq(model_name="llama3-8b-8192", groq_api_key=os.getenv("GROQ_API_KEY"))
+                for word in query_words:
+                    check_query = f"SELECT name FROM genres WHERE LOWER(name) LIKE '%{word}%' LIMIT 1;"
+                    result = db.run(check_query)
+                    if result:
+                        genre_name = result[0][0]
+                        break
 
-    try:
-        # Handle count and list request
-        if "how many" in user_query.lower() and "list" in user_query.lower() and "genres" in user_query.lower():
-            count_query = "SELECT COUNT(*) FROM genres;"
-            list_query = "SELECT name FROM genres LIMIT 10;"  # Adjust limit if needed
+                if genre_name:
+                    sql_query = """
+                        SELECT b.title, b.description, a.name as author
+                        FROM books b
+                        JOIN book_genres bg ON b.id = bg.book_id
+                        JOIN genres g ON bg.genre_id = g.id
+                        JOIN book_authors ba ON b.id = ba.book_id
+                        JOIN authors a ON ba.author_id = a.id
+                        WHERE LOWER(g.name) LIKE LOWER(%s)
+                        LIMIT 5;
+                    """
+                    sql_result = db.run(sql_query, parameters=(f"%{genre_name}%",))
 
-            count_result = db.run(count_query)
-            list_result = db.run(list_query)
+                    if sql_result:
+                        books_info = [
+                            f"📖 Title: {row[0]}\n✍️ Author: {row[2]}\n📄 Description: {row[1]}"
+                            for row in sql_result
+                        ]
+                        books_text = "\n\n".join(books_info)
+                        return f"Here are some {genre_name} books:\n\n{books_text}"
+                    else:
+                        return f"Sorry, I couldn't find any books in the {genre_name} genre."
+                else:
+                    return "I couldn't identify the genre you're looking for. Try specifying a valid genre."
 
-            count = count_result[0][0]  # Extract count
-            genres_names = [row[0] for row in list_result]  # Extract names
-
-            # Convert to natural response
-            genres_list = ", ".join(genres_names) if genres_names else "No genress found."
-            ai_prompt = f"There are {count} genress. Here are some: {genres_list}. Generate a friendly response."
-            ai_response = llm.invoke(ai_prompt)
+            # If it's a general book-related question, use LLM to generate a response
+            ai_response = llm.invoke(f"Answer this book-related question in a helpful way: {user_query}")
             return ai_response.content
 
-        # Handle only count request
-        elif "how many" in user_query.lower() and "genres" in user_query.lower():
-            sql_query = "SELECT COUNT(*) FROM genres;"
-            sql_result = db.run(sql_query)
-            count = sql_result[0][0]  # Extract count
+        except Exception as e:
+            return f"❌ Error processing book-related question: {str(e)}"
 
-            ai_prompt = f"The database contains {count} genress. Generate a friendly response."
-            ai_response = llm.invoke(ai_prompt)
-            return ai_response.content
-
-        # Handle only list request
-        elif "list" in user_query.lower() and "genres" in user_query.lower():
-            sql_query = "SELECT name FROM genres LIMIT 10;"
-            sql_result = db.run(sql_query)
-            genres_names = [row[0] for row in sql_result]  # Extract names
-
-            genres_list = ", ".join(genres_names) if genres_names else "No genress found."
-            ai_prompt = f"Here are some genress from the database: {genres_list}. Generate a friendly response."
-            ai_response = llm.invoke(ai_prompt)
-            return ai_response.content
-
-        else:
-            return "I need more details. Which table or data are you referring to?"
-
-    except Exception as e:
-        return f"❌ SQL Execution Error: {str(e)}"
-
+    # Default response for non-book-related queries
+    return "I can only provide book recommendations and related information. Please ask about books."           
 
 # Streamlit UI
-st.set_page_config(page_title="Story Sound Hub", page_icon=":speech_balloon:")
 st.title("Assistant 🤖")
 
 if "chat_history" not in st.session_state:
-    st.session_state.chat_history = [AIMessage(content="Hello! Ask me a questions.")]
-
-with st.sidebar:
-    st.subheader("Database Settings")
-    st.write("Connect to your MySQL database.")
-
-    host = st.text_input("Host", value="localhost", key="host")
-    port = st.text_input("Port", value="3306", key="port")
-    user = st.text_input("User", value="root", key="user")
-    password = st.text_input("Password", type="password", value="", key="password")
-    database = st.text_input("Database", value="storysound_app", key="database")
-
-    if st.button("Connect"):
-        with st.spinner("Connecting to database..."):
-            connection = init_database(user, password, host, port, database)
-            if connection:
-                st.session_state.db = connection
-                st.success("✅ Connected to MySQL!")
+    st.session_state.chat_history = [AIMessage(content="Hello! Ask me a question.")]
 
 # Display Chat History
 for message in st.session_state.chat_history:
@@ -124,7 +107,7 @@ for message in st.session_state.chat_history:
         st.markdown(message.content)
 
 # Handle User Input
-user_query = st.chat_input("Type your database-related question here...")
+user_query = st.chat_input("Ask about books, genres, or anything database-related...")
 if user_query and user_query.strip():
     st.session_state.chat_history.append(HumanMessage(content=user_query))
     
@@ -135,7 +118,6 @@ if user_query and user_query.strip():
         with st.chat_message("AI"):
             response = get_response(user_query, st.session_state.db)
             st.markdown(response)
-
         st.session_state.chat_history.append(AIMessage(content=response))
     else:
         st.error("❌ No database connection. Please connect first.")
