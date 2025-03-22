@@ -25,3 +25,14 @@ if "db" not in st.session_state:
             st.success("✅ Auto-connected to MySQL!")
         else:
             st.error("❌ Failed to auto-connect. Check credentials.")
+
+# Check if input is a greeting
+def is_greeting(question: str):
+    greetings = ["hi", "hello", "hey", "good morning", "good afternoon", "good evening"]
+    return question.lower().strip() in greetings
+
+# Check if a question is about books
+def is_book_related(question: str):
+    book_keywords = ["book", "books", "novel", "author", "genre", "literature", "reading", "recommendation"]
+    return any(keyword in question.lower() for keyword in book_keywords)
+           
