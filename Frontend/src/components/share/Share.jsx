@@ -2,19 +2,32 @@ import "./share.scss";
 import Image from "../../assets/img.png";
 import { useUser } from "../../context/UserContext";
 import { useState, useEffect } from "react";
+import axios from "axios"; // Import axios
 
 const Share = () => {
   const { currentUser, joinedBookClubs } = useUser();
   const [desc, setDesc] = useState("");
   const [selectedBookClub, setSelectedBookClub] = useState("");
   const [selectedGenre, setSelectedGenre] = useState("");
+  const [genres, setGenres] = useState([]);
   const [theme, setTheme] = useState(
     localStorage.getItem("theme") || 
     (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
   );
   
-  // Sample genres
-  const genres = ["Fiction", "Non-Fiction", "Sci-Fi", "Mystery", "Romance", "Thriller", "Fantasy", "Biography"];
+  // Fetch genres from API using axios
+  useEffect(() => {
+    const fetchGenres = async () => {
+      try {
+        const response = await axios.get("http://localhost:8000/api/genres");
+        setGenres(response.data);
+      } catch (error) {
+        console.error("Error fetching genres:", error);
+      }
+    };
+
+    fetchGenres();
+  }, []);
   
   // Listen for theme changes - improved implementation
   useEffect(() => {
@@ -51,19 +64,39 @@ const Share = () => {
     };
   }, []);
   
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // In a real app, you would send this to an API
-    console.log("Sharing post:", {
-      userId: currentUser.id,
-      desc,
-      bookClubId: selectedBookClub ? parseInt(selectedBookClub) : null,
-      genre: selectedGenre,
-      img: null // Would be handled with file upload in a real app
-    });
-    setDesc("");
-    setSelectedBookClub("");
-    setSelectedGenre("");
+    
+    try {
+      // In a real app, you would send this to an API using axios
+      console.log("Sharing post:", {
+        userId: currentUser.id,
+        desc,
+        bookClubId: selectedBookClub ? parseInt(selectedBookClub) : null,
+        genre_id: selectedGenre, // Updated to match API naming convention
+        img: null // Would be handled with file upload in a real app
+      });
+      
+      // Example of how you might implement the actual API call:
+      // await axios.post("http://localhost:8000/api/books", {
+      //   title: desc,
+      //   author: currentUser.name,
+      //   type: "post",
+      //   picture: "", // Would be from file upload
+      //   genre_id: selectedGenre,
+      //   price: 0,
+      //   owner_id: currentUser.id,
+      //   condition: "N/A",
+      //   quantity: 1,
+      //   book_club_id: selectedBookClub || null
+      // });
+      
+      setDesc("");
+      setSelectedBookClub("");
+      setSelectedGenre("");
+    } catch (error) {
+      console.error("Error sharing post:", error);
+    }
   };
   
   return (
@@ -100,7 +133,7 @@ const Share = () => {
             >
               <option value="">None</option>
               {genres.map((genre) => (
-                <option key={genre} value={genre}>{genre}</option>
+                <option key={genre.id} value={genre.id}>{genre.name}</option>
               ))}
             </select>
           </div>
