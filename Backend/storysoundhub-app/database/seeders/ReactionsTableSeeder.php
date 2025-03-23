@@ -14,9 +14,36 @@ class ReactionsTableSeeder extends Seeder
     {
         DB::table('reactions')->insert([
             [
-                'reaction_id' => 1,
-                'post_id' => 1,
-                'membership_id' => 1,
+                'post_id' => DB::table('posts')->value('post_id'), // Fetch post_id dynamically
+                'membership_id' => DB::table('book_club_members')->value('membership_id'), // Fetch membership_id dynamically
+                'type' => 'like', // Example reaction type
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'post_id' => DB::table('posts')->value('post_id'),
+                'membership_id' => DB::table('book_club_members')->value('membership_id'),
+                'type' => 'like', // Another reaction type example
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'post_id' => DB::table('posts')->value('post_id'),
+                'membership_id' => DB::table('book_club_members')->value('membership_id'),
+                'type' => 'like', // Another reaction type example
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'post_id' => DB::table('posts')->value('post_id'),
+                'membership_id' => DB::table('book_club_members')->value('membership_id'),
+                'type' => 'like',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'post_id' => DB::table('posts')->value('post_id'),
+                'membership_id' => DB::table('book_club_members')->value('membership_id'),
                 'type' => 'like',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),

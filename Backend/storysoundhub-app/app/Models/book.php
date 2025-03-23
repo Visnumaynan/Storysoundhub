@@ -33,7 +33,7 @@ class book extends Model
 
     public function genre()
     {
-        return $this->belongsTo(genres::class, 'genre_id');
+        return $this->belongsTo(Genres::class, 'genre_id');
     }
 
     public function owner()
