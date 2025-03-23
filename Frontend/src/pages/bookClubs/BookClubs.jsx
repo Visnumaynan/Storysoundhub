@@ -1,40 +1,36 @@
 import "./bookClubs.scss";
 import { Link } from "react-router-dom";
 import { useUser } from "../../context/UserContext";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import BookClubService from "../../services/BookClubService";
 
 const BookClubs = () => {
+  const { currentUser } = useUser();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newClubName, setNewClubName] = useState("");
   const [newClubDescription, setNewClubDescription] = useState("");
-  
-  // In a real app, you would fetch this data from an API
-  const [bookClubs, setBookClubs] = useState([
-    {
-      id: 1,
-      name: "Thriller",
-      coverPic: "https://images.pexels.com/photos/13440765/pexels-photo-13440765.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-      description: "For fans of heart-pounding suspense and plot twists."
-    },
-    {
-      id: 2,
-      name: "Mystery",
-      coverPic: "https://images.pexels.com/photos/1367192/pexels-photo-1367192.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      description: "Dive into whodunits and detective stories."
-    },
-    {
-      id: 3,
-      name: "Science Fiction",
-      coverPic: "https://images.pexels.com/photos/2150/sky-space-dark-galaxy.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      description: "Explore futuristic worlds and technologies."
-    },
-    {
-      id: 4,
-      name: "Fantasy",
-      coverPic: "https://images.pexels.com/photos/957024/forest-trees-perspective-bright-957024.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      description: "Magical realms and epic adventures."
-    }
-  ]);
+  const [bookClubs, setBookClubs] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Fetch book clubs from API
+  useEffect(() => {
+    const fetchBookClubs = async () => {
+      try {
+        setLoading(true);
+        const data = await BookClubService.getAllBookClubs();
+        setBookClubs(data);
+        setError(null);
+      } catch (err) {
+        console.error("Failed to fetch book clubs:", err);
+        setError("Failed to load book clubs. Please try again later.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBookClubs();
+  }, []);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -46,20 +42,32 @@ const BookClubs = () => {
     setNewClubDescription("");
   };
 
-  const handleAddBookClub = (e) => {
+  const handleAddBookClub = async (e) => {
     e.preventDefault();
     
     if (newClubName.trim() === "") return;
     
-    const newClub = {
-      id: bookClubs.length + 1, // Simple ID generation (use UUID in production)
-      name: newClubName,
-      // Default cover image for new clubs
-      coverPic: "https://images.pexels.com/photos/590493/pexels-photo-590493.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-    };
-    
-    setBookClubs([...bookClubs, newClub]);
-    closeModal();
+    try {
+      const newClubData = {
+        club_name: newClubName,
+        description: newClubDescription,
+        creator_user_id: currentUser.id.toString()
+      };
+      
+      const newClub = await BookClubService.createBookClub(newClubData);
+      
+      // Add a default cover pic since API doesn't handle images
+      const newClubWithImage = {
+        ...newClub,
+        coverPic: "https://images.pexels.com/photos/590493/pexels-photo-590493.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+      };
+      
+      setBookClubs([...bookClubs, newClubWithImage]);
+      closeModal();
+    } catch (err) {
+      console.error("Failed to create book club:", err);
+      alert("Failed to create book club. Please try again.");
+    }
   };
 
   return (
@@ -75,24 +83,38 @@ const BookClubs = () => {
         </button>
       </div>
       
-      <div className="bookClubsList">
-        {bookClubs.map(club => (
-          <Link 
-            to={`/book-club/${club.id}`} 
-            key={club.id}
-            className="bookClubCard"
-          >
-            <div className="bookClubImageContainer">
-              <img src={club.coverPic} alt={club.name} />
-              <div className="gradient"></div>
-            </div>
-            <div className="bookClubInfo">
-              <h2>{club.name}</h2>
-              <p>{club.description}</p>
-            </div>
-          </Link>
-        ))}
-      </div>
+      {loading ? (
+        <div className="loadingIndicator">Loading book clubs...</div>
+      ) : error ? (
+        <div className="errorMessage">{error}</div>
+      ) : (
+        <div className="bookClubsList">
+          {bookClubs.length === 0 ? (
+            <div className="noClubsMessage">No book clubs available. Be the first to create one!</div>
+          ) : (
+            bookClubs.map(club => (
+              <Link 
+                to={`/book-club/${club.id}`} 
+                key={club.id}
+                className="bookClubCard"
+              >
+                <div className="bookClubImageContainer">
+                  {/* Use club.picture from API if available, otherwise use a default */}
+                  <img 
+                    src={club.picture || club.coverPic || "https://images.pexels.com/photos/590493/pexels-photo-590493.jpeg"} 
+                    alt={club.name || club.club_name} 
+                  />
+                  <div className="gradient"></div>
+                </div>
+                <div className="bookClubInfo">
+                  <h2>{club.name || club.club_name}</h2>
+                  <p>{club.description}</p>
+                </div>
+              </Link>
+            ))
+          )}
+        </div>
+      )}
 
       {/* Modal for adding a new book club */}
       {isModalOpen && (
@@ -108,6 +130,16 @@ const BookClubs = () => {
                   value={newClubName}
                   onChange={(e) => setNewClubName(e.target.value)}
                   placeholder="Enter book club name"
+                  required
+                />
+              </div>
+              <div className="formGroup">
+                <label htmlFor="clubDescription">Description</label>
+                <textarea
+                  id="clubDescription"
+                  value={newClubDescription}
+                  onChange={(e) => setNewClubDescription(e.target.value)}
+                  placeholder="Enter a brief description of this book club"
                   required
                 />
               </div>

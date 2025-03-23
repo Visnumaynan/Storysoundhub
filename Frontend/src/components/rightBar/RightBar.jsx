@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 const RightBar = () => {
-  const { joinedBookClubs, toggleBookClub } = useUser();
+  const { joinedBookClubs, toggleBookClub, loading } = useUser();
   const [theme, setTheme] = useState(
     localStorage.getItem("theme") || 
     (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
@@ -57,25 +57,32 @@ const RightBar = () => {
     };
   }, [theme]);
 
+  const handleLeaveClub = (club) => {
+    toggleBookClub(club);
+  };
+
   return (
     <div className={`rightBar ${theme === "dark" ? "dark" : ""}`}>
       <div className="container">
         <div className="item">
           <span>Your Book Clubs</span>
-          {joinedBookClubs.length === 0 ? (
+          {loading ? (
+            <div className="loading">Loading your book clubs...</div>
+          ) : joinedBookClubs.length === 0 ? (
             <div className="noClubs">
               You haven't joined any book clubs yet.
+              <Link to="/book-clubs" className="browseLink">Browse Clubs</Link>
             </div>
           ) : (
             joinedBookClubs.map(club => (
               <div className="user" key={club.id}>
                 <div className="userInfo">
                   <Link to={`/book-club/${club.id}`} style={{ textDecoration: "none", color: "inherit" }}>
-                    <span>{club.name}</span>
+                    <span>{club.name || club.club_name}</span>
                   </Link>
                 </div>
                 <div className="buttons">
-                  <button onClick={() => toggleBookClub(club)}>leave</button>
+                  <button onClick={() => handleLeaveClub(club)}>leave</button>
                 </div>
               </div>
             ))
