@@ -1,6 +1,8 @@
 import React from 'react';
 import MImage from '../../assets/Images/maintance.jpg';
 
+import './maintenance.css';
+
 const Maintenance = () => {
 	return (
 		<div>
