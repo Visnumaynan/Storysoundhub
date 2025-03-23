@@ -16,19 +16,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call([
-            // List all your seeders here
-            UsersTableSeeder::class,
-            GenresTableSeeder::class,
-            BooksTableSeeder::class,
-            BookClubsTableSeeder::class,
-            BookClubMembersTableSeeder::class,
-            PostsTableSeeder::class,
-            ReactionsTableSeeder::class,
-            BookTransactionsTableSeeder::class,
-            BookWishlistTableSeeder::class,
-            CommentsTableSeeder::class,
-            
-        ]);
+        // $this->call([
+        //     // List all your seeders here
+        //     UsersTableSeeder::class,
+        //     GenresTableSeeder::class,
+        //     BooksTableSeeder::class,
+        //     BookClubsTableSeeder::class,
+        //     BookClubMembersTableSeeder::class,
+        //     PostsTableSeeder::class,
+        //     ReactionsTableSeeder::class,
+        //     BookTransactionsTableSeeder::class,
+        //     BookWishlistTableSeeder::class,
+        //     CommentsTableSeeder::class,
+
+        // ]);
     }
 }
