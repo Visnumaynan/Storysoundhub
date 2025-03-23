@@ -25,6 +25,7 @@ const Navbar = () => {
 
 
         <div className={`nav-links ${menuOpen ? "open" : ""}`}>
+        
           <div className="dark-mode-container">
             <DarkMode />
           </div>
