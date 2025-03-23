@@ -1,6 +1,9 @@
 
 import errorImage from '../../assets/Images/404.jpg'; 
 import "./erorPage.css";
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+
 
 const ErrorPage = () => {
   return (
