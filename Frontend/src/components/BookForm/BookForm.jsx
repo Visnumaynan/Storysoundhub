@@ -9,7 +9,8 @@ const BookForm = () => {
 
   const onSubmit = async (data) => {
     try {
-      const response = await axios.post("http://localhost:8000/api/books", data);
+      const base_url_api = process.env.BASE_URL_API || "http://localhost:8000";
+      const response = await axios.post(`{base_url_api}/api/books`, data);
       console.log("Book added successfully:", response.data);
       alert("Book added successfully!");
       reset();

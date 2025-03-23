@@ -134,7 +134,8 @@ const LoginRegister = () => {
 
   const saveUserToDatabase = async (userData) => {
     try {
-      const response = await axios.post('http://127.0.0.1:8000/api/users', {
+      const base_url_api = process.env.BASE_URL_API || "http://localhost:8000";
+      const response = await axios.post(`{base_url_api}/api/users`, {
         name: userData.fullName || userData.firstName || 'Unknown',
         email: userData.emailAddresses[0].emailAddress,
       }, {
