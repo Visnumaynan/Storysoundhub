@@ -85,7 +85,8 @@ const Posts = ({ userId, bookClubId }) => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/api/posts");
+        const base_url_api = process.env.BASE_URL_API || "http://localhost:8000";
+        const response = await axios.get(`{base_url_api}/api/posts`);
         let fetchedPosts = response.data;
 
         // Filter out invalid posts (e.g., with post_id = 0)

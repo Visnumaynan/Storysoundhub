@@ -13,7 +13,8 @@ const Books = () => {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/api/books");
+        const base_url_api = process.env.BASE_URL_API || "http://localhost:8000";
+        const response = await axios.get(`{base_url_api}/api/books`);
         setBooks(response.data);
       } catch (error) {
         console.error("Error fetching books:", error);
