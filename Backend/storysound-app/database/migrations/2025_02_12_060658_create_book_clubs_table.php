@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('book_clubs', function (Blueprint $table) {
-            $table->uuid('club_id')-> primary();
-            $table->string('club_name');
-            $table->foreignId('creator_user_id')->constrained('users', 'id');
-            $table->text('description');
-            $table->timestamp('created_date')->useCurrent();
-            $table->timestamps();
-        });
+        // Schema::create('book_clubs', function (Blueprint $table) {
+        //     $table->uuid('club_id')-> primary();
+        //     $table->string('club_name');
+        //     $table->foreignId('creator_user_id')->constrained('users', 'id');
+        //     $table->text('description');
+        //     $table->timestamp('created_date')->useCurrent();
+        //     $table->timestamps();
+        // });
     }
 
     /**
