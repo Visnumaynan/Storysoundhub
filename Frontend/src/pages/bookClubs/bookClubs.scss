@@ -1,0 +1,245 @@
+@use "../../style" as style;
+
+.bookClubs {
+  padding: 20px;
+  background-color: var(--card-bg);
+  max-width: 1200px;
+  margin: 0 auto;
+  
+  .bookClubsHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 15px;
+    
+    h1 {
+      color: var(--text-color);
+      margin: 0;
+    }
+    
+    .addBookClubButton {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background-color: var(--primary-color, #4361ee);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s ease, transform 0.1s ease;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      
+      &:hover {
+        background-color: var(--primary-hover, #3a56d4);
+        transform: translateY(-2px);
+      }
+      
+      &:active {
+        transform: translateY(0);
+      }
+    }
+  }
+  
+  .bookClubsList {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+    
+    @media (max-width: 640px) {
+      grid-template-columns: 1fr;
+    }
+    
+    .bookClubCard {
+      text-decoration: none;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow, 0 4px 12px rgba(0, 0, 0, 0.08));
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      background-color: var(--background-color, #ffffff);
+      border: 1px solid var(--border-color, #eaeaea);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+      }
+      
+      .bookClubImageContainer {
+        position: relative;
+        height: 180px;
+        width: 100%;
+        
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+        
+        .gradient {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.5) 0%,
+            transparent 40%,
+            transparent 60%,
+            rgba(0, 0, 0, 0.3) 100%
+          );
+        }
+      }
+      
+      .bookClubInfo {
+        padding: 18px;
+        color: var(--text-color, #333);
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        
+        h2 {
+          margin-bottom: 12px;
+          font-size: 18px;
+          font-weight: 600;
+        }
+        
+        p {
+          color: var(--text-color, #333);
+          opacity: 0.8;
+          font-size: 14px;
+          line-height: 1.5;
+          margin: 0;
+        }
+      }
+    }
+  }
+  
+  // Modal styles
+  .modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 20px;
+    
+    .modalContent {
+      background-color: var(--background-color, #ffffff);
+      border-radius: 12px;
+      padding: 30px;
+      width: 100%;
+      max-width: 500px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      
+      h2 {
+        margin-top: 0;
+        margin-bottom: 20px;
+        color: var(--text-color, #333);
+        font-size: 22px;
+      }
+      
+      .formGroup {
+        margin-bottom: 20px;
+        
+        label {
+          display: block;
+          margin-bottom: 8px;
+          font-weight: 500;
+          color: var(--text-color, #333);
+        }
+        
+        input, textarea {
+          width: 100%;
+          padding: 12px;
+          border: 1px solid var(--border-color, #ddd);
+          border-radius: 8px;
+          font-size: 16px;
+          transition: border-color 0.2s;
+          background-color: var(--input-bg, #f9f9f9);
+          color: var(--text-color, #333);
+          
+          &:focus {
+            outline: none;
+            border-color: var(--primary-color, #4361ee);
+            box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.1);
+          }
+        }
+        
+        textarea {
+          resize: vertical;
+          min-height: 100px;
+        }
+      }
+      
+      .modalButtons {
+        display: flex;
+        justify-content: flex-end;
+        gap: 15px;
+        margin-top: 30px;
+        
+        button {
+          padding: 10px 20px;
+          border-radius: 8px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.2s ease;
+        }
+        
+        .cancelButton {
+          background-color: transparent;
+          border: 1px solid var(--border-color, #ddd);
+          color: var(--text-color, #555);
+          
+          &:hover {
+            background-color: var(--hover-bg, #f5f5f5);
+          }
+        }
+        
+        .createButton {
+          background-color: var(--primary-color, #4361ee);
+          color: white;
+          border: none;
+          
+          &:hover {
+            background-color: var(--primary-hover, #3a56d4);
+          }
+        }
+      }
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .bookClubs {
+    padding: 15px;
+    
+    .bookClubsHeader {
+      flex-direction: column;
+      align-items: flex-start;
+      
+      .addBookClubButton {
+        align-self: stretch;
+        justify-content: center;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .modalOverlay .modalContent {
+    padding: 20px;
+  }
+}

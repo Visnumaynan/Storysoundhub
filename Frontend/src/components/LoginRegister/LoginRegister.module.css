@@ -1,226 +1,78 @@
-@import url('https://fonts.googleapis.com/css?family=Poppins:400,700,900');
-
-
+/* LoginRegister.module.css */
 .container {
-    position: relative;
-    width: 850px;
-    height: 550px;
-    background: #fff;
-    border-radius: 30px;
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.811);
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: transform 0.6s ease-in-out;
-    margin-left: 22%;
-    margin-top: 5%;
-    margin-bottom: 5%;
-  background-color: #f5f5f5; 
-  
-}
-
-.formBox {
-  position: absolute;
-  width: 40%;
-  height: 100%;
-  background: #fff;
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  color: #333;
-  text-align: center;
-  padding: 40px;
-  transition: transform 0.6s ease-in-out;
-  opacity: 1;
+  padding: 20px;
 }
 
-.login {
-  transform: translateX(1%);
-  z-index: 2;
-  left: 50%;
+.buttonContainer {
+  margin-bottom: 20px;
+  display: flex;
+  gap: 10px;
 }
 
-.register {
-  transform: translateX(100%);
-  z-index: 1;
-  opacity: 0;
-  right: 50%;
+.navBtn {
+  padding: 10px 20px;
+  background: #f0f0f0;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.active .login {
-  transform: translateX(-100%);
-  z-index: 1;
-  opacity: 0;
+.navBtn.active {
+  background: #0066cc;
+  color: white;
 }
 
-.active .register {
-  transform: translateX(0%);
-  z-index: 2;
-  opacity: 1;
+.card {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 100%;
+  max-width: 450px;
+  margin: 0 auto;
 }
 
-form {
+.formContainer {
   width: 100%;
 }
 
-h1 {
-  font-size: 36px;
-  margin: 10px 0;
-}
-
-.inputBox {
-  position: relative;
-  margin: 30px 0;
-}
-
-.inputBox input {
-  width: 300px;
-  height: 23px;
-  padding: 13px;
-  background: #eee;
-  border-radius: 8px;
-  border: none;
-  outline: none;
-  font-size: 16px;
-  font-weight: 500;
-  color: #000000;
-}
-
-.inputBox input::placeholder {
-  color: #888;
-}
-
-.forgotLink a {
-  font-size: 14.5px;
-  color: #333;
-  text-decoration: none;
+.formBox {
+  width: 100%;
+  padding: 20px;
+  text-align: center;
 }
 
 .btn {
   width: 100%;
-  height: 48px;
-  border-radius: 8px;
+  padding: 10px;
+  background: #0066cc;
+  color: white;
   border: none;
-  font-size: 16px;
-  color: #ffffff;
-  font-weight: 600;
+  border-radius: 5px;
   cursor: pointer;
-  transition: 0.3s;
-  z-index: 10;
-  background-color: #000000 !important;
-    
-}
-
-.btn:hover {
-  background: #00000083 !important;
+  margin-top: 20px;
 }
 
 .socialIcons {
   display: flex;
   justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
 }
 
-.socialIcons a {
-  margin: 0 8px;
-  transition: transform 0.3s ease;
+.socialIcons img {
+  width: 30px;
+  height: 30px;
 }
 
-.socialIcons a img {
-  width: 20px;
-  height: 20px;
-}
-
-.socialIcons a:hover {
-  transform: scale(1.1);
-}
-
-.toggleBox {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-}
-
-.toggleBox::before {
-  content: '';
-  position: absolute;
-  left: -250%;
-  width: 300%;
-  height: 100%;
-  background-image: url('../../assets/website/Login.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  border-radius: 150px;
-  z-index: 2;
-  transition: 1.8s ease-in-out;
-}
-
-.active .toggleBox::before {
-  left: 50%;
-}
-
-.togglePanel {
-  position: absolute;
-  width: 50%;
-  height: 100%;
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  z-index: 2;
-  transition: opacity 0.6s ease-in-out, visibility 0.6s ease-in-out;
-}
-
-.togglePanel p {
-  margin-bottom: 20px;
-}
-
-.togglePanel .btn {
-  width: 160px;
-  background: transparent;
-  border: 2px solid #ffffff;
-  background-color: #00000000 !important;
-}
-
-.toggleLeft {
-  left: 0;
-}
-
-.toggleRight {
-  right: 0;
-}
-
-.active .toggleLeft {
-  opacity: 0;
-  visibility: hidden;
-}
-
-.toggleRight-h1{
-  color: #ffffff;
-}
 .h2 {
-  font-size: 2rem;  /* Large font size */
-  font-weight: bold;
-  color: rgb(0, 0, 0); /* Default color */
-  text-align: center;
-}
-.h1 {
-  font-size: 2rem;  /* Large font size */
-  font-weight: bold;
-  color: rgb(255, 255, 255); /* Default color */
-  text-align: center;
-}
-
-.toggleRight {
-  color: #fdfdfd;
-  opacity: 0;
-  visibility: hidden;
-  transition-delay: 0.6s;
-}
-
-.active .toggleRight {
-  opacity: 1;
-  visibility: visible;
-  transition-delay: 0s;
+  margin-bottom: 20px;
+  color: black;
 }

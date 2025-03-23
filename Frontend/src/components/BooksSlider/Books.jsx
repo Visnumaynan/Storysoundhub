@@ -1,160 +1,80 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Book1 from "../../assets/books/book1.jpg";
-import Book2 from "../../assets/books/book2.jpg";
-import Book3 from "../../assets/books/book3.jpg";
-import search from "../../assets/website/search.png";
-import addBook from "../../assets/website/add_book.png"; // Import Add Book Icon
-import { FaStar } from "react-icons/fa6";
-import "./Books.css"; // Importing external CSS
-
-const booksData = [
-  {
-    id: 1,
-    img: Book1,
-    title: "Sands of Eppla",
-    rating: 5.0,
-    author: "Janeal Falor",
-  },
-  {
-    id: 2,
-    img: Book2,
-    title: "Artificial Intelligence & Generative AI for Beginners",
-    rating: 4.5,
-    author: "John",
-  },
-  {
-    id: 3,
-    img: Book3,
-    title: "It Ends With Us",
-    rating: 4.7,
-    author: "Lost Girl",
-  },
-  {
-    id: 4,
-    img: Book2,
-    title: "Artificial Intelligence & Generative AI for Beginners",
-    rating: 4.4,
-    author: "Someone",
-  },
-  {
-    id: 5,
-    img: Book1,
-    title: "Sands of Eppla",
-    rating: 5.0,
-    author: "Janeal Falor",
-  },
-  {
-    id: 6,
-    img: Book2,
-    title: "Machine Learning Mastery",
-    rating: 4.3,
-    author: "Tech Enthusiast",
-  },
-  {
-    id: 7,
-    img: Book3,
-    title: "The Midnight Library",
-    rating: 4.6,
-    author: "Matt Haig",
-  },
-  {
-    id: 8,
-    img: Book1,
-    title: "The Silent Patient",
-    rating: 4.8,
-    author: "Alex Michaelides",
-  },
-  {
-    id: 9,
-    img: Book2,
-    title: "Educated: A Memoir",
-    rating: 4.9,
-    author: "Tara Westover",
-  },
-  {
-    id: 10,
-    img: Book3,
-    title: "The Alchemist",
-    rating: 5.0,
-    author: "Paulo Coelho",
-  },
-  {
-    id: 11,
-    img: Book1,
-    title: "The Book Thief",
-    rating: 4.5,
-    author: "Markus Zusak",
-  },
-  {
-    id: 12,
-    img: Book2,
-    title: "1984",
-    rating: 4.8,
-    author: "George Orwell",
-  },
-];
+import axios from "axios";
+import { FaSearch, FaPlus, FaStar } from "react-icons/fa";
+import "./Books.css";
 
 const Books = () => {
+  const [books, setBooks] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [showAll, setShowAll] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
 
-  // Filter books based on the search term
-  const filteredBooks = booksData.filter((book) =>
-    book.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  useEffect(() => {
+    const fetchBooks = async () => {
+      try {
+        const response = await axios.get("http://localhost:8000/api/books");
+        setBooks(response.data);
+      } catch (error) {
+        console.error("Error fetching books:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-  // Show only the first 10 books or all books based on `showAll`
-  const displayedBooks = showAll ? filteredBooks : filteredBooks.slice(0, 10);
+    fetchBooks();
+  }, []);
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const filteredBooks = books.filter(
+    (book) =>
+      book.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      book.author.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div className="books-container">
-      <div className="container">
-        {/* Top Bar with Search and Add Button */}
-        <div className="top-bar">
+      <div className="books-header">
+        <h2 className="books-title">Discover Books</h2>
+        <p className="books-subtitle">Find your next favorite read</p>
+      </div>
+
+      <div className="top-bar">
+        <div className="search-container">
+          <FaSearch className="search-icon" />
           <input
             type="text"
-            placeholder="Search books..."
+            placeholder="Search by title or author..."
             className="search-bar"
             value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
+            onChange={handleSearchChange}
           />
-          <button className="add-book-button" onClick={() => navigate("/BookForm")}>
-            <img src={addBook} alt="Add Book" />
-          </button>
         </div>
+        <button className="add-book-button" onClick={() => navigate("/BookForm")}>
+          <FaPlus />
+        </button>
+      </div>
 
-        {/* Books Grid */}
+      {isLoading ? (
+        <p>Loading books...</p>
+      ) : (
         <div className="books-grid">
-          {displayedBooks.map(({ id, img, title, author, rating }) => (
-            <div key={id} className="book-card"
-            onClick={() => navigate(`/product-details/${id}`)} // Navigate to book details
-            style={{ cursor: "pointer" }} // Add pointer cursor
-          >
-              <img src={img} alt={title} className="book-image" />
-              <h3 className="book-title">{title}</h3>
-              <p className="book-author">{author}</p> {/* Author Below Title */}
-              <div className="book-rating">
+          {filteredBooks.map(({ id, title, author, picture, price }) => (
+            <div key={id} className="book-card" onClick={() => navigate(`/books/${id}`)}>
+              <img src={picture} alt={title} className="book-image" />
+              <div className="book-info">
+                <h3 className="book-title">{title}</h3>
+                <p className="book-author">by {author}</p>
+                <p className="book-price">${price}</p>
                 <FaStar className="star-icon" />
-                <span>{rating}</span>
               </div>
             </div>
           ))}
         </div>
-
-        {/* View All / Show Less Button */}
-        {filteredBooks.length > 10 && (
-          <div className="button-container">
-            <button
-              className="view-all-button"
-              onClick={() => setShowAll(!showAll)}
-            >
-              {showAll ? "Show Less" : "View All Books"}
-            </button>
-          </div>
-        )}
-      </div>
+      )}
     </div>
   );
 };

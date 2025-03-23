@@ -1,0 +1,88 @@
+.bookClubProfile {
+  background-color: var(--card-bg);
+  
+  .images {
+    width: 100%;
+    height: 300px;
+    position: relative;
+    
+    .cover {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  
+  .profileContainer {
+    padding: 20px 70px;
+    
+    @media (max-width: 768px) {
+      padding: 10px;
+    }
+    
+    .uInfo {
+      height: 100px;
+      box-shadow: var(--shadow);
+      border-radius: 20px;
+      background-color: var(--background-color);
+      color: var(--text-color);
+      padding: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      
+      @media (max-width: 768px) {
+        flex-direction: column;
+        height: 30vh;
+        padding: 20px;
+        margin-top: 0;
+      }
+      
+      .left {
+        flex: 1;
+        display: flex;
+        gap: 10px;
+        
+        @media (max-width: 992px) {
+          flex-wrap: wrap;
+        }
+      }
+      
+      .center {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        
+        span {
+          font-size: 30px;
+          font-weight: 500;
+        }
+      }
+      
+      .right {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 10px;
+        
+        button {
+          border: none;
+          background-color: var(--accent-color);
+          color: white;
+          padding: 10px 20px;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+          
+          &:hover {
+            background-color: var(--hover-color);
+          }
+        }
+      }
+    }
+  }
+}
