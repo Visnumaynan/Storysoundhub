@@ -2,7 +2,7 @@ import React from 'react';
 import ComingSoonImage from '../../assets/Images/comingsoon.jpg';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import './comingsoon.css';
+import './coming.css';
 
 const ComingSoon = () => {
 	return (
