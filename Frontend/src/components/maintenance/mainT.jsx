@@ -1,6 +1,7 @@
 import React from 'react';
 import MImage from '../../assets/Images/maintance.jpg';
-
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 import './maintenance.css';
 
 const Maintenance = () => {
