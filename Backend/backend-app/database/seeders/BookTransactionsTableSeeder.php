@@ -19,8 +19,8 @@ class BookTransactionsTableSeeder extends Seeder
             [
                 'transaction_id' => 1,
                 'book_id' => DB::table('books')->value('book_id'),
-                'buyer_id' => 1, // Buyer is different
-                'seller_id' =>2,
+                'buyer_clerk_id' => 'user_2uL5pjtDzptiqhdz2ZxZNEA1SDH', // Buyer is different
+                'seller_clerk_id' =>'user_2uL5pjtDzptiqhdz2ZxZNEA1SDH',
                 'price' => 19.99,
                 'status' => 'completed',
                 'transaction_date' => Carbon::now(),
@@ -30,8 +30,8 @@ class BookTransactionsTableSeeder extends Seeder
             [
                 'transaction_id' => 2,
                 'book_id' => DB::table('books')->value('book_id'),
-                'buyer_id' => 1,
-                'seller_id' => 2,
+                'buyer_clerk_id' => 'user_2uL5pjtDzptiqhdz2ZxZNEA1SDH',
+                'seller_clerk_id' => 'user_2uL5pjtDzptiqhdz2ZxZNEA1SDH',
                 'price' => 15.50,
                 'status' => 'pending',
                 'transaction_date' => Carbon::now(),
@@ -41,8 +41,8 @@ class BookTransactionsTableSeeder extends Seeder
             [
                 'transaction_id' => 3,
                 'book_id' => DB::table('books')->value('book_id'),
-                'buyer_id' => 1,
-                'seller_id' => 2,
+                'buyer_clerk_id' => 'user_2uL5pjtDzptiqhdz2ZxZNEA1SDH',
+                'seller_clerk_id' => 'user_2uL5pjtDzptiqhdz2ZxZNEA1SDH',
                 'price' => 12.75,
                 'status' => 'completed',
                 'transaction_date' => Carbon::now(),
@@ -52,8 +52,8 @@ class BookTransactionsTableSeeder extends Seeder
             [
                 'transaction_id' => 4,
                 'book_id' => DB::table('books')->value('book_id'),
-                'buyer_id' =>1,
-                'seller_id' => 2,
+                'buyer_clerk_id' =>'user_2uL5pjtDzptiqhdz2ZxZNEA1SDH',
+                'seller_clerk_id' => 'user_2uL5pjtDzptiqhdz2ZxZNEA1SDH',
                 'price' => 22.00,
                 'status' => 'pending',
                 'transaction_date' => Carbon::now(),
@@ -63,8 +63,8 @@ class BookTransactionsTableSeeder extends Seeder
             [
                 'transaction_id' => 5,
                 'book_id' => DB::table('books')->value('book_id'),
-                'buyer_id' => 1,
-                'seller_id' =>2,
+                'buyer_clerk_id' => 'user_2uL5pjtDzptiqhdz2ZxZNEA1SDH',
+                'seller_clerk_id' =>'user_2uL5pjtDzptiqhdz2ZxZNEA1SDH',
                 'price' => 18.90,
                 'status' => 'completed',
                 'transaction_date' => Carbon::now(),

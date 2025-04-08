@@ -19,7 +19,7 @@ class BookClubsTableSeeder extends Seeder
             [
                 'club_id' => Str::uuid(),
                 'club_name' => 'Sci-Fi Enthusiasts',
-                'creator_user_id' => 1,
+                'clerk_id' => 'user_2uL5pjtDzptiqhdz2ZxZNEA1SDH',
                 'description' => 'A club for sci-fi book lovers.',
                 'created_date' => Carbon::now(),
                 'created_at' => Carbon::now(),
@@ -27,7 +27,7 @@ class BookClubsTableSeeder extends Seeder
             ],[
                 'club_id' => Str::uuid(),
                 'club_name' => 'Sci-Fi Enthusiasts',
-                'creator_user_id' => 1,
+                'clerk_id' => 'user_2uL5pjtDzptiqhdz2ZxZNEA1SDH',
                 'description' => 'A club for sci-fi book lovers.',
                 'created_date' => Carbon::now(),
                 'created_at' => Carbon::now(),
@@ -36,7 +36,7 @@ class BookClubsTableSeeder extends Seeder
             [
                 'club_id' => Str::uuid(),
                 'club_name' => 'Fantasy Readers',
-                'creator_user_id' => 1,
+                'clerk_id' => 'user_2uL5pjtDzptiqhdz2ZxZNEA1SDH',
                 'description' => 'A club for fans of fantasy literature.',
                 'created_date' => Carbon::now(),
                 'created_at' => Carbon::now(),
@@ -45,7 +45,7 @@ class BookClubsTableSeeder extends Seeder
             [
                 'club_id' => Str::uuid(),
                 'club_name' => 'Classic Literature Lovers',
-                'creator_user_id' =>1,
+                'clerk_id' =>'user_2uL5pjtDzptiqhdz2ZxZNEA1SDH',
                 'description' => 'A club dedicated to classic books.',
                 'created_date' => Carbon::now(),
                 'created_at' => Carbon::now(),
@@ -54,7 +54,7 @@ class BookClubsTableSeeder extends Seeder
             [
                 'club_id' => Str::uuid(),
                 'club_name' => 'Mystery Solvers',
-                'creator_user_id' =>1,
+                'clerk_id' =>'user_2uL5pjtDzptiqhdz2ZxZNEA1SDH',
                 'description' => 'For those who love thrilling mystery novels.',
                 'created_date' => Carbon::now(),
                 'created_at' => Carbon::now(),
@@ -63,7 +63,7 @@ class BookClubsTableSeeder extends Seeder
             [
                 'club_id' => Str::uuid(),
                 'club_name' => 'Philosophy & Thought',
-                'creator_user_id' => 1,
+                'clerk_id' => 'user_2uL5pjtDzptiqhdz2ZxZNEA1SDH',
                 'description' => 'A place for discussing philosophical books.',
                 'created_date' => Carbon::now(),
                 'created_at' => Carbon::now(),
