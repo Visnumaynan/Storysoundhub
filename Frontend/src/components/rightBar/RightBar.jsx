@@ -1,18 +1,40 @@
 import "./rightBar.scss";
 import { useUser } from "../../context/UserContext";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import BookClubService from "../../services/BookClubService";
 
 const RightBar = () => {
-  const { joinedBookClubs, toggleBookClub, loading } = useUser();
+  const [bookClubs, setBookClubs] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
   const [theme, setTheme] = useState(
     localStorage.getItem("theme") || 
     (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
   );
 
-  // Improved theme sync
+  // Fetch all book clubs
   useEffect(() => {
-    // Function to update theme state
+    const fetchBookClubs = async () => {
+      try {
+        setLoading(true);
+        const data = await BookClubService.getAllBookClubs();
+        setBookClubs(data);
+        setError(null);
+      } catch (err) {
+        console.error("Failed to fetch book clubs:", err);
+        setError("Failed to load book clubs. Please try again later.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBookClubs();
+  }, []);
+
+  // Theme sync effect
+  useEffect(() => {
     const updateTheme = () => {
       const currentTheme = localStorage.getItem("theme");
       if (currentTheme && currentTheme !== theme) {
@@ -20,26 +42,17 @@ const RightBar = () => {
       }
     };
     
-    // Initial check
-    updateTheme();
-    
-    // Use MutationObserver to detect HTML class changes
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
-        if (
-          mutation.type === "attributes" && 
-          mutation.attributeName === "class"
-        ) {
+        if (mutation.type === "attributes" && mutation.attributeName === "class") {
           const isDark = document.documentElement.classList.contains("dark");
           setTheme(isDark ? "dark" : "light");
         }
       });
     });
     
-    // Start observing document element for class changes
     observer.observe(document.documentElement, { attributes: true });
     
-    // Also listen for storage events
     const handleStorageChange = (e) => {
       if (e.key === "theme") {
         setTheme(e.newValue);
@@ -47,7 +60,6 @@ const RightBar = () => {
     };
     window.addEventListener("storage", handleStorageChange);
     
-    // Fallback polling at a faster interval
     const interval = setInterval(updateTheme, 100);
     
     return () => {
@@ -57,35 +69,35 @@ const RightBar = () => {
     };
   }, [theme]);
 
-  const handleLeaveClub = (club) => {
-    toggleBookClub(club);
+  const handleClubClick = (clubId) => {
+    navigate(`/book-clubs`);
   };
 
   return (
     <div className={`rightBar ${theme === "dark" ? "dark" : ""}`}>
       <div className="container">
         <div className="item">
-          <span>Your Book Clubs</span>
+          <span>Book Clubs</span>
           {loading ? (
-            <div className="loading">Loading your book clubs...</div>
-          ) : joinedBookClubs.length === 0 ? (
+            <div className="loading">Loading...</div>
+          ) : error ? (
+            <div className="error">{error}</div>
+          ) : bookClubs.length === 0 ? (
             <div className="noClubs">
-              You haven't joined any book clubs yet.
-              <Link to="/book-clubs" className="browseLink">Browse Clubs</Link>
+              No book clubs available
             </div>
           ) : (
-            joinedBookClubs.map(club => (
-              <div className="user" key={club.id}>
-                <div className="userInfo">
-                  <Link to={`/book-club/${club.id}`} style={{ textDecoration: "none", color: "inherit" }}>
-                    <span>{club.name || club.club_name}</span>
-                  </Link>
+            <div className="clubsList">
+              {bookClubs.map(club => (
+                <div 
+                  key={club.id}
+                  className="clubName"
+                  onClick={() => handleClubClick(club.id)}
+                >
+                  {club.name || club.club_name}
                 </div>
-                <div className="buttons">
-                  <button onClick={() => handleLeaveClub(club)}>leave</button>
-                </div>
-              </div>
-            ))
+              ))}
+            </div>
           )}
         </div>
       </div>

@@ -36,79 +36,43 @@
         color: var(--text-color);
         opacity: 0.6;
         transition: color 0.3s ease;
+        font-size: 16px;
+        font-weight: 500;
+        display: block;
+        margin-bottom: 15px;
       }
       
-      .noClubs {
+      .loading, .error, .noClubs {
         margin-top: 15px;
         color: var(--text-color);
         opacity: 0.7;
         font-style: italic;
         transition: color 0.3s ease;
+        text-align: center;
+      }
+
+      .error {
+        color: #ff4444;
       }
       
-      .user {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin: 20px 0px;
-        
-        .userInfo {
+      .clubsList {
+        .clubName {
           display: flex;
           align-items: center;
-          gap: 20px;
-          position: relative;
+          padding: 12px 0;
+          margin: 8px 0;
+          color: var(--text-color);
+          cursor: pointer;
+          transition: all 0.3s ease;
+          border-bottom: 1px solid rgba(0, 0, 0, 0.05);
           
-          img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            object-fit: cover;
+          &:last-child {
+            border-bottom: none;
           }
           
-          .online {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background-color: limegreen;
-            position: absolute;
-            top: 0;
-            left: 30px;
-          }
-          
-          p {
-            color: var(--text-color);
-            opacity: 0.7;
-            transition: color 0.3s ease;
-          }
-          
-          span {
-            font-weight: 500;
-            color: var(--text-color);
-            opacity: 1;
-            transition: color 0.3s ease;
-          }
-        }
-        
-        .buttons {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          
-          button {
-            border: none;
-            padding: 5px;
-            color: white;
-            cursor: pointer;
-            border-radius: 4px;
-            transition: background-color 0.2s ease;
-            
-            &:first-child {
-              background-color: #5271ff;
-              
-              &:hover {
-                background-color: #4a67eb;
-              }
-            }
+          &:hover {
+            color: var(--accent-color);
+            padding-left: 5px;
           }
         }
       }
@@ -120,16 +84,12 @@
       .item {
         box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.2);
         
-        .user {
-          .buttons {
-            button {
-              &:first-child {
-                background-color: var(--accent-color);
-                
-                &:hover {
-                  background-color: var(--hover-color);
-                }
-              }
+        .clubsList {
+          .clubName {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            
+            &:hover {
+              color: var(--accent-color);
             }
           }
         }
