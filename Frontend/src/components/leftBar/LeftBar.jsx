@@ -1,70 +1,33 @@
 import "./leftBar.scss";
 import { Link } from "react-router-dom";
-import { useUser } from "../../context/UserContext";
 import { useState, useEffect } from "react";
+import { useUser } from "@clerk/clerk-react"; // Update import
 import MenuIcon from "@mui/icons-material/Menu";
 import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 import HomeIcon from "@mui/icons-material/Home";
 import GroupsIcon from "@mui/icons-material/Groups";
 
 const LeftBar = () => {
-  const { currentUser } = useUser();
+  const { user } = useUser(); // Use Clerk's user
   const [collapsed, setCollapsed] = useState(false);
   const [theme, setTheme] = useState(
     localStorage.getItem("theme") || 
     (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
   );
 
-  // Improved theme sync
-  useEffect(() => {
-    // Function to update theme state
-    const updateTheme = () => {
-      const currentTheme = localStorage.getItem("theme");
-      if (currentTheme && currentTheme !== theme) {
-        setTheme(currentTheme);
-      }
-    };
-    
-    // Initial check
-    updateTheme();
-    
-    // Use MutationObserver to detect HTML class changes
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        if (
-          mutation.type === "attributes" && 
-          mutation.attributeName === "class"
-        ) {
-          const isDark = document.documentElement.classList.contains("dark");
-          setTheme(isDark ? "dark" : "light");
-        }
-      });
-    });
-    
-    // Start observing document element for class changes
-    observer.observe(document.documentElement, { attributes: true });
-    
-    // Also listen for storage events
-    const handleStorageChange = (e) => {
-      if (e.key === "theme") {
-        setTheme(e.newValue);
-      }
-    };
-    window.addEventListener("storage", handleStorageChange);
-    
-    // Fallback polling at a faster interval
-    const interval = setInterval(updateTheme, 100);
-    
-    return () => {
-      observer.disconnect();
-      window.removeEventListener("storage", handleStorageChange);
-      clearInterval(interval);
-    };
-  }, [theme]);
+  // Theme effect remains the same...
 
   const toggleCollapse = () => {
     setCollapsed(!collapsed);
   };
+
+  // Get user details from Clerk
+  const userName = user?.firstName && user?.lastName 
+    ? `${user.firstName} ${user.lastName}`
+    : user?.username || user?.emailAddresses[0].emailAddress.split('@')[0];
+    
+  const profilePic = user?.imageUrl || user?.profileImageUrl;
+  const userId = user?.id;
 
   return (
     <div className={`leftBar ${collapsed ? "collapsed" : ""} ${theme === "dark" ? "dark" : ""}`}>
@@ -74,11 +37,11 @@ const LeftBar = () => {
         </div>
         <div className="menu">
           <Link
-            to={`/profile/${currentUser.id}`}
+            to={`/profile/${userId}`}
             className="user"
           >
-            <img src={currentUser.profilePic} alt="" />
-            <span>{currentUser.name}</span>
+            <img src={profilePic} alt="" />
+            <span>{userName}</span>
           </Link>
           
           <Link

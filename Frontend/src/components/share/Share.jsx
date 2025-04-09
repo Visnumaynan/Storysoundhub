@@ -1,11 +1,11 @@
 import "./share.scss";
 import Image from "../../assets/img.png";
-import { useUser } from "../../context/UserContext";
 import { useState, useEffect } from "react";
-import axios from "axios"; // Import axios
+import axios from "axios";
+import { useUser } from "@clerk/clerk-react";
 
 const Share = () => {
-  const { currentUser, joinedBookClubs } = useUser();
+  const { user } = useUser();
   const [desc, setDesc] = useState("");
   const [selectedBookClub, setSelectedBookClub] = useState("");
   const [selectedGenre, setSelectedGenre] = useState("");
@@ -14,6 +14,13 @@ const Share = () => {
     localStorage.getItem("theme") || 
     (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
   );
+
+  // Get user details from Clerk
+  const userName = user.firstName && user.lastName 
+    ? `${user.firstName} ${user.lastName}`
+    : user.username || user.emailAddresses[0].emailAddress.split('@')[0];
+    
+  const profilePic = user.imageUrl || user.profileImageUrl;
   
   // Fetch genres from API using axios
   useEffect(() => {
@@ -31,17 +38,14 @@ const Share = () => {
   
   // Listen for theme changes - improved implementation
   useEffect(() => {
-    // Function to update theme from localStorage
     const updateTheme = () => {
       const storedTheme = localStorage.getItem("theme") || 
         (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
       setTheme(storedTheme);
     };
     
-    // Listen for storage events (when theme changes from another tab)
     window.addEventListener("storage", updateTheme);
     
-    // Create a MutationObserver to watch for dark class changes on html element
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         if (mutation.attributeName === 'class') {
@@ -51,10 +55,8 @@ const Share = () => {
       });
     });
     
-    // Start observing the document element for class changes
     observer.observe(document.documentElement, { attributes: true });
     
-    // Check theme periodically as a fallback
     const intervalId = setInterval(updateTheme, 1000);
     
     return () => {
@@ -68,28 +70,13 @@ const Share = () => {
     e.preventDefault();
     
     try {
-      // In a real app, you would send this to an API using axios
       console.log("Sharing post:", {
-        userId: currentUser.id,
+        userId: user.id,
         desc,
         bookClubId: selectedBookClub ? parseInt(selectedBookClub) : null,
-        genre_id: selectedGenre, // Updated to match API naming convention
-        img: null // Would be handled with file upload in a real app
+        genre_id: selectedGenre,
+        img: null
       });
-      
-      // Example of how you might implement the actual API call:
-      // await axios.post("http://localhost:8000/api/books", {
-      //   title: desc,
-      //   author: currentUser.name,
-      //   type: "post",
-      //   picture: "", // Would be from file upload
-      //   genre_id: selectedGenre,
-      //   price: 0,
-      //   owner_id: currentUser.id,
-      //   condition: "N/A",
-      //   quantity: 1,
-      //   book_club_id: selectedBookClub || null
-      // });
       
       setDesc("");
       setSelectedBookClub("");
@@ -103,10 +90,10 @@ const Share = () => {
     <div className="share">
       <div className="container">
         <div className="top">
-          <img src={currentUser.profilePic} alt="" />
+          <img src={profilePic} alt="" />
           <input 
             type="text" 
-            placeholder={`What's on your mind ${currentUser.name}?`}
+            placeholder={`What's on your mind ${userName}?`}
             value={desc}
             onChange={(e) => setDesc(e.target.value)}
           />
@@ -120,7 +107,8 @@ const Share = () => {
               onChange={(e) => setSelectedBookClub(e.target.value)}
             >
               <option value="">None</option>
-              {joinedBookClubs.map((club) => (
+              {/* We'll need to update this once we have the book clubs data from Clerk */}
+              {[].map((club) => (
                 <option key={club.id} value={club.id}>{club.name}</option>
               ))}
             </select>
