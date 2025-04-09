@@ -1,34 +1,51 @@
 import "./share.scss";
 import Image from "../../assets/img.png";
-import { useUser } from "../../context/UserContext";
 import { useState, useEffect } from "react";
+import axios from "axios";
+import { useUser } from "@clerk/clerk-react";
 
 const Share = () => {
-  const { currentUser, joinedBookClubs } = useUser();
+  const { user } = useUser();
   const [desc, setDesc] = useState("");
   const [selectedBookClub, setSelectedBookClub] = useState("");
   const [selectedGenre, setSelectedGenre] = useState("");
+  const [genres, setGenres] = useState([]);
   const [theme, setTheme] = useState(
     localStorage.getItem("theme") || 
     (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
   );
+
+  // Get user details from Clerk
+  const userName = user.firstName && user.lastName 
+    ? `${user.firstName} ${user.lastName}`
+    : user.username || user.emailAddresses[0].emailAddress.split('@')[0];
+    
+  const profilePic = user.imageUrl || user.profileImageUrl;
   
-  // Sample genres
-  const genres = ["Fiction", "Non-Fiction", "Sci-Fi", "Mystery", "Romance", "Thriller", "Fantasy", "Biography"];
+  // Fetch genres from API using axios
+  useEffect(() => {
+    const fetchGenres = async () => {
+      try {
+        const response = await axios.get("http://localhost:8000/api/genres");
+        setGenres(response.data);
+      } catch (error) {
+        console.error("Error fetching genres:", error);
+      }
+    };
+
+    fetchGenres();
+  }, []);
   
   // Listen for theme changes - improved implementation
   useEffect(() => {
-    // Function to update theme from localStorage
     const updateTheme = () => {
       const storedTheme = localStorage.getItem("theme") || 
         (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
       setTheme(storedTheme);
     };
     
-    // Listen for storage events (when theme changes from another tab)
     window.addEventListener("storage", updateTheme);
     
-    // Create a MutationObserver to watch for dark class changes on html element
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         if (mutation.attributeName === 'class') {
@@ -38,10 +55,8 @@ const Share = () => {
       });
     });
     
-    // Start observing the document element for class changes
     observer.observe(document.documentElement, { attributes: true });
     
-    // Check theme periodically as a fallback
     const intervalId = setInterval(updateTheme, 1000);
     
     return () => {
@@ -51,29 +66,34 @@ const Share = () => {
     };
   }, []);
   
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // In a real app, you would send this to an API
-    console.log("Sharing post:", {
-      userId: currentUser.id,
-      desc,
-      bookClubId: selectedBookClub ? parseInt(selectedBookClub) : null,
-      genre: selectedGenre,
-      img: null // Would be handled with file upload in a real app
-    });
-    setDesc("");
-    setSelectedBookClub("");
-    setSelectedGenre("");
+    
+    try {
+      console.log("Sharing post:", {
+        userId: user.id,
+        desc,
+        bookClubId: selectedBookClub ? parseInt(selectedBookClub) : null,
+        genre_id: selectedGenre,
+        img: null
+      });
+      
+      setDesc("");
+      setSelectedBookClub("");
+      setSelectedGenre("");
+    } catch (error) {
+      console.error("Error sharing post:", error);
+    }
   };
   
   return (
     <div className="share">
       <div className="container">
         <div className="top">
-          <img src={currentUser.profilePic} alt="" />
+          <img src={profilePic} alt="" />
           <input 
             type="text" 
-            placeholder={`What's on your mind ${currentUser.name}?`}
+            placeholder={`What's on your mind ${userName}?`}
             value={desc}
             onChange={(e) => setDesc(e.target.value)}
           />
@@ -87,7 +107,8 @@ const Share = () => {
               onChange={(e) => setSelectedBookClub(e.target.value)}
             >
               <option value="">None</option>
-              {joinedBookClubs.map((club) => (
+              {/* We'll need to update this once we have the book clubs data from Clerk */}
+              {[].map((club) => (
                 <option key={club.id} value={club.id}>{club.name}</option>
               ))}
             </select>
@@ -100,7 +121,7 @@ const Share = () => {
             >
               <option value="">None</option>
               {genres.map((genre) => (
-                <option key={genre} value={genre}>{genre}</option>
+                <option key={genre.id} value={genre.id}>{genre.name}</option>
               ))}
             </select>
           </div>

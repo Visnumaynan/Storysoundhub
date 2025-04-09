@@ -4,11 +4,11 @@ import footerLogo from "../../assets/website/logo.png";
 import "./Footer.css"; // Import external CSS
 
 const FooterLinks = [
-  { title: "Home", link: "/#" },
-  { title: "Shop", link: "/#Shop" },
-  { title: "Community", link: "/#Community" },
-  { title: "About", link: "/#About" },
-  { title: "Contact", link: "/#Contact" },
+  { title: "Home", link: "/" },
+  { title: "Shop", link: "/Shop" },
+  { title: "Community", link: "/Community" },
+  { title: "About", link: "/About" },
+  { title: "Contact", link: "/Contact" },
 ];
 
 const Footer = () => {

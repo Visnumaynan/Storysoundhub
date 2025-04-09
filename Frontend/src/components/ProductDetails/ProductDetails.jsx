@@ -449,9 +449,7 @@ const ProductDetails = () => {
             </div>
 
             <div className="buttons">
-              <button className="buy-btn">Buy Now</button>
-              <button className="cart-btn" onClick={handleAddToCart}>
-                <FaHeart className="btn-icon" /> Add to My List</button>
+             <button class="buy-btn" onClick={() => window.location.href = 'https://traveledith.com/checkout'}>Buy Now</button>
             </div>
           </div>
 

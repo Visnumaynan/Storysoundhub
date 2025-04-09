@@ -5,40 +5,57 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useUser } from "../../context/UserContext";
 import Share from "../../components/share/Share";
+import BookClubService from "../../services/BookClubService";
 
 const BookClubProfile = () => {
   const { id } = useParams();
-  const { currentUser, joinedBookClubs } = useUser();
+  const { currentUser, joinedBookClubs, toggleBookClub } = useUser();
   const [bookClub, setBookClub] = useState(null);
   const [isJoined, setIsJoined] = useState(false);
-
-  // In a real app, you would fetch this data from an API
-  const bookClubs = [
-    {
-      id: 1,
-      name: "Thriller",
-      coverPic: "https://images.pexels.com/photos/13440765/pexels-photo-13440765.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-    },
-    {
-      id: 2,
-      name: "Mystery",
-      coverPic: "https://images.pexels.com/photos/1367192/pexels-photo-1367192.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-    }
-  ];
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    setBookClub(bookClubs.find(bc => bc.id === parseInt(id)) || bookClubs[0]);
-    // Check if user has joined this book club
-    setIsJoined(joinedBookClubs.some(bc => bc.id === parseInt(id)));
-  }, [id, joinedBookClubs]);
+    const fetchBookClub = async () => {
+      try {
+        setLoading(true);
+        const data = await BookClubService.getBookClubById(id);
+        
+        // Add default cover pic if not provided by API
+        const bookClubWithImage = {
+          ...data,
+          coverPic: data.picture || "https://images.pexels.com/photos/590493/pexels-photo-590493.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+        };
+        
+        setBookClub(bookClubWithImage);
+        setError(null);
+      } catch (err) {
+        console.error("Failed to fetch book club:", err);
+        setError("Failed to load book club details. Please try again later.");
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  if (!bookClub) return <div>Loading...</div>;
+    fetchBookClub();
+  }, [id]);
+
+  // Check if user has joined this book club
+  useEffect(() => {
+    if (bookClub) {
+      setIsJoined(joinedBookClubs.some(bc => bc.id === parseInt(id) || bc.id === id));
+    }
+  }, [id, joinedBookClubs, bookClub]);
 
   const handleJoin = () => {
-    // In a real app, you would send this to an API
-    console.log(`${isJoined ? 'Leaving' : 'Joining'} book club:`, bookClub.name);
-    // The actual join/leave logic would be handled in the UserContext
+    if (bookClub) {
+      toggleBookClub(bookClub);
+    }
   };
+
+  if (loading) return <div className="loadingIndicator">Loading book club details...</div>;
+  if (error) return <div className="errorMessage">{error}</div>;
+  if (!bookClub) return <div className="notFoundMessage">Book club not found</div>;
 
   return (
     <div className="bookClubProfile">
@@ -55,7 +72,8 @@ const BookClubProfile = () => {
             {/* Empty div to maintain layout */}
           </div>
           <div className="center">
-            <span>{bookClub.name}</span>
+            <span>{bookClub.name || bookClub.club_name}</span>
+            <p className="description">{bookClub.description}</p>
           </div>
           <div className="right">
             <button onClick={handleJoin}>{isJoined ? 'Leave' : 'Join'}</button>
