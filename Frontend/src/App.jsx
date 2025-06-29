@@ -215,6 +215,7 @@ import Home from "./pages/home/Home";
 import Profile from "./pages/profile/Profile";
 import BookClubProfile from "./pages/bookClubProfile/BookClubProfile";
 import BookClubs from "./pages/bookClubs/BookClubs";
+import Ebooks from "./pages/ebooks/Ebooks";
 
 // Context
 import { UserProvider } from "./context/UserContext";
@@ -384,6 +385,16 @@ function App() {
                 <BookClubLayout>
                   <BookClubs />
                 </BookClubLayout>
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/ebooks" 
+            element={
+              <ProtectedRoute>
+                <MainLayout>
+                  <Ebooks />
+                </MainLayout>
               </ProtectedRoute>
             } 
           />

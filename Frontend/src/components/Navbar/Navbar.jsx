@@ -34,7 +34,7 @@ const Navbar = () => {
             <li><Link to="/" className="nav-item">Home</Link></li>
             <li><Link to="/shop" className="nav-item">Shop</Link></li>
             <li><a href="/book-club-home" className="nav-item">Community</a></li>
-            <li><a href="https://chat.traveledith.com/" className="nav-item">Assistant</a></li>
+            <li><a href="/ebooks" className="nav-item">Ebooks</a></li>
             
          
         {/* <Link to="/loginRegister" className="user-profile">
