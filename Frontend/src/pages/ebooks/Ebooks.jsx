@@ -72,7 +72,7 @@ const Ebooks = () => {
   return (
     <div className="app">
       <header className="app-header">
-        <h1>📚 BookFinder</h1>
+        <h1>E-books</h1>
         <p>Discover, Read, and Download Books from Around the World</p>
       </header>
 
