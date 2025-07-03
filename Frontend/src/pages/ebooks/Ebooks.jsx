@@ -80,7 +80,7 @@ const Ebooks = () => {
         <div className="search-section">
           <input
             type="text"
-            placeholder="Search for books, authors, or topics..."
+            placeholder="Search for books or topics..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             onKeyPress={handleKeyPress}
